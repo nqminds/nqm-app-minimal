@@ -9,20 +9,25 @@ var session = require('express-session');
 app.use(session({ secret: 'blahblahblah', resave: true, saveUninitialized: true })); 
 app.set('view engine', 'pug');
 
-// Default route - check if have a valid token for this session.
-app.get('/', function(req, res) {
+// Authentication helper - include this on any route that should be secure
+function ensureAuthenticated(req,res,next) {
+  // Check if have a valid token for this session.
   if (req.session && req.session.token) {
-    res.render("home", { token: req.session.token });    
+    next();    
   } else {
-    // No token => render login UI.
-    res.render("login");
-  }
+    res.redirect("/login");
+  }  
+}
+
+// Default route 
+app.get('/', ensureAuthenticated, function(req, res) {
+  res.render("home", { token: req.session.token });    
 });
 
-// Redirect to the TDX auth server with a return URL to our /authCB route.
+// Render login page, which will redirect to the TDX auth server with a return URL to our /authCB route.
 app.get("/login", function(req, res) {
-  var tdxURL = util.format("%s/auth?rurl=%s/authCB", config.authServer, config.hostURL);
-  res.redirect(tdxURL);
+  var tdxURL = util.format("%s/auth?rurl=%s/authCB", config.authServer, config.hostURL);  
+  res.render("login", { loginURL: tdxURL });
 });
 
 // TDX auth server will callback here after authentication.
