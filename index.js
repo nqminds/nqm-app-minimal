@@ -9,31 +9,37 @@ var session = require('express-session');
 app.use(session({ secret: 'blahblahblah', resave: true, saveUninitialized: true })); 
 app.set('view engine', 'pug');
 
-// respond with "hello world" when a GET request is made to the homepage
+// Default route - check if have a valid token for this session.
 app.get('/', function(req, res) {
   if (req.session && req.session.token) {
     res.render("home", { token: req.session.token });    
   } else {
+    // No token => render login UI.
     res.render("login");
   }
 });
 
+// Redirect to the TDX auth server with a return URL to our /authCB route.
 app.get("/login", function(req, res) {
   var tdxURL = util.format("%s/auth?rurl=%s/authCB", config.authServer, config.hostURL);
   res.redirect(tdxURL);
 });
 
+// TDX auth server will callback here after authentication.
 app.get("/authCB", function(req, res) {
   if (req.query.access_token) {
+    // Store the access token with the session.
     log("token is %s",req.query.access_token);
     req.session.token = req.query.access_token;
   } else {
     log("failed to get access token");
   }
+  // Redirect to home page.
   res.redirect("/");
 });
 
 app.get("/logout", function(req,res) {
+  // Clear session
   req.session.destroy();
   res.redirect("/");
 });
