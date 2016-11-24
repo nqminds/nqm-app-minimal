@@ -16,7 +16,7 @@ const styles = {
 class AppMenu extends React.Component {
   static propTypes = {
     activeItem: React.PropTypes.string,
-    setActive: React.PropTypes.func,
+    go: React.PropTypes.func,
   }
   static menuData = [
     {
@@ -35,7 +35,7 @@ class AppMenu extends React.Component {
     muiTheme: React.PropTypes.object,
   }
   onMenuItem(route) {
-    this.props.setActive(route);
+    this.props.go(route);
   }
   render() {
     const activeItemStyle = {

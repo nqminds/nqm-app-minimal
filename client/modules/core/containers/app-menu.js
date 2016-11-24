@@ -9,7 +9,7 @@ export const depsMapper = (context, actions) => ({
   store: context.store,
   connectionManager: context.connectionManager,
   FlowRouter: context.FlowRouter,
-  setActive: actions.navigation.setActive,
+  go: actions.navigation.go,
 });
 
 export default dataLoader.merge(
