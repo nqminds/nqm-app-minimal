@@ -4,7 +4,7 @@ import framework from "nqm-app-framework";
 
 // Application pages
 import Home from "../core/components/home";
-import Modal from "../core/components/modal";
+import Modal from "../core/containers/modal";
 
 // Application sidebar
 import AppSideBar from "./components/app-side-bar";
@@ -13,7 +13,8 @@ import AppSideBar from "./components/app-side-bar";
 const Layout = framework.ui.Layout;
 const ModalLayout = framework.ui.ModalLayout;
 
-export default function(injectDeps, {FlowRouter}) {
+export default function(injectDeps, context, actions) {   // eslint-disable-line no-unused-vars
+  const {FlowRouter} = context;
   const LayoutCtx = injectDeps(Layout);
   const ModalLayoutCtx = injectDeps(ModalLayout);
 

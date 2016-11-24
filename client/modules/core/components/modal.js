@@ -12,10 +12,11 @@ const styles = {
 
 class Modal extends React.Component {
   static propTypes = {
+    goBack: React.PropTypes.func,
     title: React.PropTypes.string,
   }
   handleClose() {
-    window.history.back();
+    this.props.goBack();
   }
   render() {
     return (

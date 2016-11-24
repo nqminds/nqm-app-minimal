@@ -6,5 +6,15 @@ export default {
       store.dispatch(reduxActions.setActive(active));
       FlowRouter.go(active);
     },
+    goBack({store, FlowRouter}) {
+      const route = FlowRouter.current();
+      if (route.oldRoute) {
+        store.dispatch(reduxActions.setActive(route.oldRoute.name));
+        window.history.back();
+      } else {
+        store.dispatch(reduxActions.setActive("root"));
+        FlowRouter.go("root");
+      }
+    },
   },
 };
