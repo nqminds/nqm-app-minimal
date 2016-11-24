@@ -52,9 +52,6 @@
   },
   "private": true,
   "babel": {
-    "presets": ["es2015", "react", "stage-1"],
-    "plugins": [
-      "transform-class-properties"
-    ]
+    "presets": ["es2015", "react", "stage-1"]
   }
 }
