@@ -1,12 +1,12 @@
 import React from "react";
 
-const Home = ({title, style}) => {
-  return <div style={style}>{"ARSE"}</div>;
+const Home = ({route, style}) => {
+  return <div style={style}>{route.title}</div>;
 };
 
 Home.propTypes = {
+  route: React.PropTypes.object,
   style: React.PropTypes.object,
-  title: React.PropTypes.string,
 };
 
 export default Home;

@@ -1,8 +1,8 @@
 import React from "react";
 import injectSheet from "react-jss";
 import _ from "lodash";
+import {browserHistory} from "react-router";
 
-import {browserHistory, Link} from "react-router";
 import {List, ListItem} from "material-ui/List";
 import Divider from "material-ui/Divider";
 import FontIcon from "material-ui/FontIcon";
