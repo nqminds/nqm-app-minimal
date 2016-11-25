@@ -30,8 +30,6 @@ export default function(injectDeps, context) {
     </Router>
   );
 
-  const BoundRoutes = injectDeps(RouterCtx);
-
   ReactDOM.render(
     React.createElement(injectDeps(RouterCtx)),
     document.getElementById("render-root")
