@@ -2,6 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import _ from "lodash";
 
+import {browserHistory, Link} from "react-router";
 import {List, ListItem} from "material-ui/List";
 import Divider from "material-ui/Divider";
 import FontIcon from "material-ui/FontIcon";
@@ -22,20 +23,23 @@ class AppMenu extends React.Component {
     {
       text: "Home",
       icon: "home",
-      route: "root",
+      route: "/",
     },
     {},
     {
       text: "Modal",
       icon: "help",
-      route: "modal",
+      route: "/modal",
     },
   ]
   static contextTypes = {
     muiTheme: React.PropTypes.object,
   }
   onMenuItem(route) {
-    this.props.go(route);
+    browserHistory.push(route);
+  }
+  componentWillUnmount() {
+    console.log("app menu unmounting");
   }
   render() {
     const activeItemStyle = {

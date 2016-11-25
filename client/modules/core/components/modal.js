@@ -16,7 +16,7 @@ class Modal extends React.Component {
     title: React.PropTypes.string,
   }
   handleClose() {
-    this.props.goBack();
+    this.props.router.goBack();
   }
   render() {
     return (

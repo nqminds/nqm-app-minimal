@@ -1,7 +1,7 @@
 import React from "react";
 
 const Home = ({title, style}) => {
-  return <div style={style}>{title}</div>;
+  return <div style={style}>{"ARSE"}</div>;
 };
 
 Home.propTypes = {

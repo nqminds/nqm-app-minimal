@@ -8,8 +8,6 @@ export const stateMapper = (state) => ({
 export const depsMapper = (context, actions) => ({
   store: context.store,
   connectionManager: context.connectionManager,
-  FlowRouter: context.FlowRouter,
-  go: actions.navigation.go,
 });
 
 export default dataLoader.merge(

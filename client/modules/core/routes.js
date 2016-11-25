@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {Router, Route, browserHistory} from "react-router";
+import {Router, Route, IndexRoute, browserHistory} from "react-router";
 import framework from "nqm-app-framework";
-import {syncHistoryWithStore} from 'react-router-redux';
+import {syncHistoryWithStore} from "react-router-redux";
 
 // Application pages
 import Home from "../core/components/home";
@@ -24,7 +24,12 @@ export default function(injectDeps, context, actions) {   // eslint-disable-line
 
   const RouterCtx = () => (
     <Router history={history}>
-      <Route path="/" component={Home} />
+      <Route path="/" title="hello" component={Layout}>
+        <IndexRoute components={{content: Home, sideBarContent: AppSideBar}} />
+      </Route>
+      <Route path="/modal" component={ModalLayout}>
+        <IndexRoute components={{content: Modal}} />
+      </Route>
     </Router>
   );
 
@@ -32,7 +37,7 @@ export default function(injectDeps, context, actions) {   // eslint-disable-line
 
   ReactDOM.render(
     <BoundRoutes />,
-    document.body
+    document.getElementById("render-root")
   );
 }
 

@@ -5,12 +5,12 @@ import framework from "nqm-app-framework";
 import initContext from "./configs/context";
 
 // modules
-// import frameworkModule from "nqm-app-framework/modules/core";
+import frameworkModule from "nqm-app-framework/modules/core";
 import coreModule from "./modules/core";
 
 // reducers
 const reducer = combineReducers({
-  // ...frameworkModule.reducers,
+  ...frameworkModule.reducers,
   ...coreModule.reducers,
   routing: routerReducer,
 });
@@ -22,7 +22,7 @@ const context = initContext({framework, reducer});
 const app = createApp(context);
 
 // load modules
-//app.loadModule(frameworkModule);
+app.loadModule(frameworkModule);
 app.loadModule(coreModule);
 
 // go
