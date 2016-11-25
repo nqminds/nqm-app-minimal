@@ -34,12 +34,10 @@ class AppMenu extends React.Component {
   ]
   static contextTypes = {
     muiTheme: React.PropTypes.object,
+    router: React.PropTypes.object,
   }
   onMenuItem(route) {
     browserHistory.push(route);
-  }
-  componentWillUnmount() {
-    console.log("app menu unmounting");
   }
   render() {
     const activeItemStyle = {
@@ -49,9 +47,9 @@ class AppMenu extends React.Component {
     };
 
     const menuItems = _.map(AppMenu.menuData, (itemData, idx) => {
-      const active = itemData.route === this.props.activeItem;
-      const itemStyle = active ? activeItemStyle : styles.itemStyle;
       if (itemData.text) {
+        const active = this.context.router.isActive(itemData.route);
+        const itemStyle = active ? activeItemStyle : styles.itemStyle;
         return (
           <ListItem
             key={idx}

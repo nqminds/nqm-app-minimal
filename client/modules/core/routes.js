@@ -21,10 +21,10 @@ export default function(injectDeps, context) {
 
   const RouterCtx = () => (
     <Router history={history}>
-      <Route path="/" component={Layout}>
+      <Route path="/" title="nqm-app-minimal" component={Layout}>
         <IndexRoute title="lorem upsum" components={{content: Home, sideBarContent: AppSideBar}} />
       </Route>
-      <Route path="/modal" component={ModalLayout}>
+      <Route path="/modal" title="modal" component={ModalLayout}>
         <IndexRoute components={{content: Modal}} />
       </Route>
     </Router>
