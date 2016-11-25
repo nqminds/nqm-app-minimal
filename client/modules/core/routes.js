@@ -6,7 +6,7 @@ import {syncHistoryWithStore} from "react-router-redux";
 
 // Application pages
 import Home from "../core/components/home";
-import Modal from "../core/containers/modal";
+import Modal from "../core/components/modal";
 
 // Application sidebar
 import AppSideBar from "./components/app-side-bar";

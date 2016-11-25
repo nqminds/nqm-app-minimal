@@ -12,7 +12,7 @@ const styles = {
 
 class Modal extends React.Component {
   static propTypes = {
-    goBack: React.PropTypes.func,
+    router: React.PropTypes.object,
     title: React.PropTypes.string,
   }
   handleClose() {
