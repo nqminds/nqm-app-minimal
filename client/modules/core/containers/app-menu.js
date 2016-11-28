@@ -1,7 +1,7 @@
 import {dataLoader} from "nqm-app-framework";
 import AppMenu from "../components/app-menu";
 
-export const depsMapper = (context, actions) => ({
+export const depsMapper = (context, actions) => ({  // eslint-disable-line no-unused-vars
 });
 
 export default dataLoader.merge(

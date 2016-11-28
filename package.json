@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "meteor run",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint client && echo \"eslint: no lint errors\""
   },
   "author": "toby.ealden@gmail.com",
   "license": "ISC",

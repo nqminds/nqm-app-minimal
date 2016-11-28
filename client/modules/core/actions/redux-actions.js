@@ -1,2 +1,2 @@
-import * as actionTypes from "./action-types";
+import * as actionTypes from "./action-types";  // eslint-disable-line no-unused-vars
 
