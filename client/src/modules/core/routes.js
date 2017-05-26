@@ -5,7 +5,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 
 // Application pages
 import ApplicationFrame from "./containers/application-frame";
-import Home from "./containers/home";
+import Home from "./components/home";
 
 export default function(injectDeps, context, actions) {   // eslint-disable-line no-unused-vars
   const Routes = () => (

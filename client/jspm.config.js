@@ -1,7 +1,7 @@
 SystemJS.config({
   paths: {
     "npm:": "jspm_packages/npm/",
-    "nqm-app-authenticate/": "src/"
+    "nqm-app/": "src/"
   },
   browserConfig: {
     "baseURL": "/"
@@ -13,11 +13,17 @@ SystemJS.config({
   },
   transpiler: "plugin-babel",
   packages: {
-    "nqm-app-authenticate": {
+    "nqm-app": {
       "main": "main.js",
       "meta": {
         "*.js": {
-          "loader": "plugin-babel"
+          "loader": "plugin-babel",
+          "babelOptions": {
+            "plugins": [
+              "babel-plugin-transform-react-jsx",
+              "babel-plugin-transform-class-properties"
+            ]
+          }
         }
       }
     }
@@ -31,16 +37,28 @@ SystemJS.config({
   ],
   map: {
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
+    "babel-plugin-transform-class-properties": "npm:babel-plugin-transform-class-properties@6.24.1",
+    "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@6.24.1",
+    "bluebird": "npm:bluebird@3.5.0",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
     "child_process": "npm:jspm-nodelibs-child_process@0.2.1",
     "constants": "npm:jspm-nodelibs-constants@0.2.1",
     "crypto": "npm:jspm-nodelibs-crypto@0.2.1",
+    "debug": "npm:debug@2.6.8",
     "domain": "npm:jspm-nodelibs-domain@0.2.1",
     "events": "npm:jspm-nodelibs-events@0.2.2",
     "fs": "npm:jspm-nodelibs-fs@0.2.1",
     "http": "npm:jspm-nodelibs-http@0.2.0",
     "https": "npm:jspm-nodelibs-https@0.2.2",
+    "jss": "npm:jss@6.5.0",
+    "jss-theme-reactor": "npm:jss-theme-reactor@0.11.1",
+    "lodash": "npm:lodash@4.17.4",
+    "material-ui": "npm:material-ui@next",
+    "nqm-core-utils": "npm:nqm-core-utils@0.2.16",
+    "nqm-ddp-tdx": "npm:nqm-ddp-tdx@0.1.9",
     "nqm-mantra-core": "npm:nqm-mantra-core@1.8.1",
+    "nqm-react-komposer": "npm:nqm-react-komposer@2.0.1",
+    "nqm-react-simple-di": "npm:nqm-react-simple-di@1.3.2",
     "os": "npm:jspm-nodelibs-os@0.2.1",
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
@@ -49,9 +67,11 @@ SystemJS.config({
     "react-dom": "npm:react-dom@15.5.4",
     "react-router": "npm:react-router@4.1.1",
     "react-router-dom": "npm:react-router-dom@4.1.1",
+    "redbox-react": "npm:redbox-react@1.3.6",
     "redux": "npm:redux@3.6.0",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.1",
+    "systemjs-hot-reloader": "npm:systemjs-hot-reloader@1.1.0",
     "url": "npm:jspm-nodelibs-url@0.2.1",
     "util": "npm:jspm-nodelibs-util@0.2.2",
     "vm": "npm:jspm-nodelibs-vm@0.2.1",
@@ -487,6 +507,351 @@ SystemJS.config({
     "npm:path-to-regexp@1.7.0": {
       "map": {
         "isarray": "npm:isarray@0.0.1"
+      }
+    },
+    "npm:systemjs-hot-reloader@1.1.0": {
+      "map": {
+        "systemjs-hmr": "npm:systemjs-hmr@2.0.9"
+      }
+    },
+    "npm:nqm-ddp-tdx@0.1.9": {
+      "map": {
+        "cookie": "npm:cookie@0.3.1",
+        "babel-plugin-transform-object-rest-spread": "npm:babel-plugin-transform-object-rest-spread@6.23.0",
+        "bluebird": "npm:bluebird@3.5.0",
+        "event-emitter-es6": "npm:event-emitter-es6@1.1.5",
+        "lodash": "npm:lodash@4.17.4",
+        "ddp.js": "npm:ddp.js@2.2.0",
+        "debug": "npm:debug@2.6.8",
+        "nqm-api-tdx": "npm:nqm-api-tdx@0.2.19",
+        "nqm-minimongo": "npm:nqm-minimongo@0.1.4",
+        "nqm-core-utils": "npm:nqm-core-utils@0.2.16"
+      }
+    },
+    "npm:nqm-api-tdx@0.2.19": {
+      "map": {
+        "bluebird": "npm:bluebird@3.5.0",
+        "debug": "npm:debug@2.6.8",
+        "lodash": "npm:lodash@4.17.4",
+        "base-64": "npm:base-64@0.1.0",
+        "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1"
+      }
+    },
+    "npm:ddp.js@2.2.0": {
+      "map": {
+        "wolfy87-eventemitter": "npm:wolfy87-eventemitter@4.3.0"
+      }
+    },
+    "npm:babel-plugin-transform-object-rest-spread@6.23.0": {
+      "map": {
+        "babel-plugin-syntax-object-rest-spread": "npm:babel-plugin-syntax-object-rest-spread@6.13.0",
+        "babel-runtime": "npm:babel-runtime@6.23.0"
+      }
+    },
+    "npm:nqm-minimongo@0.1.4": {
+      "map": {
+        "lodash": "npm:lodash@3.10.1",
+        "bowser": "npm:bowser@0.7.3",
+        "async": "npm:async@1.5.2"
+      }
+    },
+    "npm:debug@2.6.8": {
+      "map": {
+        "ms": "npm:ms@2.0.0"
+      }
+    },
+    "npm:nqm-core-utils@0.2.16": {
+      "map": {
+        "bluebird": "npm:bluebird@3.5.0",
+        "debug": "npm:debug@2.6.8",
+        "lodash": "npm:lodash@4.17.4",
+        "mongo-parse": "npm:mongo-parse@2.0.2",
+        "shortid": "npm:shortid@2.2.8"
+      }
+    },
+    "npm:redbox-react@1.3.6": {
+      "map": {
+        "error-stack-parser": "npm:error-stack-parser@1.3.6",
+        "object-assign": "npm:object-assign@4.1.1",
+        "prop-types": "npm:prop-types@15.5.10"
+      }
+    },
+    "npm:error-stack-parser@1.3.6": {
+      "map": {
+        "stackframe": "npm:stackframe@0.3.1"
+      }
+    },
+    "npm:babel-plugin-transform-class-properties@6.24.1": {
+      "map": {
+        "babel-template": "npm:babel-template@6.24.1",
+        "babel-plugin-syntax-class-properties": "npm:babel-plugin-syntax-class-properties@6.13.0",
+        "babel-helper-function-name": "npm:babel-helper-function-name@6.24.1",
+        "babel-runtime": "npm:babel-runtime@6.23.0"
+      }
+    },
+    "npm:babel-template@6.24.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "lodash": "npm:lodash@4.17.4",
+        "babel-traverse": "npm:babel-traverse@6.24.1",
+        "babel-types": "npm:babel-types@6.24.1",
+        "babylon": "npm:babylon@6.17.1"
+      }
+    },
+    "npm:babel-helper-function-name@6.24.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "babel-template": "npm:babel-template@6.24.1",
+        "babel-traverse": "npm:babel-traverse@6.24.1",
+        "babel-types": "npm:babel-types@6.24.1",
+        "babel-helper-get-function-arity": "npm:babel-helper-get-function-arity@6.24.1"
+      }
+    },
+    "npm:babel-traverse@6.24.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "lodash": "npm:lodash@4.17.4",
+        "babel-types": "npm:babel-types@6.24.1",
+        "babylon": "npm:babylon@6.17.1",
+        "globals": "npm:globals@9.17.0",
+        "invariant": "npm:invariant@2.2.2",
+        "debug": "npm:debug@2.6.8",
+        "babel-messages": "npm:babel-messages@6.23.0",
+        "babel-code-frame": "npm:babel-code-frame@6.22.0"
+      }
+    },
+    "npm:babel-types@6.24.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "lodash": "npm:lodash@4.17.4",
+        "to-fast-properties": "npm:to-fast-properties@1.0.3",
+        "esutils": "npm:esutils@2.0.2"
+      }
+    },
+    "npm:babel-helper-get-function-arity@6.24.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "babel-types": "npm:babel-types@6.24.1"
+      }
+    },
+    "npm:babel-messages@6.23.0": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0"
+      }
+    },
+    "npm:babel-code-frame@6.22.0": {
+      "map": {
+        "esutils": "npm:esutils@2.0.2",
+        "js-tokens": "npm:js-tokens@3.0.1",
+        "chalk": "npm:chalk@1.1.3"
+      }
+    },
+    "npm:chalk@1.1.3": {
+      "map": {
+        "ansi-styles": "npm:ansi-styles@2.2.1",
+        "supports-color": "npm:supports-color@2.0.0",
+        "strip-ansi": "npm:strip-ansi@3.0.1",
+        "has-ansi": "npm:has-ansi@2.0.0",
+        "escape-string-regexp": "npm:escape-string-regexp@1.0.5"
+      }
+    },
+    "npm:strip-ansi@3.0.1": {
+      "map": {
+        "ansi-regex": "npm:ansi-regex@2.1.1"
+      }
+    },
+    "npm:has-ansi@2.0.0": {
+      "map": {
+        "ansi-regex": "npm:ansi-regex@2.1.1"
+      }
+    },
+    "npm:babel-plugin-transform-react-jsx@6.24.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "babel-plugin-syntax-jsx": "npm:babel-plugin-syntax-jsx@6.18.0",
+        "babel-helper-builder-react-jsx": "npm:babel-helper-builder-react-jsx@6.24.1"
+      }
+    },
+    "npm:babel-helper-builder-react-jsx@6.24.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "babel-types": "npm:babel-types@6.24.1",
+        "esutils": "npm:esutils@2.0.2"
+      }
+    },
+    "npm:jss-theme-reactor@0.11.1": {
+      "map": {
+        "jss-preset-default": "npm:jss-preset-default@2.0.0",
+        "murmurhash-js": "npm:murmurhash-js@1.0.0",
+        "jss": "npm:jss@7.1.2",
+        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@5.1.0"
+      }
+    },
+    "npm:jss-preset-default@2.0.0": {
+      "map": {
+        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@5.1.0",
+        "jss-camel-case": "npm:jss-camel-case@4.0.0",
+        "jss-compose": "npm:jss-compose@3.0.1",
+        "jss-expand": "npm:jss-expand@3.0.1",
+        "jss-extend": "npm:jss-extend@4.0.1",
+        "jss-default-unit": "npm:jss-default-unit@6.1.1",
+        "jss-global": "npm:jss-global@1.0.1",
+        "jss-props-sort": "npm:jss-props-sort@4.0.0",
+        "jss-nested": "npm:jss-nested@4.0.1"
+      }
+    },
+    "npm:jss@7.1.2": {
+      "map": {
+        "warning": "npm:warning@3.0.0",
+        "is-in-browser": "npm:is-in-browser@1.0.2"
+      }
+    },
+    "npm:jss-vendor-prefixer@5.1.0": {
+      "map": {
+        "css-vendor": "npm:css-vendor@0.3.8"
+      }
+    },
+    "npm:jss-compose@3.0.1": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:jss-extend@4.0.1": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:jss-nested@4.0.1": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:css-vendor@0.3.8": {
+      "map": {
+        "is-in-browser": "npm:is-in-browser@1.1.3"
+      }
+    },
+    "npm:material-ui@next": {
+      "map": {
+        "classnames": "npm:classnames@2.2.5",
+        "jss-preset-default": "npm:jss-preset-default@1.3.1",
+        "dom-helpers": "npm:dom-helpers@3.2.1",
+        "keycode": "npm:keycode@2.1.9",
+        "react-scrollbar-size": "npm:react-scrollbar-size@1.0.1",
+        "jss-theme-reactor": "npm:jss-theme-reactor@0.10.0",
+        "recompose": "npm:recompose@0.23.4",
+        "react-transition-group": "npm:react-transition-group@1.1.3",
+        "react-event-listener": "npm:react-event-listener@0.4.5",
+        "scroll": "npm:scroll@2.0.0",
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "object-assign": "npm:object-assign@4.1.1",
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@1.2.0",
+        "prop-types": "npm:prop-types@15.5.10",
+        "lodash": "npm:lodash@4.17.4",
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:react-scrollbar-size@1.0.1": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "prop-types": "npm:prop-types@15.5.10",
+        "react": "npm:react@15.5.4",
+        "react-event-listener": "npm:react-event-listener@0.4.5",
+        "lodash.isequal": "npm:lodash.isequal@4.5.0",
+        "lodash.throttle": "npm:lodash.throttle@4.1.1"
+      }
+    },
+    "npm:recompose@0.23.4": {
+      "map": {
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@1.2.0",
+        "fbjs": "npm:fbjs@0.8.12",
+        "symbol-observable": "npm:symbol-observable@1.0.4",
+        "change-emitter": "npm:change-emitter@0.1.6"
+      }
+    },
+    "npm:react-event-listener@0.4.5": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.23.0",
+        "prop-types": "npm:prop-types@15.5.10",
+        "warning": "npm:warning@3.0.0",
+        "fbjs": "npm:fbjs@0.8.12"
+      }
+    },
+    "npm:react-transition-group@1.1.3": {
+      "map": {
+        "dom-helpers": "npm:dom-helpers@3.2.1",
+        "prop-types": "npm:prop-types@15.5.10",
+        "warning": "npm:warning@3.0.0",
+        "chain-function": "npm:chain-function@1.0.0"
+      }
+    },
+    "npm:jss-theme-reactor@0.10.0": {
+      "map": {
+        "jss-preset-default": "npm:jss-preset-default@1.3.1",
+        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@4.0.0",
+        "jss": "npm:jss@6.5.0",
+        "murmurhash-js": "npm:murmurhash-js@1.0.0"
+      }
+    },
+    "npm:jss-preset-default@1.3.1": {
+      "map": {
+        "jss-camel-case": "npm:jss-camel-case@3.0.0",
+        "jss-default-unit": "npm:jss-default-unit@5.0.3",
+        "jss-compose": "npm:jss-compose@2.1.0",
+        "jss-expand": "npm:jss-expand@2.1.0",
+        "jss-extend": "npm:jss-extend@3.0.1",
+        "jss-props-sort": "npm:jss-props-sort@3.0.0",
+        "jss-nested": "npm:jss-nested@3.0.1",
+        "jss-global": "npm:jss-global@0.4.1",
+        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@4.0.0"
+      }
+    },
+    "npm:scroll@2.0.0": {
+      "map": {
+        "rafl": "npm:rafl@1.2.2"
+      }
+    },
+    "npm:jss-compose@2.1.0": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:jss-extend@3.0.1": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:jss-nested@3.0.1": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:jss@6.5.0": {
+      "map": {
+        "warning": "npm:warning@3.0.0",
+        "is-in-browser": "npm:is-in-browser@1.0.2"
+      }
+    },
+    "npm:jss-vendor-prefixer@4.0.0": {
+      "map": {
+        "css-vendor": "npm:css-vendor@0.3.8"
+      }
+    },
+    "npm:rafl@1.2.2": {
+      "map": {
+        "global": "npm:global@4.3.2"
+      }
+    },
+    "npm:global@4.3.2": {
+      "map": {
+        "process": "npm:process@0.5.2",
+        "min-document": "npm:min-document@2.19.0",
+        "node-min-document": "npm:min-document@2.19.0"
+      }
+    },
+    "npm:min-document@2.19.0": {
+      "map": {
+        "dom-walk": "npm:dom-walk@0.1.1"
       }
     }
   }

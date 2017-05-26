@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import careshareStyleSheet from "./stylesheet";
+import applicationStyleSheet from "./application-style";
 
 import ServerPendingModal from "../containers/server-pending-modal";
 
@@ -13,7 +13,7 @@ import {createStyleSheet} from "jss-theme-reactor";
 
 export let appClasses;
 
-const CareshareFrame = ({
+const ApplicationFrame = ({
   appInitialiseProgress,
   appInitialised,
   authenticationError,
@@ -47,7 +47,7 @@ const CareshareFrame = ({
   document.body.style.color = palette.text.primary;
 
   // Global app styles.
-  const appStyleSheet = createStyleSheet("nqm-careshare-app", careshareStyleSheet);
+  const appStyleSheet = createStyleSheet("nqm-app", applicationStyleSheet);
   appClasses = styleManager.render(appStyleSheet);
 
   const styleSheet = createStyleSheet("nqm-careshare-frame", ({palette}) => {
@@ -84,7 +84,14 @@ const CareshareFrame = ({
   if (!authenticated || !appInitialised) {
     let inner;
     if (!authenticated) {
-      inner = (<div>{authenticationError}<Button onClick={handleSignIn}>SIGN IN</Button></div>);
+      inner = (
+        <div>
+          <span>{authenticationError}</span>
+          <Button onClick={handleSignIn}>
+            sign in
+          </Button>
+        </div>
+      );
     } else if (!appInitialised) {
       inner = `initialising ${appInitialiseProgress}`;
     }
@@ -109,7 +116,7 @@ const CareshareFrame = ({
   );
 };
 
-CareshareFrame.propTypes = {
+ApplicationFrame.propTypes = {
   appInitialiseProgress: PropTypes.string,
   appInitialised: PropTypes.bool,
   authenticated: PropTypes.bool,
@@ -119,4 +126,4 @@ CareshareFrame.propTypes = {
   signIn: PropTypes.func.isRequired,
 };
 
-export default CareshareFrame;
+export default ApplicationFrame;
