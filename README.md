@@ -13,7 +13,7 @@ jspm install
 
 ## commissioning
 Create an **application definition** using the **nqminds toolbox**. Note the application id and secret and insert them into the
-`./server/server-settings.js' file.
+`./server/server-settings.js` file.
 
 ## run
 ```
