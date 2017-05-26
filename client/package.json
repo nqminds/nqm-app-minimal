@@ -113,9 +113,5 @@
   },
   "author": "toby.ealden@gmail.com",
   "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "jspm": "^0.17.0-beta.41"
-  }
+  "description": ""
 }

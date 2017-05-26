@@ -22,7 +22,7 @@ module.exports = (function() {
   return {
     appTitle: "minimal",
     applicationId: "SJg2iqKde-",                    // This is the application account id.
-    applicationSecret: "nqm-cs-123",                // Application account secret.
+    applicationSecret: "secret",                // Application account secret.
     authServerURL: "https://localhost:4443",
     getServerDataFolderId: getServerDataFolderId,
     setServerDataFolderId: setServerDataFolderId,
