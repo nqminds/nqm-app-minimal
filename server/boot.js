@@ -4,21 +4,20 @@ module.exports = (function() {
   const log = require("debug")("nqm-app:boot");
   const TDXApi = require("nqm-api-tdx");
   const nqmUtils = require("nqm-core-utils");
-  const settings = require("./server-settings");
+  const config = require("./app-config");
   const constants = nqmUtils.constants;
-  const _ = require("lodash");
 
   const bootstrap = function() {
     // Configure TDX comms.
-    const api = new TDXApi(settings.tdxApiConfig);
+    const api = new TDXApi(config.public.tdxConfig);
 
-    return api.authenticate(settings.applicationId, settings.applicationSecret)
+    return api.authenticate(config.applicationId, config.applicationSecret)
       .then((token) => {
         log("TDX authenticated OK");
-        settings.setToken(token);
+        config.setToken(token);
 
         // Determine the id of the application server data folder.
-        const dataFolderId = nqmUtils.shortHash(constants.applicationServerDataFolderPrefix + settings.applicationId);
+        const dataFolderId = nqmUtils.shortHash(constants.applicationServerDataFolderPrefix + config.applicationId);
         return api.getResource(dataFolderId);
       })
       .then((resource) => {
@@ -30,7 +29,7 @@ module.exports = (function() {
         log("got server data folder [%s]", resource.id);
 
         // Cache the folder id.
-        settings.setServerDataFolderId(resource.id);
+        config.setServerDataFolderId(resource.id);
         return resource.id;
       })
       .catch((err) => {

@@ -11,7 +11,7 @@ import {
   CORE_SERVER_IDLE,
 } from "../actions/action-types";
 
-const defaultTDXState = {
+export const defaultCoreState = {
   appInitialised: false,
   appInitialiseProgress: "",
   authenticating: false,
@@ -23,7 +23,7 @@ const defaultTDXState = {
   serverError: null,
 };
 
-export function core(state = defaultTDXState, action) {
+export function core(state = defaultCoreState, action) {
   switch (action.type) {
     case CORE_APP_INITIALISED:
       return {...state, appInitialised: true};

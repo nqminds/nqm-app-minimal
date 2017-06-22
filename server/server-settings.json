@@ -1,0 +1,14 @@
+{
+  "public": {
+    "tdxConfig": {
+      "ddpServer": "ws://localhost:2222",
+      "tdxServer": "localhost:4443",
+      "commandHost": "http://localhost:3103",
+      "queryHost": "http://localhost:3104",
+      "accessTokenTTL": 31622400
+    }
+  },
+  "applicationId": "Skx-OIGY7Z",
+  "applicationSecret": "password",
+  "authServerURL": "https://localhost:4443"
+}

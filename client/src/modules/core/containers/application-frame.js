@@ -13,6 +13,7 @@ export const connectedMapper = ({authenticated, getAccessToken, setAuthToken}, o
 
 export const reduxMapper = (state) => {
   return {
+    accessToken: state.core.accessToken,
     appInitialiseProgress: state.core.appInitialiseProgress,
     appInitialised: state.core.appInitialised,
     authenticated: state.core.authenticated,
@@ -32,7 +33,7 @@ export const depsMapper = ({getAccessToken, store}, actions) => {
 };
 
 const Container = merge(
-  compose(connectedMapper),
+  // compose(connectedMapper),
   compose(reduxFactory(reduxMapper)),
   useDeps(depsMapper)
 )(ApplicationFrame);

@@ -11,9 +11,7 @@ export default function(injectDeps, context, actions) {   // eslint-disable-line
   const Routes = () => (
     <ApplicationFrame>
       <BrowserRouter>
-        <div id="router-root">
-          <Route exact path="/" component={Home} />
-        </div>
+        <Route exact path="/" component={Home} />
       </BrowserRouter>
     </ApplicationFrame>
 );

@@ -6,7 +6,7 @@ module.exports = (function() {
   const router = express.Router();
   const base64 = require("base-64");
   const requestIP = require("request-ip");
-  const settings = require("../server-settings");
+  const config = require("../app-config");
   const jwt = require("jsonwebtoken");
   const nqmUtils = require("nqm-core-utils");
 
@@ -25,7 +25,7 @@ module.exports = (function() {
 
     // Redirect to auth server, sending the application token and the encoded client IP to bind the new token to.
     res.redirect(
-      `${settings.authServerURL}/auth?rurl=${rurlAuth}&a=${settings.getToken()}&c=${clientIP}`
+      `${config.authServerURL}/auth?rurl=${rurlAuth}&a=${config.getToken()}&c=${clientIP}`
     );
   });
 
@@ -51,15 +51,29 @@ module.exports = (function() {
   });
 
   router.get("*", function(req, res) {
-    // Pass configuration data to the client app, including the id of the current users' application data folder.
-    let userDataFolderId = "";
-    if (req.session && req.session.authData) {
-      // The user application data folder is a combination of the application id and the user TDX id.
-      userDataFolderId = nqmUtils.shortHash(`${settings.applicationId}-${req.session.authData.sub}`);
-    }
+    // Check for access token on query string.
+    if (req.query.access_token) {
+      // Set access token in session and remove from URL.
+      req.session.accessToken = req.query.access_token;
+      res.redirect(req.path);
+    } else {
+      // Render the workbench client.
+      // Pass configuration data to the client app, including the id of the current users' application data folder.
+      let userDataFolderId = "";
+      if (req.session && req.session.authData) {
+        // The user application data folder is a combination of the application id and the user TDX id.
+        userDataFolderId = nqmUtils.shortHash(`${config.applicationId}-${req.session.authData.sub}`);
+      }
 
-    // Now render the client app.
-    res.render("index", {title: settings.appTitle, settings, userDataFolderId, token: req.session.token || ""});
+      // Now render the client app.
+      res.render("index", {
+        accessToken: req.session.token || "",
+        config,
+        settings: {public: config.public},
+        title: config.appTitle,
+        userDataFolderId,
+      });
+    }
   });
 
   return router;

@@ -8,33 +8,15 @@ html
     link(rel="stylesheet", href="/font-awesome/css/font-awesome.min.css")
     link(rel="stylesheet", href="/stylesheets/style.css")
     script.
-      var __applicationConfig = (function() {
-        var accessToken = "#{token}";
-        var serverDataFolderId = "#{settings.getServerDataFolderId()}";
-        var userDataFolderId = "#{userDataFolderId}";
-
-        var clearAccessToken = function() {
-          accessToken = "";
-        };
-
-        var getAccessToken = function() {
-          return accessToken;
-        };
-
-        var getServerDataFolderId = function() {
-          return serverDataFolderId;
-        };
-
-        var getUserDataFolderId = function() {
-          return userDataFolderId;
-        };
-
+      window.__nqmApplicationState = (function() {
         return {
-          clearAccessToken: clearAccessToken,
-          getAccessToken: getAccessToken,
-          getServerDataFolderId: getServerDataFolderId,
-          getUserDataFolderId: getUserDataFolderId,
+          core: {
+            accessToken: "#{accessToken}",
+          },
         };
+      }());    
+      window.__nqmApplicationSettings = (function() {
+        return !{JSON.stringify(settings || {})};
       }());
     script(src="/jspm_packages/system.js")
     script(src="/jspm.config.js")
@@ -43,9 +25,9 @@ html
   body
     block content
     script.
-      SystemJS.import('systemjs-hot-reloader')
-        .then((connect) => {
-          connect();
+      //- SystemJS.import('systemjs-hot-reloader')
+      //-   .then((connect) => {
+      //-     connect();
           System.import('/src/main.js');
-        });
+        //- });
         
