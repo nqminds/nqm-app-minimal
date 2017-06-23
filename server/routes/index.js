@@ -4,18 +4,13 @@ module.exports = (function() {
   const log = require("debug")("nqm:route-index");
   const express = require("express");
   const router = express.Router();
-  const base64 = require("base-64");
-  const requestIP = require("request-ip");
   const config = require("../app-config");
   const jwt = require("jsonwebtoken");
   const nqmUtils = require("nqm-core-utils");
 
   router.get("/auth", function(req, res) {
     delete req.session.authData;
-    delete req.session.access_token;
-
-    // Encode requesting client IP and send it to auth server so that the user token is bound to the correct IP.
-    const clientIP = base64.encode(requestIP.getClientIp(req));
+    delete req.session.token;
 
     // Encode the client return url.
     const rurlClient = encodeURIComponent(req.query.rurl);
@@ -23,9 +18,9 @@ module.exports = (function() {
     // Encode the auth callback return url (which also includes the client return url!).
     const rurlAuth = encodeURIComponent(`${req.protocol}://${req.get("host")}/auth/callback?rurl=${rurlClient}`);
 
-    // Redirect to auth server, sending the application token and the encoded client IP to bind the new token to.
+    // Redirect to auth server, sending the application token.
     res.redirect(
-      `${config.authServerURL}/auth?rurl=${rurlAuth}&a=${config.getToken()}&c=${clientIP}`
+      `https://${config.public.tdxConfig.tdxServer}/auth?rurl=${rurlAuth}&a=${config.getToken()}`
     );
   });
 
@@ -51,29 +46,22 @@ module.exports = (function() {
   });
 
   router.get("*", function(req, res) {
-    // Check for access token on query string.
-    if (req.query.access_token) {
-      // Set access token in session and remove from URL.
-      req.session.accessToken = req.query.access_token;
-      res.redirect(req.path);
-    } else {
-      // Render the workbench client.
-      // Pass configuration data to the client app, including the id of the current users' application data folder.
-      let userDataFolderId = "";
-      if (req.session && req.session.authData) {
-        // The user application data folder is a combination of the application id and the user TDX id.
-        userDataFolderId = nqmUtils.shortHash(`${config.applicationId}-${req.session.authData.sub}`);
-      }
-
-      // Now render the client app.
-      res.render("index", {
-        accessToken: req.session.token || "",
-        config,
-        settings: {public: config.public},
-        title: config.appTitle,
-        userDataFolderId,
-      });
+    // Render the workbench client.
+    // Pass configuration data to the client app, including the id of the current users' application data folder.
+    let userDataFolderId = "";
+    if (req.session && req.session.authData) {
+      // The user application data folder is a combination of the application id and the user TDX id.
+      userDataFolderId = nqmUtils.shortHash(`${config.applicationId}-${req.session.authData.sub}`);
     }
+
+    // Now render the client app.
+    res.render("index", {
+      accessToken: req.session.token || "",
+      config,
+      settings: {public: config.public},
+      title: "minimal",
+      userDataFolderId,
+    });
   });
 
   return router;

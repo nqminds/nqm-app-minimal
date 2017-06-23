@@ -8,16 +8,14 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import createPalette from "material-ui/styles/palette";
 import createMuiTheme from "material-ui/styles/theme";
 import * as Colors from "material-ui/styles/colors";
-import Button from "material-ui/Button";
 import {createStyleSheet} from "jss-theme-reactor";
 
 export let appClasses;
 
 class ApplicationFrame extends React.Component {
   componentDidMount() {
-    const {accessToken, authenticated, authenticating, setAuthToken, signIn} = this.props;
-    debugger;
-    if (!authenticated && !authenticating) {
+    const {accessToken, authenticating, setAuthToken, signIn} = this.props;
+    if (!authenticating) {
       if (accessToken) {
         setAuthToken(accessToken);
       } else {
@@ -29,10 +27,10 @@ class ApplicationFrame extends React.Component {
   }
   render() {
     const {
+      accessToken,
       appInitialiseProgress,
       appInitialised,
       authenticationError,
-      authenticated,
       darkTheme,
       children,
     } = this.props;
@@ -87,9 +85,9 @@ class ApplicationFrame extends React.Component {
     const classes = styleManager.render(styleSheet);
 
     let content;
-    if (!authenticated || !appInitialised) {
+    if (!accessToken || !appInitialised) {
       let inner;
-      if (!authenticated) {
+      if (!accessToken) {
         inner = (
           <div>
             <div>{authenticationError}</div>
@@ -125,7 +123,6 @@ ApplicationFrame.propTypes = {
   accessToken: React.PropTypes.string,
   appInitialiseProgress: PropTypes.string,
   appInitialised: PropTypes.bool,
-  authenticated: PropTypes.bool,
   authenticating: React.PropTypes.bool,
   authenticationError: PropTypes.string,
   children: PropTypes.any,

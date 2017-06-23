@@ -4,12 +4,12 @@ import * as actionTypes from "./action-types";
  * AUTH
  *
  */
-export const signIn = function(returnUrl) {
-  return {type: actionTypes.CORE_AUTH_SIGN_IN, returnUrl};
+export const authenticating = function() {
+  return {type: actionTypes.CORE_AUTH_AUTHENTICATING};
 };
 
-export const authenticated = function(token) {
-  return {type: actionTypes.CORE_AUTH_OK, token};
+export const setAuthToken = function(token) {
+  return {type: actionTypes.CORE_AUTH_SET_TOKEN, token};
 };
 
 export const authenticationError = function(err) {
