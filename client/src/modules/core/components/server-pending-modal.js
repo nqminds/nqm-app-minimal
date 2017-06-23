@@ -2,7 +2,7 @@ import React from "react";
 
 import Dialog from "material-ui/Dialog";
 import Button from "material-ui/Button";
-import {createStyleSheet} from "jss-theme-reactor";
+import {createStyleSheet, withStyles} from "material-ui/styles";
 
 export const styleSheet = createStyleSheet("nqm-server-pending-modal", ({palette}) => {
   return {
@@ -64,9 +64,7 @@ class ServerPendingModal extends React.Component {
     }
   }
   render() {
-    const {styleManager} = this.context;
-    const {setServerIdle} = this.props;
-    const classes = styleManager.render(styleSheet);
+    const {classes, setServerIdle} = this.props;
 
     const handleRequestClose = () => {
       this.killCloseTimer();
@@ -78,8 +76,8 @@ class ServerPendingModal extends React.Component {
     if (this.state.serverError) {
       content = (
         <div>
-          <div className={classes.errorContent}>[{this.state.serverError.code}]</div>
-          <div className={classes.errorContent}>{this.state.serverError.failure}</div>
+          <div className={classes.errorContent}>[{this.state.serverError.failure.code}]</div>
+          <div className={classes.errorContent}>{this.state.serverError.failure.message}</div>
           <Button className={classes.dialogButton} onClick={handleRequestClose}>OK</Button>
         </div>
       );
@@ -107,14 +105,11 @@ class ServerPendingModal extends React.Component {
   }
 }
 
-ServerPendingModal.contextTypes = {
-  styleManager: React.PropTypes.object,
-};
-
 ServerPendingModal.propTypes = {
+  classes: React.PropTypes.object,
   serverError: React.PropTypes.object,
   serverPending: React.PropTypes.string,
   setServerIdle: React.PropTypes.func,
 };
 
-export default ServerPendingModal;
+export default withStyles(styleSheet)(ServerPendingModal);

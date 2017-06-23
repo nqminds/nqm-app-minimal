@@ -1,6 +1,7 @@
 import {
   CORE_APP_INITIALISED,
   CORE_APP_INITIALISE_PROGRESS,
+  CORE_APP_SET_PROFILE_ID,
   CORE_AUTH_AUTHENTICATING,
   CORE_AUTH_SET_TOKEN,
   CORE_AUTH_ERROR,
@@ -17,8 +18,10 @@ export const defaultCoreState = {
   authenticating: false,
   accessToken: "",
   darkTheme: true,
+  profileId: "",
   serverPending: "",
   serverError: null,
+  userDataFolderId: "",
 };
 
 export function core(state = defaultCoreState, action) {
@@ -29,6 +32,8 @@ export function core(state = defaultCoreState, action) {
       return {...state, appInitialiseProgress: action.progress};
     case CORE_APP_TOGGLE_THEME:
       return {...state, darkTheme: !state.darkTheme};
+    case CORE_APP_SET_PROFILE_ID:
+      return {...state, profileId: action.profileId};
     case CORE_AUTH_AUTHENTICATING:
       return {...state, authenticating: true};
     case CORE_AUTH_SET_TOKEN:
@@ -40,7 +45,13 @@ export function core(state = defaultCoreState, action) {
     case CORE_SERVER_PENDING:
       return {...state, serverPending: action.description};
     case CORE_SERVER_ERROR:
-      return {...state, serverError: action.error};
+      return {
+        ...state,
+        serverError: {
+          ...action.error,
+          failure: JSON.parse(action.error.failure),
+        },
+      };
     case CORE_SERVER_IDLE:
       return {...state, serverPending: "", serverError: null};
     default:

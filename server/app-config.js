@@ -1,6 +1,6 @@
 module.exports = (function() {
   "use strict";
-  const settings = require("./server-settings");
+  const settings = require("./settings");
   const _ = require("lodash");
 
   let token;

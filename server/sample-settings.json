@@ -8,7 +8,7 @@
       "accessTokenTTL": 31622400
     }
   },
-  "applicationId": "Skx-OIGY7Z",
-  "applicationSecret": "password",
+  "applicationId": "xxxxxxxxx",
+  "applicationSecret": "zzzzzzz",
   "authServerURL": "https://localhost:4443"
 }

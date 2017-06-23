@@ -5,14 +5,22 @@ import _ from "lodash";
 const log = debug("nqm-app:boot");
 
 const checkAndCreate = function(context, name, schemaId) {
-  const {getDataFolderId, store, tdxConnections} = context;
+  //
+  // Check that a resource exists with the given name and schema in the user data folder.
+  // Create the resource if it doesn't exist.
+  //
+  const {store, tdxConnections} = context;
 
+  // Feedback the current operation to the UI.
   store.dispatch(reduxActions.initialiseProgress(`${name} resource`));
+
+  // Get the tdx connection manager.
   const connectionManager = tdxConnections.getDefault();
 
+  // Create the lookup to check if the resource already exists.
   const lookup = {
     name,
-    parents: getDataFolderId(),
+    parents: store.getState().core.userDataFolderId,
     "schemaDefinition.parent": schemaId,
   };
 
@@ -25,7 +33,7 @@ const checkAndCreate = function(context, name, schemaId) {
         const resourcePayload = {
           name,
           basedOnSchema: schemaId,
-          parentId: getDataFolderId(),
+          parentId: store.getState().core.userDataFolderId,
         };
         // Add resource and wait for index to be built.
         return connectionManager.tdxApi.addResource(resourcePayload, true)
@@ -33,12 +41,14 @@ const checkAndCreate = function(context, name, schemaId) {
             return result.response.id;
           });
       } else {
+        // A resource exists.
         if (resources.length > 1) {
           log("unexpected multiple %s resources [%d]", name, resources.length);
         } else {
           log("%s resource OK", name);
         }
         return new Promise((resolve) => {
+          // Delay to allow the UI feedback to be readable (could remove this delay).
           setTimeout(() => {
             resolve(_.first(resources).id);
           }, 250);
@@ -58,16 +68,23 @@ const checkAndCreateFilter = function(
   readProjection,
   writableProperties,
   ) {
-  const {getDataFolderId, store, tdxConnections} = context;
+  //
+  // Check that a filter exists with the given name and schema in the user data folder.
+  // Create the filter if it doesn't exist.
+  //
+  const {store, tdxConnections} = context;
 
+  // Feedback the current operation to the UI.
   store.dispatch(reduxActions.initialiseProgress(`${name} resource filter`));
+
+  // Get the tdx connection manager.
   const connectionManager = tdxConnections.getDefault();
 
   // Look for a resource with the given derived source.
   const lookup = {
     name,
     "derived.source": derivedFromId,
-    parents: getDataFolderId(),
+    parents: store.getState().core.userDataFolderId,
   };
 
   log("checking %s resource", name);
@@ -86,7 +103,7 @@ const checkAndCreateFilter = function(
             projection: JSON.stringify(readProjection || {}),
             writeProjection: JSON.stringify(writableProperties || {}),
           },
-          parentId: getDataFolderId(),
+          parentId: store.getState().core.userDataFolderId,
           shareMode,
         };
         // Add resource and wait for index to be built.
@@ -95,12 +112,14 @@ const checkAndCreateFilter = function(
             return result.response.id;
           });
       } else {
+        // The resource already exists.
         if (resources.length > 1) {
           log("unexpected multiple %s resource filters [%d]", name, resources.length);
         } else {
           log("%s resource filter OK", name);
         }
         return new Promise((resolve) => {
+          // Delay to allow the UI feedback to be readable (could remove this delay).
           setTimeout(() => {
             resolve(_.first(resources).id);
           }, 250);
@@ -109,8 +128,18 @@ const checkAndCreateFilter = function(
     });
 };
 
+const checkUserProfile = function(context) {
+  // Create a profile dataset (n.b. you should use a different schema than "dataset").
+  return checkAndCreate(context, "profile", "dataset")
+    .then((resourceId) => {
+      context.store.dispatch(reduxActions.setProfileId(resourceId));
+    });
+};
+
 const initialiseUser = function(context) {
-  return Promise.resolve(context)
+  // Do any user initialisation here.
+  // For example, make sure a profile dataset exists for the current user.
+  return checkUserProfile(context)
     .then(() => {
       context.store.dispatch(reduxActions.setInitialised());
     })

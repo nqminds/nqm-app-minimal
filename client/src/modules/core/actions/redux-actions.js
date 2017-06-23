@@ -36,6 +36,10 @@ export const toggleTheme = function() {
   return {type: actionTypes.CORE_APP_TOGGLE_THEME};
 };
 
+export const setProfileId = function(profileId) {
+  return {type: actionTypes.CORE_APP_SET_PROFILE_ID, profileId};
+};
+
 /*
  * TDX
  *

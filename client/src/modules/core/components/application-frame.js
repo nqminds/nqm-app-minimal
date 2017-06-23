@@ -8,7 +8,7 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import createPalette from "material-ui/styles/palette";
 import createMuiTheme from "material-ui/styles/theme";
 import * as Colors from "material-ui/styles/colors";
-import {createStyleSheet} from "jss-theme-reactor";
+import {createStyleSheet} from "material-ui/styles";
 
 export let appClasses;
 
@@ -21,8 +21,6 @@ class ApplicationFrame extends React.Component {
       } else {
         signIn();
       }
-    } else {
-      // Authenticated OK - do nothing.
     }
   }
   render() {
@@ -37,7 +35,7 @@ class ApplicationFrame extends React.Component {
 
     const palette = createPalette({
       primary: Colors.blue,
-      accent: Colors.pink,
+      accent: Colors.amber,
       type: darkTheme ? "dark" : "light",
     });
 

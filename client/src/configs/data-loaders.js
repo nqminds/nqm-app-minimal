@@ -6,10 +6,7 @@ import {Tracker} from "nqm-ddp-tdx";
 import RedBox from "redbox-react";
 import Promise from "bluebird";
 
-import LoadingIndicator from "../modules/core/components/loading-indicator";
-
 export const noLoader = () => (null);
-export const spinningLoader = () => (<LoadingIndicator />);
 export const defaultError = (err) => (<RedBox error={err} />);
 
 export const compose = setDefaults({
