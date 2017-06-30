@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import framework from "nqm-app-framework";
 
@@ -12,8 +13,8 @@ const styles = {
 
 class Modal extends React.Component {
   static propTypes = {
-    router: React.PropTypes.object,
-    title: React.PropTypes.string,
+    router: PropTypes.object,
+    title: PropTypes.string,
   }
   handleClose() {
     this.props.router.goBack();
