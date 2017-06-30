@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import _ from "lodash";
 import {browserHistory} from "react-router";
@@ -16,8 +17,9 @@ const styles = {
 
 class AppMenu extends React.Component {
   static propTypes = {
-    activeItem: React.PropTypes.string,
-    go: React.PropTypes.func,
+    activeItem: PropTypes.string,
+    go: PropTypes.func,
+    setSidebarFloating: React.PropTypes.func.isRequired,
   }
   static menuData = [
     {
@@ -33,10 +35,11 @@ class AppMenu extends React.Component {
     },
   ]
   static contextTypes = {
-    muiTheme: React.PropTypes.object,
-    router: React.PropTypes.object,
+    muiTheme: PropTypes.object,
+    router: PropTypes.object,
   }
   onMenuItem(route) {
+    this.props.setSidebarFloating(false);
     browserHistory.push(route);
   }
   render() {
@@ -45,8 +48,9 @@ class AppMenu extends React.Component {
       fontWeight: "bold",
       borderRight: `4px solid ${this.context.muiTheme.palette.accent1Color}`,
     };
+    const menuData = _.clone(AppMenu.menuData);
 
-    const menuItems = _.map(AppMenu.menuData, (itemData, idx) => {
+    const menuItems = _.map(menuData, (itemData, idx) => {
       if (itemData.text) {
         const active = this.context.router.isActive(itemData.route);
         const itemStyle = active ? activeItemStyle : styles.itemStyle;
