@@ -8,6 +8,25 @@ module.exports = (function() {
   const jwt = require("jsonwebtoken");
   const nqmUtils = require("nqm-core-utils");
 
+  const setUserSession = function(req, res, redirectTo) {
+    if (req.query.access_token) {
+      // Decode the JWT access token.
+      const decoded = jwt.decode(req.query.access_token);
+      if (decoded) {
+        // n.b. we haven't *verified* the JWT signature, but this is OK if we trust the connection to the auth
+        // server (which should be ssl).
+        //
+        // Save details to session and redirect to client return url.
+        req.session.authData = decoded;
+        req.session.token = req.query.access_token;
+        res.redirect(redirectTo);
+      } else {
+        log("setUserSession: missing or invalid token received from auth server [%s]", req.query.access_token);
+        res.redirect("/");
+      }
+    }
+  };
+
   router.get("/auth", function(req, res) {
     // Clear any existing session data.
     req.session.destroy(() => {
@@ -25,33 +44,14 @@ module.exports = (function() {
   });
 
   router.get("/auth/callback", function(req, res) {
-    if (req.query.access_token) {
-      // Decode the JWT access token.
-      const decoded = jwt.decode(req.query.access_token);
-      if (decoded) {
-        //
-        // n.b. we haven't *verified* the JWT signature, but this is OK if we trust the connection to the auth
-        // server (which should be ssl).
-        //
-        // Save details to session and redirect to client return url.
-        req.session.authData = decoded;
-        req.session.token = req.query.access_token;
-        return res.redirect(req.query.rurl);
-      }
-    }
-
-    if (!req.session.authData) {
-      log("missing or invalid token received from auth server in auth/callback [%s]", req.query.access_token);
-      return res.redirect("/");
-    }
+    setUserSession(req, res, req.query.rurl);
   });
 
   router.get("*", function(req, res) {
     // Check for access token on query string.
     if (req.query.access_token) {
       // Set access token in session and remove from URL.
-      req.session.token = req.query.access_token;
-      res.redirect(req.path);
+      setUserSession(req, res, req.path);
     } else {
       // Render the client.
       // Pass configuration data to the client app, including the id of the current users' application data folder.
