@@ -15,6 +15,10 @@ import AppSideBar from "./components/app-side-bar";
 const Layout = framework.ui.Layout;
 const ModalLayout = framework.ui.ModalLayout;
 
+const title = function(title) {
+  return () => <span>{title}</span>;
+};
+
 export default function(injectDeps, context) {
   const {store} = context;
   const history = syncHistoryWithStore(browserHistory, store);
@@ -22,7 +26,7 @@ export default function(injectDeps, context) {
   const RouterCtx = () => (
     <Router history={history}>
       <Route path="/" title="nqm-app-minimal" component={Layout}>
-        <IndexRoute title="lorem upsum" components={{content: Home, sideBarContent: AppSideBar}} />
+        <IndexRoute components={{content: Home, sideBarContent: AppSideBar, title: title("lorum ipsum")}} />
       </Route>
       <Route path="/modal" title="modal" component={ModalLayout}>
         <IndexRoute components={{content: Modal}} />
