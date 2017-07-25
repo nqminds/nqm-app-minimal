@@ -13,8 +13,8 @@
     "jsonwebtoken": "^7.4.1",
     "lodash": "^4.17.4",
     "morgan": "~1.6.1",
-    "nqm-api-tdx": "^0.2.19",
-    "nqm-core-utils": "^0.2.16",
+    "nqm-api-tdx": "^0.2.30",
+    "nqm-core-utils": "^0.2.25",
     "pug": "^2.0.0-rc.1",
     "request-ip": "^2.0.1",
     "serve-favicon": "~2.3.0"

@@ -17,7 +17,7 @@ export const defaultCoreState = {
   appInitialiseProgress: "",
   authenticating: false,
   accessToken: "",
-  darkTheme: true,
+  darkTheme: false,
   profileId: "",
   serverPending: "",
   serverError: null,

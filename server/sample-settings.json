@@ -4,7 +4,7 @@
       "ddpServer": "ws://localhost:2222",
       "tdxServer": "localhost:4443",
       "commandHost": "http://localhost:3103",
-      "queryHost": "http://localhost:3104",
+      "queryHost": "http://localhost:3104/v1/",
       "accessTokenTTL": 31622400
     }
   },

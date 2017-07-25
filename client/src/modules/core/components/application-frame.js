@@ -7,7 +7,9 @@ import ServerPendingModal from "../containers/server-pending-modal";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import createPalette from "material-ui/styles/palette";
 import createMuiTheme from "material-ui/styles/theme";
-import * as Colors from "material-ui/styles/colors";
+import amber from "material-ui/colors/amber";
+import blue from "material-ui/colors/blue";
+import lightBlue from "material-ui/colors/lightBlue";
 import {createStyleSheet} from "material-ui/styles";
 
 export let appClasses;
@@ -34,12 +36,12 @@ class ApplicationFrame extends React.Component {
     } = this.props;
 
     const palette = createPalette({
-      primary: Colors.blue,
-      accent: Colors.amber,
+      primary: blue,
+      accent: amber,
       type: darkTheme ? "dark" : "light",
     });
 
-    palette.background.appBar = Colors.lightBlue[500];
+    palette.background.appBar = lightBlue[500];
 
     const overrides = {
       MuiFormControl: {
