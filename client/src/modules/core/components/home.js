@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 import Button from "material-ui/Button";
@@ -32,7 +33,7 @@ const Home = ({classes}) => {
 };
 
 Home.propTypes = {
-  classes: React.PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styleSheet)(Home);

@@ -118,14 +118,14 @@ class ApplicationFrame extends React.Component {
 }
 
 ApplicationFrame.propTypes = {
-  accessToken: React.PropTypes.string,
+  accessToken: PropTypes.string,
   appInitialiseProgress: PropTypes.string,
   appInitialised: PropTypes.bool,
-  authenticating: React.PropTypes.bool,
+  authenticating: PropTypes.bool,
   authenticationError: PropTypes.string,
   children: PropTypes.any,
   darkTheme: PropTypes.bool,
-  setAuthToken: React.PropTypes.func.isRequired,
+  setAuthToken: PropTypes.func.isRequired,
   signIn: PropTypes.func.isRequired,
 };
 
