@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 import Dialog from "material-ui/Dialog";
@@ -106,10 +107,10 @@ class ServerPendingModal extends React.Component {
 }
 
 ServerPendingModal.propTypes = {
-  classes: React.PropTypes.object,
-  serverError: React.PropTypes.object,
-  serverPending: React.PropTypes.string,
-  setServerIdle: React.PropTypes.func,
+  classes: PropTypes.object,
+  serverError: PropTypes.object,
+  serverPending: PropTypes.string,
+  setServerIdle: PropTypes.func,
 };
 
 export default withStyles(styleSheet)(ServerPendingModal);
