@@ -3,7 +3,9 @@ import React from "react";
 
 import Dialog from "material-ui/Dialog";
 import Button from "material-ui/Button";
-import {createStyleSheet, withStyles} from "material-ui/styles";
+import {createStyleSheet} from "material-ui/styles";
+
+import withAppAndStyle from "./with-app";
 
 export const styleSheet = createStyleSheet("nqm-server-pending-modal", ({palette}) => {
   return {
@@ -113,4 +115,4 @@ ServerPendingModal.propTypes = {
   setServerIdle: PropTypes.func,
 };
 
-export default withStyles(styleSheet)(ServerPendingModal);
+export default withAppAndStyle(styleSheet)(ServerPendingModal);

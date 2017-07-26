@@ -2,7 +2,10 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import Button from "material-ui/Button";
-import {createStyleSheet, withStyles} from "material-ui/styles";
+import {createStyleSheet} from "material-ui/styles";
+
+import withAppAndStyle from "./with-app";
+
 const styleSheet = createStyleSheet("nqm-home", () => {
   return {
     container: {
@@ -36,4 +39,4 @@ Home.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styleSheet)(Home);
+export default withAppAndStyle(styleSheet)(Home);
