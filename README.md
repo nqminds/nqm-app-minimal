@@ -31,6 +31,8 @@ npm start
 ## building an application
 
 ### route setup
+Uses react router 4, advise reading up on this if unfamiliar https://reacttraining.com/react-router/
+
 Open /client/src/modules/core/components/application
 
 Locate the section labelled "Define top-level routes"
