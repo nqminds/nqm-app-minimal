@@ -4,7 +4,7 @@ module.exports = (function() {
   const express = require("express");
   const path = require("path");
   const favicon = require("serve-favicon");
-  const logger = require("morgan");
+  // const logger = require("morgan");
   const cookieParser = require("cookie-parser");
   const session = require("express-session");
   const bodyParser = require("body-parser");
@@ -17,7 +17,7 @@ module.exports = (function() {
   app.set("views", path.join(__dirname, "views"));
   app.set("view engine", "pug");
 
-  app.use(favicon(path.join(__dirname, "../client", "favicon.ico")));
+  app.use(favicon(path.join(__dirname, "../client", "favicon.png")));
   // app.use(logger("dev"));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: false}));
@@ -27,7 +27,7 @@ module.exports = (function() {
   //
   // n.b. - make sure you set a unique name for the session to avoid confusion esp. when debugging on localhost.
   //
-  app.use(session({secret: "lksajddfdfsajlkje", name: "nqm-app-minimal", saveUninitialized: false}));
+  app.use(session({secret: "boogaloo", name: "nqm-app-minimal", saveUninitialized: false}));
 
   app.use("/", routes);
 

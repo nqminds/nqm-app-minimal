@@ -8,8 +8,8 @@ export const authenticating = function() {
   return {type: actionTypes.CORE_AUTH_AUTHENTICATING};
 };
 
-export const setAuthToken = function(token) {
-  return {type: actionTypes.CORE_AUTH_SET_TOKEN, token};
+export const authenticated = function(authenticated) {
+  return {type: actionTypes.CORE_AUTH_AUTHENTICATED, authenticated};
 };
 
 export const authenticationError = function(err) {
@@ -24,8 +24,16 @@ export const signOut = function() {
  * APP
  *
  */
-export const setInitialised = function() {
-  return {type: actionTypes.CORE_APP_INITIALISED};
+export const reset = function() {
+  return {type: actionTypes.CORE_APP_RESET};
+};
+
+export const setAppInitialised = function(initialised) {
+  return {type: actionTypes.CORE_APP_INITIALISED, initialised};
+};
+
+export const setUserInitialised = function(initialised) {
+  return {type: actionTypes.CORE_APP_USER_INITIALISED, initialised};
 };
 
 export const initialiseProgress = function(progress) {
@@ -34,10 +42,6 @@ export const initialiseProgress = function(progress) {
 
 export const toggleTheme = function() {
   return {type: actionTypes.CORE_APP_TOGGLE_THEME};
-};
-
-export const setProfileId = function(profileId) {
-  return {type: actionTypes.CORE_APP_SET_PROFILE_ID, profileId};
 };
 
 /*

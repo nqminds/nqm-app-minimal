@@ -1,29 +1,31 @@
 {
   "jspm": {
-    "name": "nqm-app-minimal-client",
+    "name": "nqm-app-minimal",
     "main": "main.js",
     "dependencies": {
-      "babel-plugin-transform-class-properties": "npm:babel-plugin-transform-class-properties@^6.24.1",
-      "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@^6.24.1",
-      "bluebird": "npm:bluebird@^3.5.0",
+      "chrono-node": "npm:chrono-node@^1.3.5",
+      "classnames": "npm:classnames@^2.2.5",
+      "css": "github:systemjs/plugin-css@^0.1.35",
       "debug": "npm:debug@^2.6.8",
       "jss-theme-reactor": "npm:jss-theme-reactor@^0.11.1",
-      "lodash": "npm:lodash@^4.17.4",
-      "material-ui": "npm:material-ui@next",
-      "nqm-core-utils": "npm:nqm-core-utils@^0.2.16",
-      "nqm-ddp-tdx": "npm:nqm-ddp-tdx@^0.1.9",
+      "material-ui-icons": "npm:material-ui-icons@^1.0.0-alpha.19",
+      "moment": "npm:moment@^2.18.1",
       "nqm-mantra-core": "npm:nqm-mantra-core@^1.8.1",
-      "nqm-react-komposer": "npm:nqm-react-komposer@^2.0.1",
-      "nqm-react-simple-di": "npm:nqm-react-simple-di@^1.3.2",
+      "nqm-tdx-client": "npm:nqm-tdx-client@^0.2.4",
       "prop-types": "npm:prop-types@^15.5.10",
+      "react-datepicker": "npm:react-datepicker@^0.52.0",
       "react-router": "npm:react-router@^4.1.1",
       "react-router-dom": "npm:react-router-dom@^4.1.1",
+      "react-select": "npm:react-select@^1.0.0-rc.5",
+      "readable-stream": "npm:readable-stream@^2.3.3",
       "redbox-react": "npm:redbox-react@^1.3.6",
-      "redux": "npm:redux@^3.6.0",
-      "systemjs-hot-reloader": "npm:systemjs-hot-reloader@^1.1.0"
+      "redux": "npm:redux@^3.6.0"
     },
     "devDependencies": {
-      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.21"
+      "babel-plugin-transform-class-properties": "npm:babel-plugin-transform-class-properties@^6.24.1",
+      "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@^6.24.1",
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.21",
+      "systemjs-hot-reloader": "npm:systemjs-hot-reloader@^1.1.0"
     },
     "peerDependencies": {
       "assert": "npm:jspm-nodelibs-assert@^0.2.0",
@@ -36,12 +38,14 @@
       "fs": "npm:jspm-nodelibs-fs@^0.2.0",
       "http": "npm:jspm-nodelibs-http@^0.2.0",
       "https": "npm:jspm-nodelibs-https@^0.2.0",
-      "jss": "npm:jss@^6.0.0",
+      "jss": "npm:jss@^8.0.0",
+      "lodash": "npm:lodash@^4.17.4",
+      "material-ui": "npm:material-ui@^1.0.0-alpha",
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "react": "npm:react@^15.5.4",
-      "react-dom": "npm:react-dom@^15.5.4",
+      "react": "npm:react@^16.0.0-beta.5",
+      "react-dom": "npm:react-dom@^16.0.0-beta.5",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
       "url": "npm:jspm-nodelibs-url@^0.2.0",
@@ -50,16 +54,6 @@
       "zlib": "npm:jspm-nodelibs-zlib@^0.2.0"
     },
     "overrides": {
-      "npm:bluebird@3.5.0": {
-        "meta": {
-          "js/browser/bluebird.js": {
-            "format": "global"
-          },
-          "js/browser/bluebird.min.js": {
-            "format": "global"
-          }
-        }
-      },
       "npm:browserify-zlib@0.1.4": {
         "dependencies": {
           "readable-stream": "^2.0.2",
@@ -97,7 +91,10 @@
           "process": "@empty"
         }
       },
-      "npm:pbkdf2@3.0.12": {
+      "npm:moment@2.18.1": {
+        "jspmNodeConversion": false
+      },
+      "npm:pbkdf2@3.0.14": {
         "main": "browser.js"
       },
       "npm:safe-buffer@5.1.1": {
@@ -105,7 +102,7 @@
       }
     }
   },
-  "name": "nqm-app-minimal-client",
+  "name": "nqm-app-minimal",
   "version": "0.2.0",
   "main": "src/main.js",
   "scripts": {

@@ -1,70 +1,20 @@
 module.exports = (function() {
   "use strict";
 
-  /*
-   * There are various permutations of data access and ownership.
-   *
-   * Data access:
-   * - application can only access data that has been explicitly shared by the user
-   * - application can impersonate the user, and access **all** their data, read and write (e.g. the toolbox)
-   *
-   * Data ownership:
-   * - the user will own all data created while using the application
-   * - the application owns all data created while using the application
-   *
-   * --------
-   * shared access with user ownership - application can only read and write from user resources that have been
-   * explicitly shared with it by the user. The application can not create any data on the TDX.
-   *
-   * > user authenticates, the token is bound to the application ID and the client IP. Application has no
-   * permissions to the application server folder (or the folder does not exist)
-   *
-   * --------
-   * shared access with application ownership - application can read and write from user resources that have been
-   * explicitly shared with it by the user. The application can store data in resources it creates or owns.
-   *
-   * > user authenticates, the token is bound to the application ID and the client IP. Application has read/write
-   * permissions to the application server folder.
-   *
-   * --------
-   * impersonate access with user ownership - application can read and write to any user resources, but can not
-   * create any data on the TDX.
-   *
-   * > user authenticates, token is bound to the user ID and the client IP. Application can not write to any other
-   * resources than those owned by the user.
-   *
-   * --------
-   * impersonate access with application ownership - application can read and write to any user resources, and can
-   * store data in resources it creates or owns.
-   *
-   * > user authenticates, token is bound to the user ID and the client IP. User also is given read/write? access to
-   * the application folder.
-   *
-   * --------
-   * Simplify
-   * --------
-   * - shared mode - token is application id
-   * - impersonate mode - token is user id
-   *
-   */
-
   const log = require("debug")("nqm:route-index");
   const express = require("express");
   const router = express.Router();
   const config = require("../app-config");
   const jwt = require("jsonwebtoken");
-  const requestIP = require("request-ip");
   const nqmUtils = require("nqm-core-utils");
+  const request = require("request");
+  const requestIP = require("request-ip");
 
   const setUserSession = function(req, res, redirectTo) {
-    log("setUserSession: %s", requestIP.getClientIp(req));
     if (req.query.access_token) {
       // Decode the JWT access token.
       const decoded = jwt.decode(req.query.access_token);
       if (decoded) {
-        // Cache the decoded authentication data on the server so that we can associate a TDX user with the
-        // local session.
-        //
         // n.b. we haven't *verified* the JWT signature, but this is OK if we trust the connection to the auth
         // server (which should be ssl).
         //
@@ -86,17 +36,33 @@ module.exports = (function() {
       const rurlClient = encodeURIComponent(req.query.rurl || "/");
 
       // Encode the auth callback return url (which also includes the client return url!).
-      const rurlAuth = encodeURIComponent(`${req.protocol}://${req.get("host")}/auth/callback?rurl=${rurlClient}`);
+      const rurlAuth = encodeURIComponent(
+        `${config.appProtocol || "https"}://${req.get("host")}/auth/callback?rurl=${rurlClient}`
+      );
 
       // Redirect to auth server, sending the application token.
       res.redirect(
-        `https://${config.public.tdxConfig.tdxServer}/auth?rurl=${rurlAuth}&a=${config.getToken()}`
+        `${config.public.tdxConfig.tdxServer}/auth?rurl=${rurlAuth}&a=${config.getToken()}`
       );
     });
   });
 
   router.get("/auth/callback", function(req, res) {
     setUserSession(req, res, req.query.rurl);
+  });
+
+  router.get("/dashboard", function(req, res) {
+    // Redirect to the auth server.
+    const authServerRedirect = `${config.public.tdxConfig.tdxServer}`;
+    res.redirect(authServerRedirect);
+  });
+
+  router.get("/sign-out", function(req, res) {
+    req.session.destroy(() => {
+      // Redirect to the auth server.
+      // const authServerRedirect = `https://${config.public.tdxConfig.tdxServer}/sign-out`;
+      res.redirect("/");
+    });
   });
 
   router.get("*", function(req, res) {
@@ -113,14 +79,41 @@ module.exports = (function() {
         userDataFolderId = nqmUtils.shortHash(`${config.applicationId}-${req.session.authData.sub}`);
       }
 
-      // Now render the client app.
-      res.render("index", {
-        accessToken: req.session.token || "",
-        config,
-        settings: {public: config.public},
-        title: "minimal",
-        userDataFolderId,
-      });
+      const doRender = (token) => {
+        // Now render the client app.
+        res.render("index", {
+          accessToken: token || "",
+          config,
+          settings: {public: config.public},
+          title: config.public.applicationTitle,
+          userDataFolderId,
+        });
+      };
+
+      if (!req.session || !req.session.token) {
+        //
+        // There is no session, which implies the user has not logged in yet. If your app supports a 'public' mode,
+        // ask the auth server for a token binding the **application** identity to the clients IP address. This
+        // enables the client code to make TDX requests using the application identity, i.e. it will have access
+        // to any resources shared with the application.
+        //
+        // n.b. this will be a read-only token, all writes will be denied
+        const options = {
+          uri: `${config.authServerURL}/app-token?a=${config.getToken()}`,
+          rejectUnauthorized: false,
+          json: {
+            ip: requestIP.getClientIp(req),
+          },
+        };
+        request.post(options, (error, response, body) => {
+          if (error || body.error) {
+            log("failed to get application token [%s]", error || body.error);
+          }
+          doRender(body.token || "");
+        });
+      } else {
+        doRender(req.session.token);
+      }
     }
   });
 

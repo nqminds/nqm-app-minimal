@@ -1,20 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {BrowserRouter} from "react-router-dom";
 
-import {BrowserRouter, Route} from "react-router-dom";
-
-// Application pages
-import ApplicationFrame from "./containers/application-frame";
-import Home from "./components/home";
+import ThemedApplication from "./containers/themed-application";
 
 export default function(injectDeps, context, actions) {   // eslint-disable-line no-unused-vars
   const Routes = () => (
-    <ApplicationFrame>
-      <BrowserRouter>
-        <Route exact path="/" component={Home} />
-      </BrowserRouter>
-    </ApplicationFrame>
-);
+    <BrowserRouter>
+      <ThemedApplication />
+    </BrowserRouter>
+  );
 
   const BoundRoutes = injectDeps(Routes);
 

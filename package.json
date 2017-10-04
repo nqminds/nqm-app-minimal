@@ -12,11 +12,13 @@
     "jade": "~1.11.0",
     "jsonwebtoken": "^7.4.1",
     "lodash": "^4.17.4",
+    "minimist": "^1.2.0",
     "morgan": "~1.6.1",
-    "nqm-api-tdx": "^0.2.30",
-    "nqm-core-utils": "^0.2.25",
+    "nqm-api-tdx": "^0.2.19",
+    "nqm-core-utils": "^0.2.16",
     "pug": "^2.0.0-rc.1",
-    "request-ip": "^2.0.1",
+    "request": "^2.81.0",
+    "request-ip": "^2.0.2",
     "serve-favicon": "~2.3.0"
   },
   "description": "",
@@ -27,11 +29,11 @@
     "eslint-plugin-babel": "^4.1.1",
     "eslint-plugin-mocha": "^4.9.0",
     "eslint-plugin-react": "^6.10.3",
-    "jspm": "^0.17.0-beta.41"
+    "jspm": "0.17.0-beta.41"
   },
   "main": "index.js",
   "scripts": {
-    "start": "node ./server/bin/www",
+    "start": "DEBUG=nqm* node ./server/bin/www --config ./minimal-settings.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "toby.ealden@gmail.com",

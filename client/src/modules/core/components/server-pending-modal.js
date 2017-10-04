@@ -1,13 +1,15 @@
-import PropTypes from "prop-types";
+/**
+ * Component that displays the current status of a TDX action
+ */
 import React from "react";
+import PropTypes from "prop-types";
 
+// MUI
 import Dialog from "material-ui/Dialog";
 import Button from "material-ui/Button";
-import {createStyleSheet} from "material-ui/styles";
+import {withStyles} from "material-ui/styles";
 
-import withAppAndStyle from "./with-app";
-
-export const styleSheet = createStyleSheet("nqm-server-pending-modal", ({palette}) => {
+export const styleSheet = ({palette}) => {
   return {
     root: {
     },
@@ -23,7 +25,7 @@ export const styleSheet = createStyleSheet("nqm-server-pending-modal", ({palette
       padding: 10,
     },
   };
-});
+};
 
 const succeeded = "succeeded";
 const closeTimeout = 500;
@@ -96,8 +98,8 @@ class ServerPendingModal extends React.Component {
     return (
       <Dialog
         onRequestClose={handleRequestClose}
-        hideOnEscapeKeyUp={!!this.state.serverError}
-        hideOnBackdropClick={!!this.state.serverError}
+        ignoreEscapeKeyUp={!this.state.serverError}
+        ignoreBackdropClick={!this.state.serverError}
         open={this.state.open}
       >
         <div className={classes.content}>
@@ -115,4 +117,4 @@ ServerPendingModal.propTypes = {
   setServerIdle: PropTypes.func,
 };
 
-export default withAppAndStyle(styleSheet)(ServerPendingModal);
+export default withStyles(styleSheet, {name: "nqm-server-pending-modal"})(withStyles(styleSheet)(ServerPendingModal));
