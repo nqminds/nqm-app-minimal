@@ -49,3 +49,7 @@ Examine /client/src/modules/core/actions/index.js to see examples of api calls f
 ### app initialisation
 See /server/boot.js for app setup
 See /client/src/configs/boot.js for setting up user datasets etc
+
+## deployment
+
+tbc...
