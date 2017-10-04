@@ -89,7 +89,7 @@ class ApplicationRoot extends React.Component {
       // has processed it and is initialised.
       //
       // Define the top-level routes.
-      //
+      // Add routes here for your application, the route /user is an example of sub routes
       content = (
         <Switch>
           <Route exact path="/" component={Home} />
