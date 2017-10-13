@@ -2,7 +2,7 @@ module.exports = (function(appConfig) {
   "use strict";
 
   const log = require("debug")("nqm-app:boot");
-  const TDXApi = require("nqm-api-tdx");
+  const TDXApi = require("@nqminds/nqm-api-tdx");
   const nqmUtils = require("nqm-core-utils");
   const constants = nqmUtils.constants;
 

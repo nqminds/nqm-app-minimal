@@ -1,3 +1,7 @@
+/*
+ * This is the app entry-point for non-databot installations or development.
+ * For databot deployment, see ../databot.js
+ */
 module.exports = (function() {
   "use strict";
 
