@@ -1,4 +1,4 @@
-module.exports = (function() {
+module.exports = (function(appConfig) {
   "use strict";
 
   const express = require("express");
@@ -9,7 +9,7 @@ module.exports = (function() {
   const session = require("express-session");
   const bodyParser = require("body-parser");
 
-  const routes = require("./routes/index");
+  const routes = require("./routes/index")(appConfig);
 
   const app = express();
 
@@ -50,4 +50,4 @@ module.exports = (function() {
   });
 
   return app;
-}());
+});

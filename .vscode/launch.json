@@ -8,7 +8,12 @@
       "type": "node",
       "request": "launch",
       "name": "app server",
-      "program": "${workspaceRoot}/server/bin/www",
+      "program": "${workspaceRoot}/server/index.js",
+      "cwd": "${workspaceRoot}/server/",
+      "args": [
+        "--config",
+        "./minimal-settings.js"
+      ],
       "env": {
         "DEBUG": "nqm*"
       }

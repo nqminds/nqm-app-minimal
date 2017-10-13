@@ -31,7 +31,7 @@
     "eslint-plugin-react": "^6.10.3",
     "jspm": "0.17.0-beta.41"
   },
-  "main": "index.js",
+  "main": "databot.js",
   "scripts": {
     "start": "DEBUG=nqm* node ./server/bin/www --config ./minimal-settings.js",
     "test": "echo \"Error: no test specified\" && exit 1"

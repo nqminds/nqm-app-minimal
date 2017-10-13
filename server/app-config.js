@@ -1,17 +1,7 @@
-module.exports = (function() {
+module.exports = (function(settings) {
   "use strict";
-  let settings;
   const _ = require("lodash");
-  const minimist = require("minimist");
   const log = require("debug")("nqm-app:app-config");
-
-  const argv = minimist(process.argv.slice(2));
-  try {
-    settings = require(argv.config);
-  } catch (err) {
-    log("failed to load settings file '%s'", argv.config);
-    process.exit(1);
-  }
 
   let token;
   let serverDataFolderId;
@@ -52,5 +42,4 @@ module.exports = (function() {
     },
     settings
   );
-}());
-
+});

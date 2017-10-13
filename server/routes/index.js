@@ -1,10 +1,9 @@
-module.exports = (function() {
+module.exports = (function(config) {
   "use strict";
 
   const log = require("debug")("nqm:route-index");
   const express = require("express");
   const router = express.Router();
-  const config = require("../app-config");
   const jwt = require("jsonwebtoken");
   const nqmUtils = require("nqm-core-utils");
   const request = require("request");
@@ -118,4 +117,4 @@ module.exports = (function() {
   });
 
   return router;
-}());
+});
