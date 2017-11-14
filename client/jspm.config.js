@@ -161,10 +161,10 @@ SystemJS.config({
     "fs": "npm:jspm-nodelibs-fs@0.2.1",
     "http": "npm:jspm-nodelibs-http@0.2.0",
     "https": "npm:jspm-nodelibs-https@0.2.2",
-    "jss": "npm:jss@8.1.0",
+    "jss": "npm:jss@9.3.2",
     "jss-theme-reactor": "npm:jss-theme-reactor@0.11.1",
     "lodash": "npm:lodash@4.17.4",
-    "material-ui": "npm:material-ui@1.0.0-beta.16",
+    "material-ui": "npm:material-ui@next",
     "material-ui-icons": "npm:material-ui-icons@1.0.0-alpha.19",
     "moment": "npm:moment@2.18.1",
     "nqm-mantra-core": "npm:nqm-mantra-core@1.8.1",
@@ -275,7 +275,7 @@ SystemJS.config({
     },
     "npm:jspm-nodelibs-crypto@0.2.1": {
       "map": {
-        "crypto-browserify": "npm:crypto-browserify@3.11.1"
+        "crypto-browserify": "npm:crypto-browserify@3.12.0"
       }
     },
     "npm:jspm-nodelibs-os@0.2.1": {
@@ -335,7 +335,7 @@ SystemJS.config({
     },
     "npm:browserify-cipher@1.0.0": {
       "map": {
-        "browserify-aes": "npm:browserify-aes@1.1.0",
+        "browserify-aes": "npm:browserify-aes@1.1.1",
         "browserify-des": "npm:browserify-des@1.0.0",
         "evp_bytestokey": "npm:evp_bytestokey@1.0.3"
       }
@@ -378,11 +378,11 @@ SystemJS.config({
     },
     "npm:parse-asn1@5.1.0": {
       "map": {
-        "browserify-aes": "npm:browserify-aes@1.1.0",
+        "browserify-aes": "npm:browserify-aes@1.1.1",
         "evp_bytestokey": "npm:evp_bytestokey@1.0.3",
         "create-hash": "npm:create-hash@1.1.3",
         "pbkdf2": "npm:pbkdf2@3.0.14",
-        "asn1.js": "npm:asn1.js@4.9.1"
+        "asn1.js": "npm:asn1.js@4.9.2"
       }
     },
     "npm:hash-base@2.0.2": {
@@ -401,13 +401,6 @@ SystemJS.config({
         "hash.js": "npm:hash.js@1.1.3",
         "minimalistic-assert": "npm:minimalistic-assert@1.0.0",
         "minimalistic-crypto-utils": "npm:minimalistic-crypto-utils@1.0.1"
-      }
-    },
-    "npm:asn1.js@4.9.1": {
-      "map": {
-        "bn.js": "npm:bn.js@4.11.8",
-        "inherits": "npm:inherits@2.0.3",
-        "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
       }
     },
     "npm:jspm-nodelibs-http@0.2.0": {
@@ -541,20 +534,6 @@ SystemJS.config({
         "safe-buffer": "npm:safe-buffer@5.1.1"
       }
     },
-    "npm:crypto-browserify@3.11.1": {
-      "map": {
-        "browserify-cipher": "npm:browserify-cipher@1.0.0",
-        "create-ecdh": "npm:create-ecdh@4.0.0",
-        "inherits": "npm:inherits@2.0.3",
-        "create-hmac": "npm:create-hmac@1.1.6",
-        "diffie-hellman": "npm:diffie-hellman@5.0.2",
-        "create-hash": "npm:create-hash@1.1.3",
-        "browserify-sign": "npm:browserify-sign@4.0.4",
-        "pbkdf2": "npm:pbkdf2@3.0.14",
-        "randombytes": "npm:randombytes@2.0.5",
-        "public-encrypt": "npm:public-encrypt@4.0.0"
-      }
-    },
     "npm:cipher-base@1.0.4": {
       "map": {
         "safe-buffer": "npm:safe-buffer@5.1.1",
@@ -581,54 +560,6 @@ SystemJS.config({
     "npm:string_decoder@1.0.3": {
       "map": {
         "safe-buffer": "npm:safe-buffer@5.1.1"
-      }
-    },
-    "npm:jss@8.1.0": {
-      "map": {
-        "is-in-browser": "npm:is-in-browser@1.1.3",
-        "warning": "npm:warning@3.0.0"
-      }
-    },
-    "npm:jss-preset-default@3.0.0": {
-      "map": {
-        "jss-camel-case": "npm:jss-camel-case@5.0.0",
-        "jss-compose": "npm:jss-compose@4.0.0",
-        "jss-default-unit": "npm:jss-default-unit@7.0.0",
-        "jss-expand": "npm:jss-expand@4.0.1",
-        "jss-global": "npm:jss-global@2.0.0",
-        "jss-nested": "npm:jss-nested@5.0.0",
-        "jss-props-sort": "npm:jss-props-sort@5.0.0",
-        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@6.0.0",
-        "jss-extend": "npm:jss-extend@5.0.0"
-      }
-    },
-    "npm:theming@1.1.0": {
-      "map": {
-        "brcast": "npm:brcast@2.0.2",
-        "prop-types": "npm:prop-types@15.6.0",
-        "react": "npm:react@15.6.2",
-        "is-plain-object": "npm:is-plain-object@2.0.4",
-        "is-function": "npm:is-function@1.0.1"
-      }
-    },
-    "npm:jss-compose@4.0.0": {
-      "map": {
-        "warning": "npm:warning@3.0.0"
-      }
-    },
-    "npm:jss-nested@5.0.0": {
-      "map": {
-        "warning": "npm:warning@3.0.0"
-      }
-    },
-    "npm:jss-vendor-prefixer@6.0.0": {
-      "map": {
-        "css-vendor": "npm:css-vendor@0.3.8"
-      }
-    },
-    "npm:jss-extend@5.0.0": {
-      "map": {
-        "warning": "npm:warning@3.0.0"
       }
     },
     "npm:is-plain-object@2.0.4": {
@@ -891,16 +822,6 @@ SystemJS.config({
         "base64-js": "npm:base64-js@1.2.1"
       }
     },
-    "npm:browserify-aes@1.1.0": {
-      "map": {
-        "cipher-base": "npm:cipher-base@1.0.4",
-        "create-hash": "npm:create-hash@1.1.3",
-        "evp_bytestokey": "npm:evp_bytestokey@1.0.3",
-        "inherits": "npm:inherits@2.0.3",
-        "safe-buffer": "npm:safe-buffer@5.1.1",
-        "buffer-xor": "npm:buffer-xor@1.0.3"
-      }
-    },
     "npm:miller-rabin@4.0.1": {
       "map": {
         "bn.js": "npm:bn.js@4.11.8",
@@ -921,32 +842,6 @@ SystemJS.config({
         "prop-types": "npm:prop-types@15.6.0"
       }
     },
-    "npm:material-ui@1.0.0-beta.16": {
-      "map": {
-        "react-transition-group": "npm:react-transition-group@2.2.1",
-        "dom-helpers": "npm:dom-helpers@3.2.1",
-        "classnames": "npm:classnames@2.2.5",
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@1.2.0",
-        "babel-runtime": "npm:babel-runtime@6.26.0",
-        "normalize-scroll-left": "npm:normalize-scroll-left@0.1.1",
-        "react-flow-types": "npm:react-flow-types@0.2.0-beta.2",
-        "lodash": "npm:lodash@4.17.4",
-        "warning": "npm:warning@3.0.0",
-        "react-popper": "npm:react-popper@0.7.3",
-        "scroll": "npm:scroll@2.0.1",
-        "keycode": "npm:keycode@2.1.9",
-        "prop-types": "npm:prop-types@15.6.0",
-        "react-jss": "npm:react-jss@7.2.0",
-        "deepmerge": "npm:deepmerge@1.5.2",
-        "react-event-listener": "npm:react-event-listener@0.5.1",
-        "react-scrollbar-size": "npm:react-scrollbar-size@2.0.2",
-        "jss-rtl": "npm:jss-rtl@0.2.1",
-        "jss-preset-default": "npm:jss-preset-default@3.0.0",
-        "jss": "npm:jss@8.1.0",
-        "recompose": "npm:recompose@0.26.0",
-        "brcast": "npm:brcast@3.0.1"
-      }
-    },
     "npm:react-transition-group@2.2.1": {
       "map": {
         "classnames": "npm:classnames@2.2.5",
@@ -955,21 +850,6 @@ SystemJS.config({
         "prop-types": "npm:prop-types@15.6.0",
         "loose-envify": "npm:loose-envify@1.3.1",
         "chain-function": "npm:chain-function@1.0.0"
-      }
-    },
-    "npm:react-jss@7.2.0": {
-      "map": {
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@1.2.0",
-        "jss-preset-default": "npm:jss-preset-default@3.0.0",
-        "prop-types": "npm:prop-types@15.6.0",
-        "jss": "npm:jss@8.1.0",
-        "theming": "npm:theming@1.1.0"
-      }
-    },
-    "npm:react-popper@0.7.3": {
-      "map": {
-        "prop-types": "npm:prop-types@15.6.0",
-        "popper.js": "npm:popper.js@1.12.5"
       }
     },
     "npm:react-event-listener@0.5.1": {
@@ -992,11 +872,6 @@ SystemJS.config({
         "rafl": "npm:rafl@1.2.2"
       }
     },
-    "npm:jss-rtl@0.2.1": {
-      "map": {
-        "rtl-css-js": "npm:rtl-css-js@1.7.0"
-      }
-    },
     "npm:recompose@0.26.0": {
       "map": {
         "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
@@ -1005,20 +880,152 @@ SystemJS.config({
         "change-emitter": "npm:change-emitter@0.1.6"
       }
     },
-    "npm:react@15.6.2": {
+    "npm:material-ui@next": {
       "map": {
-        "fbjs": "npm:fbjs@0.8.16",
-        "loose-envify": "npm:loose-envify@1.3.1",
-        "object-assign": "npm:object-assign@4.1.1",
+        "react-jss": "npm:react-jss@8.1.0",
+        "deepmerge": "npm:deepmerge@2.0.1",
+        "react-flow-types": "npm:react-flow-types@0.2.0-beta.3",
+        "normalize-scroll-left": "npm:normalize-scroll-left@0.1.2",
+        "jss-preset-default": "npm:jss-preset-default@4.0.1",
+        "react-popper": "npm:react-popper@0.7.4",
+        "dom-helpers": "npm:dom-helpers@3.2.1",
+        "jss": "npm:jss@9.3.2",
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
+        "brcast": "npm:brcast@3.0.1",
+        "babel-runtime": "npm:babel-runtime@6.26.0",
+        "react-scrollbar-size": "npm:react-scrollbar-size@2.0.2",
+        "react-event-listener": "npm:react-event-listener@0.5.1",
+        "keycode": "npm:keycode@2.1.9",
+        "warning": "npm:warning@3.0.0",
+        "scroll": "npm:scroll@2.0.1",
+        "react-transition-group": "npm:react-transition-group@2.2.1",
+        "classnames": "npm:classnames@2.2.5",
         "prop-types": "npm:prop-types@15.6.0",
-        "create-react-class": "npm:create-react-class@15.6.2"
+        "lodash": "npm:lodash@4.17.4",
+        "recompose": "npm:recompose@0.26.0"
       }
     },
-    "npm:create-react-class@15.6.2": {
+    "npm:react-jss@8.1.0": {
       "map": {
-        "fbjs": "npm:fbjs@0.8.16",
-        "loose-envify": "npm:loose-envify@1.3.1",
-        "object-assign": "npm:object-assign@4.1.1"
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@2.3.1",
+        "prop-types": "npm:prop-types@15.6.0",
+        "jss": "npm:jss@9.3.2",
+        "jss-preset-default": "npm:jss-preset-default@4.0.1",
+        "theming": "npm:theming@1.2.1"
+      }
+    },
+    "npm:jss@9.3.2": {
+      "map": {
+        "warning": "npm:warning@3.0.0",
+        "is-in-browser": "npm:is-in-browser@1.1.3",
+        "symbol-observable": "npm:symbol-observable@1.0.4"
+      }
+    },
+    "npm:react-popper@0.7.4": {
+      "map": {
+        "prop-types": "npm:prop-types@15.6.0",
+        "popper.js": "npm:popper.js@1.12.8"
+      }
+    },
+    "npm:jss-preset-default@4.0.1": {
+      "map": {
+        "jss-compose": "npm:jss-compose@5.0.0",
+        "jss-default-unit": "npm:jss-default-unit@8.0.0",
+        "jss-camel-case": "npm:jss-camel-case@6.0.0",
+        "jss-expand": "npm:jss-expand@5.0.0",
+        "jss-extend": "npm:jss-extend@6.0.1",
+        "jss-props-sort": "npm:jss-props-sort@6.0.0",
+        "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
+        "jss-nested": "npm:jss-nested@6.0.1",
+        "jss-global": "npm:jss-global@3.0.0",
+        "jss-template": "npm:jss-template@1.0.0"
+      }
+    },
+    "npm:theming@1.2.1": {
+      "map": {
+        "prop-types": "npm:prop-types@15.6.0",
+        "brcast": "npm:brcast@3.0.1",
+        "is-function": "npm:is-function@1.0.1",
+        "is-plain-object": "npm:is-plain-object@2.0.4"
+      }
+    },
+    "npm:jss-compose@5.0.0": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:jss-extend@6.0.1": {
+      "map": {
+        "warning": "npm:warning@3.0.0",
+        "is-observable": "npm:is-observable@0.2.0"
+      }
+    },
+    "npm:jss-nested@6.0.1": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:jss-template@1.0.0": {
+      "map": {
+        "warning": "npm:warning@3.0.0"
+      }
+    },
+    "npm:jss-default-unit@8.0.0": {
+      "map": {
+        "is-observable": "npm:is-observable@0.2.0"
+      }
+    },
+    "npm:jss-expand@5.0.0": {
+      "map": {
+        "is-observable": "npm:is-observable@0.2.0"
+      }
+    },
+    "npm:jss-vendor-prefixer@7.0.0": {
+      "map": {
+        "css-vendor": "npm:css-vendor@0.3.8"
+      }
+    },
+    "npm:is-observable@0.2.0": {
+      "map": {
+        "symbol-observable": "npm:symbol-observable@0.2.4"
+      }
+    },
+    "npm:crypto-browserify@3.12.0": {
+      "map": {
+        "inherits": "npm:inherits@2.0.3",
+        "browserify-cipher": "npm:browserify-cipher@1.0.0",
+        "randomfill": "npm:randomfill@1.0.3",
+        "create-ecdh": "npm:create-ecdh@4.0.0",
+        "create-hash": "npm:create-hash@1.1.3",
+        "browserify-sign": "npm:browserify-sign@4.0.4",
+        "randombytes": "npm:randombytes@2.0.5",
+        "pbkdf2": "npm:pbkdf2@3.0.14",
+        "create-hmac": "npm:create-hmac@1.1.6",
+        "public-encrypt": "npm:public-encrypt@4.0.0",
+        "diffie-hellman": "npm:diffie-hellman@5.0.2"
+      }
+    },
+    "npm:randomfill@1.0.3": {
+      "map": {
+        "safe-buffer": "npm:safe-buffer@5.1.1",
+        "randombytes": "npm:randombytes@2.0.5"
+      }
+    },
+    "npm:browserify-aes@1.1.1": {
+      "map": {
+        "cipher-base": "npm:cipher-base@1.0.4",
+        "safe-buffer": "npm:safe-buffer@5.1.1",
+        "inherits": "npm:inherits@2.0.3",
+        "create-hash": "npm:create-hash@1.1.3",
+        "evp_bytestokey": "npm:evp_bytestokey@1.0.3",
+        "buffer-xor": "npm:buffer-xor@1.0.3"
+      }
+    },
+    "npm:asn1.js@4.9.2": {
+      "map": {
+        "bn.js": "npm:bn.js@4.11.8",
+        "inherits": "npm:inherits@2.0.3",
+        "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
       }
     }
   }
