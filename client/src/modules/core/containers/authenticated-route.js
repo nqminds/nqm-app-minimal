@@ -2,7 +2,7 @@
  * Container for the authenticated rout HoC which can be used to redirect to sign
  * in page if a user visits a page where they need to be logged in
  */
-import {compose, merge, reduxFactory, useDeps} from "nqm-tdx-client";
+import {compose, merge, reduxFactory, useDeps} from "@nqminds/nqm-tdx-client";
 import AuthenticatedRoute from "../components/authenticated-route";
 
 export const authMapper = ({userInitialised, signIn, user, utils}, onData) => {

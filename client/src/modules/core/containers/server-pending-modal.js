@@ -1,4 +1,4 @@
-import {compose, merge, reduxFactory, useDeps} from "nqm-tdx-client";
+import {compose, merge, reduxFactory, useDeps} from "@nqminds/nqm-tdx-client";
 import ServerPendingModal from "../components/server-pending-modal";
 
 const reduxMapper = (state) => {

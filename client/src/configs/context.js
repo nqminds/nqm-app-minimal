@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import {createStore} from "redux";
 import constants from "./constants";
-import {utils, TDXConnections} from "nqm-tdx-client";
+import {utils, TDXConnections} from "@nqminds/nqm-tdx-client";
 import {initialiseUser} from "./boot";
 import debug from "debug";
 import moment from "moment";

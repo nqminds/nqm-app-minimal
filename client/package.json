@@ -3,6 +3,7 @@
     "name": "nqm-app-minimal",
     "main": "main.js",
     "dependencies": {
+      "@nqminds/nqm-tdx-client": "npm:@nqminds/nqm-tdx-client@^0.3.1",
       "chrono-node": "npm:chrono-node@^1.3.5",
       "classnames": "npm:classnames@^2.2.5",
       "css": "github:systemjs/plugin-css@^0.1.35",
@@ -11,7 +12,6 @@
       "material-ui-icons": "npm:material-ui-icons@^1.0.0-alpha.19",
       "moment": "npm:moment@^2.18.1",
       "nqm-mantra-core": "npm:nqm-mantra-core@^1.8.1",
-      "nqm-tdx-client": "npm:nqm-tdx-client@^0.2.4",
       "prop-types": "npm:prop-types@^15.5.10",
       "react-datepicker": "npm:react-datepicker@^0.52.0",
       "react-router": "npm:react-router@^4.1.1",
@@ -48,12 +48,23 @@
       "react-dom": "npm:react-dom@^16.0.0",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
+      "tty": "npm:jspm-nodelibs-tty@^0.2.0",
       "url": "npm:jspm-nodelibs-url@^0.2.0",
       "util": "npm:jspm-nodelibs-util@^0.2.0",
       "vm": "npm:jspm-nodelibs-vm@^0.2.0",
       "zlib": "npm:jspm-nodelibs-zlib@^0.2.0"
     },
     "overrides": {
+      "npm:bluebird@3.5.1": {
+        "meta": {
+          "js/browser/bluebird.js": {
+            "format": "global"
+          },
+          "js/browser/bluebird.min.js": {
+            "format": "global"
+          }
+        }
+      },
       "npm:browserify-zlib@0.1.4": {
         "dependencies": {
           "readable-stream": "^2.0.2",
@@ -63,7 +74,7 @@
           "_stream_transform": "readable-stream/transform"
         }
       },
-      "npm:debug@2.6.8": {
+      "npm:debug@2.6.9": {
         "main": "src/browser.js",
         "jspmNodeConversion": false,
         "format": "cjs",

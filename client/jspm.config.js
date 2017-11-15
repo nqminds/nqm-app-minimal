@@ -55,7 +55,7 @@ SystemJS.config({
           "babylon": "npm:babylon@6.17.1",
           "globals": "npm:globals@9.17.0",
           "invariant": "npm:invariant@2.2.2",
-          "debug": "npm:debug@2.6.8",
+          "debug": "npm:debug@2.6.9",
           "babel-messages": "npm:babel-messages@6.23.0",
           "babel-code-frame": "npm:babel-code-frame@6.22.0"
         }
@@ -147,6 +147,7 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
+    "@nqminds/nqm-tdx-client": "npm:@nqminds/nqm-tdx-client@0.3.1",
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
     "child_process": "npm:jspm-nodelibs-child_process@0.2.1",
@@ -155,7 +156,7 @@ SystemJS.config({
     "constants": "npm:jspm-nodelibs-constants@0.2.1",
     "crypto": "npm:jspm-nodelibs-crypto@0.2.1",
     "css": "github:systemjs/plugin-css@0.1.35",
-    "debug": "npm:debug@2.6.8",
+    "debug": "npm:debug@2.6.9",
     "domain": "npm:jspm-nodelibs-domain@0.2.1",
     "events": "npm:jspm-nodelibs-events@0.2.2",
     "fs": "npm:jspm-nodelibs-fs@0.2.1",
@@ -168,7 +169,6 @@ SystemJS.config({
     "material-ui-icons": "npm:material-ui-icons@1.0.0-alpha.19",
     "moment": "npm:moment@2.18.1",
     "nqm-mantra-core": "npm:nqm-mantra-core@1.8.1",
-    "nqm-tdx-client": "npm:nqm-tdx-client@0.2.4",
     "os": "npm:jspm-nodelibs-os@0.2.1",
     "path": "npm:jspm-nodelibs-path@0.2.3",
     "process": "npm:jspm-nodelibs-process@0.2.1",
@@ -184,6 +184,7 @@ SystemJS.config({
     "redux": "npm:redux@3.6.0",
     "stream": "npm:jspm-nodelibs-stream@0.2.1",
     "string_decoder": "npm:jspm-nodelibs-string_decoder@0.2.1",
+    "tty": "npm:jspm-nodelibs-tty@0.2.1",
     "url": "npm:jspm-nodelibs-url@0.2.1",
     "util": "npm:jspm-nodelibs-util@0.2.2",
     "vm": "npm:jspm-nodelibs-vm@0.2.1",
@@ -481,11 +482,6 @@ SystemJS.config({
         "isarray": "npm:isarray@0.0.1"
       }
     },
-    "npm:debug@2.6.8": {
-      "map": {
-        "ms": "npm:ms@2.0.0"
-      }
-    },
     "npm:redbox-react@1.3.6": {
       "map": {
         "error-stack-parser": "npm:error-stack-parser@1.3.6",
@@ -740,56 +736,6 @@ SystemJS.config({
         "warning": "npm:warning@3.0.0"
       }
     },
-    "npm:nqm-tdx-client@0.2.4": {
-      "map": {
-        "nqm-react-komposer": "npm:nqm-react-komposer@2.0.2",
-        "debug": "npm:debug@2.6.8",
-        "nqm-react-simple-di": "npm:nqm-react-simple-di@1.3.2",
-        "ddp.js": "npm:ddp.js@2.2.0",
-        "lodash": "npm:lodash@4.17.4",
-        "event-emitter-es6": "npm:event-emitter-es6@1.1.5",
-        "nqm-core-utils": "npm:nqm-core-utils@0.2.52",
-        "nqm-api-tdx": "npm:nqm-api-tdx@0.2.49",
-        "nqm-minimongo": "npm:nqm-minimongo@0.1.4"
-      }
-    },
-    "npm:nqm-core-utils@0.2.52": {
-      "map": {
-        "debug": "npm:debug@2.6.8",
-        "lodash": "npm:lodash@4.17.4",
-        "mongo-parse": "npm:mongo-parse@2.0.3",
-        "shortid": "npm:shortid@2.2.8"
-      }
-    },
-    "npm:ddp.js@2.2.0": {
-      "map": {
-        "wolfy87-eventemitter": "npm:wolfy87-eventemitter@4.3.0"
-      }
-    },
-    "npm:nqm-react-komposer@2.0.2": {
-      "map": {
-        "hoist-non-react-statics": "npm:hoist-non-react-statics@1.2.0",
-        "lodash.pick": "npm:lodash.pick@4.4.0",
-        "babel-runtime": "npm:babel-runtime@6.26.0",
-        "react-stubber": "npm:react-stubber@1.0.0",
-        "shallowequal": "npm:shallowequal@0.2.2"
-      }
-    },
-    "npm:nqm-minimongo@0.1.4": {
-      "map": {
-        "lodash": "npm:lodash@3.10.1",
-        "async": "npm:async@1.5.2",
-        "bowser": "npm:bowser@0.7.3"
-      }
-    },
-    "npm:nqm-api-tdx@0.2.49": {
-      "map": {
-        "debug": "npm:debug@2.6.8",
-        "lodash": "npm:lodash@4.17.4",
-        "base-64": "npm:base-64@0.1.0",
-        "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1"
-      }
-    },
     "npm:react@16.0.0": {
       "map": {
         "fbjs": "npm:fbjs@0.8.16",
@@ -1026,6 +972,78 @@ SystemJS.config({
         "bn.js": "npm:bn.js@4.11.8",
         "inherits": "npm:inherits@2.0.3",
         "minimalistic-assert": "npm:minimalistic-assert@1.0.0"
+      }
+    },
+    "npm:@nqminds/nqm-tdx-client@0.3.1": {
+      "map": {
+        "debug": "npm:debug@2.6.9",
+        "lodash": "npm:lodash@4.17.4",
+        "nqm-react-simple-di": "npm:nqm-react-simple-di@1.3.2",
+        "nqm-core-utils": "npm:nqm-core-utils@0.2.62",
+        "nqm-react-komposer": "npm:nqm-react-komposer@2.0.4",
+        "event-emitter-es6": "npm:event-emitter-es6@1.1.5",
+        "nqm-minimongo": "npm:nqm-minimongo@0.1.5",
+        "@nqminds/ddp.js": "npm:@nqminds/ddp.js@2.2.2",
+        "@nqminds/nqm-api-tdx": "npm:@nqminds/nqm-api-tdx@0.2.71"
+      }
+    },
+    "npm:debug@2.6.9": {
+      "map": {
+        "ms": "npm:ms@2.0.0"
+      }
+    },
+    "npm:nqm-core-utils@0.2.62": {
+      "map": {
+        "debug": "npm:debug@2.6.9",
+        "lodash": "npm:lodash@4.17.4",
+        "shortid": "npm:shortid@2.2.8",
+        "mongo-parse": "npm:mongo-parse@2.0.3"
+      }
+    },
+    "npm:nqm-minimongo@0.1.5": {
+      "map": {
+        "lodash": "npm:lodash@3.10.1",
+        "async": "npm:async@1.5.2"
+      }
+    },
+    "npm:nqm-react-komposer@2.0.4": {
+      "map": {
+        "babel-runtime": "npm:babel-runtime@6.26.0",
+        "react-stubber": "npm:react-stubber@1.0.0",
+        "lodash.pick": "npm:lodash.pick@4.4.0",
+        "shallowequal": "npm:shallowequal@0.2.2",
+        "hoist-non-react-statics": "npm:hoist-non-react-statics@1.2.0"
+      }
+    },
+    "npm:@nqminds/ddp.js@2.2.2": {
+      "map": {
+        "ejson": "npm:ejson@2.1.2",
+        "wolfy87-eventemitter": "npm:wolfy87-eventemitter@4.3.0"
+      }
+    },
+    "npm:@nqminds/nqm-api-tdx@0.2.71": {
+      "map": {
+        "debug": "npm:debug@3.1.0",
+        "lodash": "npm:lodash@4.17.4",
+        "bluebird": "npm:bluebird@3.5.1",
+        "base-64": "npm:base-64@0.1.0",
+        "@nqminds/isomorphic-fetch": "npm:@nqminds/isomorphic-fetch@0.1.1"
+      }
+    },
+    "npm:ejson@2.1.2": {
+      "map": {
+        "underscore": "npm:underscore@1.8.3"
+      }
+    },
+    "npm:debug@3.1.0": {
+      "map": {
+        "ms": "npm:ms@2.0.0"
+      }
+    },
+    "npm:@nqminds/isomorphic-fetch@0.1.1": {
+      "map": {
+        "node-fetch": "npm:node-fetch@1.7.3",
+        "whatwg-fetch": "npm:whatwg-fetch@2.0.3"
       }
     }
   }

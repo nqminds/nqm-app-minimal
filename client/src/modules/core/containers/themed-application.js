@@ -1,4 +1,4 @@
-import {compose, merge, reduxFactory, useDeps} from "nqm-tdx-client";
+import {compose, merge, reduxFactory, useDeps} from "@nqminds/nqm-tdx-client";
 import {createMuiTheme} from "material-ui/styles";
 
 import blueGrey from "material-ui/colors/blueGrey";

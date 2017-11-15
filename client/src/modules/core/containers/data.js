@@ -4,7 +4,7 @@
  * type available for your mappers that is designed for returning promises,
  * called promiseFactory
  */
-import {compose, merge, trackerFactory, reduxFactory, useDeps} from "nqm-tdx-client";
+import {compose, merge, trackerFactory, reduxFactory, useDeps} from "@nqminds/nqm-tdx-client";
 import Data from "../components/data";
 
 const dataMapper = ({connectionManager}, onData) => {

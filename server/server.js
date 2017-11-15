@@ -27,7 +27,7 @@ module.exports = (function(appConfig) {
   //
   // n.b. - make sure you set a unique name for the session to avoid confusion esp. when debugging on localhost.
   //
-  app.use(session({secret: "boogaloo", name: "nqm-app-minimal", saveUninitialized: false}));
+  app.use(session({resave: false, secret: "boogaloo", name: "nqm-app-minimal", saveUninitialized: false}));
 
   app.use("/", routes);
 

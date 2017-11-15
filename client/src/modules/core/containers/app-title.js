@@ -1,4 +1,4 @@
-import {compose, merge, reduxFactory, useDeps} from "nqm-tdx-client";
+import {compose, merge, reduxFactory, useDeps} from "@nqminds/nqm-tdx-client";
 import {withRouter} from "react-router-dom";
 import AppTitle from "../components/app-title";
 

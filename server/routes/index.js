@@ -8,6 +8,7 @@ module.exports = (function(config) {
   const nqmUtils = require("nqm-core-utils");
   const request = require("request");
   const requestIP = require("request-ip");
+  const TDXApi = require("@nqminds/nqm-api-tdx");
 
   const setUserSession = function(req, res, redirectTo) {
     if (req.query.access_token) {
@@ -89,29 +90,29 @@ module.exports = (function(config) {
         });
       };
 
-      if (!req.session || !req.session.token) {
+      if ((!req.session || !req.session.token) && config.publicShareKeyId && config.publicShareKeySecret) {
         //
-        // There is no session, which implies the user has not logged in yet. If your app supports a 'public' mode,
-        // ask the auth server for a token binding the **application** identity to the clients IP address. This
-        // enables the client code to make TDX requests using the application identity, i.e. it will have access
-        // to any resources shared with the application.
+        // There is no session, which implies a user has not logged in yet. If your app supports a 'public' mode,
+        // in which you'd like to be able to provide the browser client with data from resources that are not in
+        // public share mode the recommended approach is to create a share key and share the resources with it.
+        // You can then ask the auth server for a token binding the share key to the clients IP address. This
+        // enables the client code to make TDX requests using the share key identity, i.e. it will have access
+        // to any resources shared with that key.
         //
-        // n.b. this will be a read-only token, all writes will be denied
-        const options = {
-          uri: `${config.authServerURL}/app-token?a=${config.getToken()}`,
-          rejectUnauthorized: false,
-          json: {
-            ip: requestIP.getClientIp(req),
-          },
-        };
-        request.post(options, (error, response, body) => {
-          if (error || body.error) {
-            log("failed to get application token [%s]", error || body.error);
-          }
-          doRender(body.token || "");
-        });
+        const tdxApi = new TDXApi(config.public.tdxConfig);
+        let publicToken;
+        tdxApi.authenticate(config.publicShareKeyId, config.publicShareKeySecret, null, requestIP.getClientIp(req))
+          .then((token) => {
+            publicToken = token;
+          })
+          .catch((err) => {
+            log("failed to get public share key token [%s]", err.message);
+          })
+          .finally(() => {
+            doRender(publicToken || "");
+          });
       } else {
-        doRender(req.session.token);
+        doRender(req.session.token || "");
       }
     }
   });
