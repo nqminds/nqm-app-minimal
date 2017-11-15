@@ -8,9 +8,9 @@ module.exports = {
     "dateFormat": "MMMM Do YYYY",
     "tdxConfig": {
       "accessTokenTTL": 31622400,
-      "commandHost": "https://cmd.nqminds.com",
+      "commandServer": "https://cmd.nqminds.com",
       "ddpServer": "https://ddp.nqminds.com",
-      "queryHost": "https://q.nqminds.com/",
+      "queryServer": "https://q.nqminds.com/",
       "tdxServer": "https://tdx.nqminds.com",
     },
   },
