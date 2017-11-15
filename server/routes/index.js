@@ -112,7 +112,7 @@ module.exports = (function(config) {
             doRender(publicToken || "");
           });
       } else {
-        doRender(req.session.token || "");
+        doRender((req.session && req.session.token) || "");
       }
     }
   });
