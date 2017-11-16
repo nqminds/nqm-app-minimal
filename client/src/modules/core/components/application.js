@@ -37,10 +37,6 @@ const styleSheet = ({palette}) => {
 };
 
 class ApplicationRoot extends React.Component {
-  static childContextTypes = {
-    appClasses: PropTypes.object,
-  };
-
   static propTypes = {
     accessToken: PropTypes.string,
     appInitialiseProgress: PropTypes.string,
@@ -51,12 +47,6 @@ class ApplicationRoot extends React.Component {
     settings: PropTypes.object.isRequired,
     userInitialised: PropTypes.bool.isRequired,
   };
-
-  getChildContext() {
-    return {
-      appClasses: this.props.classes,
-    };
-  }
 
   render() {
     const {
