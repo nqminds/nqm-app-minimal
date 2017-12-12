@@ -163,7 +163,13 @@ SystemJS.config({
     "http": "npm:jspm-nodelibs-http@0.2.0",
     "https": "npm:jspm-nodelibs-https@0.2.2",
     "jss": "npm:jss@9.3.2",
+    "jss-camel-case": "npm:jss-camel-case@6.0.0",
+    "jss-default-unit": "npm:jss-default-unit@8.0.0",
+    "jss-global": "npm:jss-global@3.0.0",
+    "jss-nested": "npm:jss-nested@6.0.1",
+    "jss-props-sort": "npm:jss-props-sort@6.0.0",
     "jss-theme-reactor": "npm:jss-theme-reactor@0.11.1",
+    "jss-vendor-prefixer": "npm:jss-vendor-prefixer@7.0.0",
     "lodash": "npm:lodash@4.17.4",
     "material-ui": "npm:material-ui@next",
     "material-ui-icons": "npm:material-ui-icons@1.0.0-alpha.19",
@@ -864,7 +870,7 @@ SystemJS.config({
       "map": {
         "warning": "npm:warning@3.0.0",
         "is-in-browser": "npm:is-in-browser@1.1.3",
-        "symbol-observable": "npm:symbol-observable@1.0.4"
+        "symbol-observable": "npm:symbol-observable@1.1.0"
       }
     },
     "npm:react-popper@0.7.4": {
