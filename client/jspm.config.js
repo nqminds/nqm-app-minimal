@@ -147,7 +147,9 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
+    "@babel/runtime": "npm:@babel/runtime@7.0.0-beta.47",
     "@material-ui/core": "npm:@material-ui/core@1.0.0",
+    "@material-ui/icons": "npm:@material-ui/icons@1.0.0",
     "@nqminds/nqm-tdx-client": "npm:@nqminds/nqm-tdx-client@0.3.1",
     "assert": "npm:jspm-nodelibs-assert@0.2.1",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.3",
@@ -1100,6 +1102,11 @@ SystemJS.config({
         "bn.js": "npm:bn.js@4.11.8",
         "inherits": "npm:inherits@2.0.3",
         "minimalistic-assert": "npm:minimalistic-assert@1.0.1"
+      }
+    },
+    "npm:@material-ui/icons@1.0.0": {
+      "map": {
+        "recompose": "npm:recompose@0.27.1"
       }
     }
   }

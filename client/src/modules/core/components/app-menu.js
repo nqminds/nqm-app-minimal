@@ -158,12 +158,12 @@ class AppMenu extends React.Component {
         </NavLink>
         {userLinks}
         <div className={classes.spacer} />
-        <Tooltip label={darkTheme ? "light theme" : "dark theme"}>
+        <Tooltip title={darkTheme ? "light theme" : "dark theme"}>
           <IconButton className={classes.menuIcon} onClick={this.handleTheme}>
             <ThemeIcon />
           </IconButton>
         </Tooltip>
-        <Tooltip label="nquiringminds applications">
+        <Tooltip title="nquiringminds applications">
           <IconButton className={classes.menuIcon} onClick={this.handleApps}>
             <AppsIcon />
           </IconButton>
