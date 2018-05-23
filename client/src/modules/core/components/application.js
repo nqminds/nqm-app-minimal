@@ -17,7 +17,7 @@ import Data from "../containers/data";
 import ServerPendingModal from "../containers/server-pending-modal";
 
 // material-ui
-import {withStyles} from "material-ui/styles";
+import {withStyles} from "@material-ui/core/styles";
 const styleSheet = ({palette}) => {
   return {
     applicationRoot: {

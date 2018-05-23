@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 import Application from "../containers/application";
 
 // material-ui
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 
 class ThemedApplication extends React.Component {
   static propTypes = {

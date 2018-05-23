@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 // internal
 import {ContentMain, PageHeading} from "./page-components";
 
-import {withStyles} from "material-ui/styles";
+import {withStyles} from "@material-ui/core/styles";
 const styleSheet = () => {
   return {
     content: {

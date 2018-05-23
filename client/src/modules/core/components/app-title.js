@@ -7,7 +7,7 @@ import AppMenu from "./app-menu";
 import {ContentMain, ContentPage, ContentSpacer} from "../../core/components/page-components";
 
 // material-ui
-import {withStyles} from "material-ui/styles";
+import {withStyles} from "@material-ui/core/styles";
 const styleSheet = ({palette}) => {
   return {
     content: {

@@ -6,12 +6,12 @@ import {NavLink} from "react-router-dom";
 // internal
 
 // material-ui
-import IconButton from "material-ui/IconButton";
-import AppsIcon from "material-ui-icons/Apps";
-import ThemeIcon from "material-ui-icons/LightbulbOutline";
-import Tooltip from "material-ui/Tooltip";
-import {withStyles} from "material-ui/styles";
-import {emphasize} from "material-ui/styles/colorManipulator";
+import IconButton from "@material-ui/core/IconButton";
+import AppsIcon from "@material-ui/icons/Apps";
+import ThemeIcon from "@material-ui/icons/LightbulbOutline";
+import Tooltip from "@material-ui/core/Tooltip";
+import {withStyles} from "@material-ui/core/styles";
+import {emphasize} from "@material-ui/core/styles/colorManipulator";
 
 const styleSheet = ({palette}) => {
   const activeItemBackground = emphasize(palette.background.appBar, 0.2);
