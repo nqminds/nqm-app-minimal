@@ -1,10 +1,10 @@
 import {compose, merge, reduxFactory, useDeps} from "@nqminds/nqm-tdx-client";
-import {createMuiTheme} from "material-ui/styles";
+import {createMuiTheme} from "@material-ui/core/styles";
 
-import blueGrey from "material-ui/colors/blueGrey";
-import grey from "material-ui/colors/grey";
+import blueGrey from "@material-ui/core/colors/blueGrey";
+import grey from "@material-ui/core/colors/grey";
 
-import {emphasize} from "material-ui/styles/colorManipulator";
+import {emphasize} from "@material-ui/core/styles/colorManipulator";
 import {withRouter} from "react-router-dom";
 import ThemedApplication from "../components/themed-application";
 
