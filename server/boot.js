@@ -3,7 +3,7 @@ module.exports = (function(appConfig) {
 
   const log = require("./logger")("nqm-app:boot");
   const TDXApi = require("@nqminds/nqm-api-tdx");
-  const nqmUtils = require("nqm-core-utils");
+  const nqmUtils = require("@nqminds/nqm-core-utils");
   const constants = nqmUtils.constants;
 
   const addServerResource = function(api, id, name, schema) {
@@ -62,7 +62,7 @@ module.exports = (function(appConfig) {
       });
   };
 
-  const bootServerResource = async function(api, id, name) {
+  const bootServerResource = async function(api, id, name, filter = false) {
     const resourceId = `${appConfig.getServerDataFolderId()}-${id}`;
     const filterId = `${appConfig.getServerDataFolderId()}-${id}Filter`;
 
@@ -80,18 +80,20 @@ module.exports = (function(appConfig) {
       }
 
       appConfig.setResourceId(id, resource.id);
-      let filterResource = checkServerResourceExists(api, filterId);
-      if (!filterResource) {
-        // Create the filter resource.
-        filterResource = addServerFilter(api, id, name, appConfig.derived[id], nqmUtils.constants.publicRWShareMode);
+      if (filter) {
+        let filterResource = checkServerResourceExists(api, filterId);
         if (!filterResource) {
-          return Promise.reject(`${id} filter resource not found`);
+          // Create the filter resource.
+          filterResource = addServerFilter(api, id, name, appConfig.derived[id], nqmUtils.constants.publicRWShareMode);
+          if (!filterResource) {
+            return Promise.reject(`${id} filter resource not found`);
+          }
+        } else {
+          log.info("got filter resource %s", filterResource.id);
         }
-      } else {
-        log.info("got filter resource %s", filterResource.id);
-      }
 
-      appConfig.setResourceId(`${id}Filter`, filterResource.id);
+        appConfig.setResourceId(`${id}Filter`, filterResource.id);
+      }
     } catch (err) {
       log.error("error booting server resources", err);
       throw err;
