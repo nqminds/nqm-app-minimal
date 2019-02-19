@@ -1,13 +1,13 @@
 module.exports = (function(appConfig) {
   "use strict";
 
-  const log = require("debug")("nqm-app:boot");
+  const log = require("./logger")("nqm-app:boot");
   const TDXApi = require("@nqminds/nqm-api-tdx");
   const nqmUtils = require("nqm-core-utils");
   const constants = nqmUtils.constants;
 
   const addServerResource = function(api, id, name, schema) {
-    log("creating %s dataset", name);
+    log.info("creating %s dataset", name);
     return api.addResource(
       {
         id: `${appConfig.getServerDataFolderId()}-${id}`,
@@ -22,7 +22,7 @@ module.exports = (function(appConfig) {
   };
 
   const addServerFilter = function(api, id, name, derived, shareMode) {
-    log("creating %s dataset", name);
+    log.info("creating %s dataset", name);
     const resourceId = `${appConfig.getServerDataFolderId()}-${id}`;
     const filterId = `${appConfig.getServerDataFolderId()}-${id}Filter`;
 
@@ -62,78 +62,66 @@ module.exports = (function(appConfig) {
       });
   };
 
-  const bootServerResource = function(api, id, name) {
+  const bootServerResource = async function(api, id, name) {
     const resourceId = `${appConfig.getServerDataFolderId()}-${id}`;
     const filterId = `${appConfig.getServerDataFolderId()}-${id}Filter`;
 
-    // Check the resource exists.
-    return checkServerResourceExists(api, resourceId)
-      .then((resource) => {
-        // Find the resource.
-        if (!resource) {
-          // Create the resource.
-          return addServerResource(api, id, name, appConfig.schemas[id]);
-        } else {
-          log("got resource %s", resource.id);
-          return resource;
-        }
-      })
-      .then((resource) => {
+    try {
+      // Check the resource exists.
+      let resource = checkServerResourceExists(api, resourceId);
+      if (!resource) {
+        // Create the resource.
+        resource = await addServerResource(api, id, name, appConfig.schemas[id]);
         if (!resource) {
           return Promise.reject(`resource ${id} not found"`);
         }
-        appConfig.setResourceId(id, resource.id);
-        return checkServerResourceExists(api, filterId);
-      })
-      .then((filterResource) => {
-        if (!filterResource) {
-          // Create the filter resource.
-          return addServerFilter(api, id, name, appConfig.derived[id], nqmUtils.constants.publicRWShareMode);
-        } else {
-          log("got filter resource %s", filterResource.id);
-          return filterResource;
-        }
-      })
-      .then((filterResource) => {
+      } else {
+        log.info("got resource %s", resource.id);
+      }
+
+      appConfig.setResourceId(id, resource.id);
+      let filterResource = checkServerResourceExists(api, filterId);
+      if (!filterResource) {
+        // Create the filter resource.
+        filterResource = addServerFilter(api, id, name, appConfig.derived[id], nqmUtils.constants.publicRWShareMode);
         if (!filterResource) {
           return Promise.reject(`${id} filter resource not found`);
         }
-        appConfig.setResourceId(`${id}Filter`, filterResource.id);
-      });
+      } else {
+        log.info("got filter resource %s", filterResource.id);
+      }
+
+      appConfig.setResourceId(`${id}Filter`, filterResource.id);
+    } catch (err) {
+      log.error("error booting server resources", err);
+      throw err;
+    }
   };
 
-  const bootstrap = function() {
+  return async function() {
     // Configure TDX comms.
     const api = new TDXApi(appConfig.public.tdxConfig);
 
-    return api.authenticate(appConfig.applicationId, appConfig.applicationSecret)
-      .then((token) => {
-        log("TDX authenticated OK");
-        appConfig.setToken(token);
+    try {
+      const token = await api.authenticate(appConfig.applicationId, appConfig.applicationSecret);
+      log.info("TDX authenticated OK");
+      appConfig.setToken(token);
+      const dataFolderId = nqmUtils.shortHash(constants.applicationServerDataFolderPrefix + appConfig.applicationId);
+      const resource = await checkServerResourceExists(api, dataFolderId);
+      if (!resource) {
+        return Promise.reject(new Error("server data folder not found"));
+      }
 
-        // Determine the id of the application server data folder.
-        const dataFolderId = nqmUtils.shortHash(constants.applicationServerDataFolderPrefix + appConfig.applicationId);
-        return checkServerResourceExists(api, dataFolderId);
-      })
-      .then((resource) => {
-        if (!resource) {
-          // TODO - review - Should be created by account-saga, but could attempt to re-create it here?
-          return Promise.reject(new Error("server data folder not found"));
-        }
+      log.info("got server data folder [%s]", resource.id);
 
-        log("got server data folder [%s]", resource.id);
+      // Cache the folder id.
+      appConfig.setServerDataFolderId(resource.id);
 
-        // Cache the folder id.
-        appConfig.setServerDataFolderId(resource.id);
-
-        // Create any resources needed here e.g.
-        // return bootServerResource(api, "owner", "owners");
-      })
-      .catch((err) => {
-        log("server boot failed [%s]", err.message);
-        return Promise.reject(err);
-      });
+      // Create any resources needed here e.g.
+      // await bootServerResource(api, "owner", "owners");
+    } catch (err) {
+      log.error("server boot failed [%s]", err.message);
+      return Promise.reject(err);
+    }
   };
-
-  return bootstrap;
 });

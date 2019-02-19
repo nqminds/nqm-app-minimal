@@ -5,7 +5,7 @@
 module.exports = (function() {
   "use strict";
 
-  const log = require("debug")("nqm-app:index");
+  const log = require("./logger")("nqm-app:index");
   const minimist = require("minimist");
   const main = require("./main");
   const argv = minimist(process.argv.slice(2));
@@ -14,15 +14,15 @@ module.exports = (function() {
   try {
     settings = require(argv.config);
   } catch (err) {
-    log("failed to load settings file '%s'", argv.config);
+    log.error("failed to load settings file '%s'", argv.config);
     process.exit(1);
   }
 
   main(settings)
-    .then(() => {
-      log("app started");
+    .then((port) => {
+      log.appStarted(port);
     })
     .catch((err) => {
-      log("app failed to start [%s]", err.message);
+      log.error("app failed to start", err);
     });
 }());

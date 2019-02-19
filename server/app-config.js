@@ -1,7 +1,6 @@
 module.exports = (function(settings) {
   "use strict";
   const _ = require("lodash");
-  const log = require("debug")("nqm-app:app-config");
 
   let token;
   let serverDataFolderId;

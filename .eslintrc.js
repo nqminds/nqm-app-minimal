@@ -2,11 +2,12 @@ module.exports = {
   // So parent files don't get applied
   root: true,
   env: {
-    es6: true,
+    jest: true,
     browser: true,
     node: true,
+    es6: true,
   },
-  extends: 'eslint:recommended',
+  extends: ['plugin:jest/recommended', 'eslint:recommended'],
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 7,
@@ -16,11 +17,7 @@ module.exports = {
       experimentalObjectRestSpread: true,
     }
   },
-  plugins: [
-    'babel',
-    'react',
-    'mocha'
-  ],
+  plugins: ['redux-saga', 'react', 'babel', 'react-hooks'],
   rules: {
     'array-bracket-spacing': ['error', 'never'],
     'arrow-spacing': 'error',
@@ -85,6 +82,7 @@ module.exports = {
     'babel/func-params-comma-dangle': 'error',
     'babel/flow-object-type': 'error',
     'react/display-name': 'error',
+    'react-hooks/rules-of-hooks': 'error',
     'react/jsx-boolean-value': ['error', 'never'],
     'react/jsx-closing-bracket-location': 'error',
     'react/jsx-curly-spacing': 'error',
@@ -120,11 +118,6 @@ module.exports = {
     'react/self-closing-comp': 'error',
     'react/sort-comp': 'error',
     'react/sort-prop-types': 'error',
-    'mocha/handle-done-callback': 'error',
-    'mocha/no-exclusive-tests': 'error',
-    'mocha/no-global-tests': 'error',
-    'mocha/no-pending-tests': 'error',
-    'mocha/no-skipped-tests': 'error',
 
     'react/no-string-refs': 'warn', // Wishlist, one day.
 
@@ -139,10 +132,14 @@ module.exports = {
     'react/forbid-prop-types': 'off',
     'react/prefer-stateless-function': 'off',
     'react/require-optimization': 'off',
-    'mocha/no-synchronous-tests': 'off',
-    'mocha/valid-suite-description': 'off',
-    'mocha/valid-test-description': 'off',
     'babel/object-shorthand': 'off',
     'babel/new-cap': 'off',
+  },
+  settings: {
+    'import/resolver': {
+      webpack: {
+        config: './internals/webpack/webpack.prod.babel.js',
+      },
+    },
   },
 };
