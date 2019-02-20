@@ -6,14 +6,15 @@ module.exports = (function(appConfig) {
   const nqmUtils = require("@nqminds/nqm-core-utils");
   const constants = nqmUtils.constants;
 
-  const addServerResource = function(api, id, name, schema) {
-    log.info("creating %s dataset", name);
+  const addServerResource = function(api, id, name, schema, optionalFields) {
+    log.info("creating %s %s", name, schema);
     return api.addResource(
       {
         id: `${appConfig.getServerDataFolderId()}-${id}`,
         name: name,
-        schema: schema,
+        basedOnSchema: schema,
         parentId: appConfig.getServerDataFolderId(),
+        ...optionalFields,
       },
       true
     ).then((result) => {
@@ -22,7 +23,7 @@ module.exports = (function(appConfig) {
   };
 
   const addServerFilter = function(api, id, name, derived, shareMode) {
-    log.info("creating %s dataset", name);
+    log.info("creating %s filter", name);
     const resourceId = `${appConfig.getServerDataFolderId()}-${id}`;
     const filterId = `${appConfig.getServerDataFolderId()}-${id}Filter`;
 
@@ -62,16 +63,16 @@ module.exports = (function(appConfig) {
       });
   };
 
-  const bootServerResource = async function(api, id, name, filter = false) {
+  const bootServerResource = async function(api, id, name, schema, filter = false, optionalFields = {}) {
     const resourceId = `${appConfig.getServerDataFolderId()}-${id}`;
     const filterId = `${appConfig.getServerDataFolderId()}-${id}Filter`;
 
     try {
       // Check the resource exists.
-      let resource = checkServerResourceExists(api, resourceId);
+      let resource = await checkServerResourceExists(api, resourceId);
       if (!resource) {
         // Create the resource.
-        resource = await addServerResource(api, id, name, appConfig.schemas[id]);
+        resource = await addServerResource(api, id, name, schema, optionalFields);
         if (!resource) {
           return Promise.reject(`resource ${id} not found"`);
         }
@@ -81,17 +82,22 @@ module.exports = (function(appConfig) {
 
       appConfig.setResourceId(id, resource.id);
       if (filter) {
-        let filterResource = checkServerResourceExists(api, filterId);
+        let filterResource = await checkServerResourceExists(api, filterId);
         if (!filterResource) {
           // Create the filter resource.
-          filterResource = addServerFilter(api, id, name, appConfig.derived[id], nqmUtils.constants.publicRWShareMode);
+          filterResource = await addServerFilter(
+            api,
+            id,
+            name,
+            appConfig.derived[id],
+            nqmUtils.constants.publicRWShareMode
+          );
           if (!filterResource) {
             return Promise.reject(`${id} filter resource not found`);
           }
         } else {
           log.info("got filter resource %s", filterResource.id);
         }
-
         appConfig.setResourceId(`${id}Filter`, filterResource.id);
       }
     } catch (err) {
