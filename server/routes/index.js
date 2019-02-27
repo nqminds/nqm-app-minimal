@@ -100,9 +100,15 @@ module.exports = (function(appConfig) {
     }
 
     res.status(200).json({
-      accessToken: token || "",
-      settings: {public: appConfig.public},
-      userDataFolderId,
+      nqmApplicationState: {
+        core: {
+          accessToken: token,
+          userDataFolderId,
+        },
+      },
+      nqmApplicationSettings: {
+        public: appConfig.public,
+      },
     });
   });
 

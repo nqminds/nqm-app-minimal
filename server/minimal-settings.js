@@ -1,6 +1,6 @@
 module.exports = {
-  "applicationId": "HyehWglad7",
-  "applicationSecret": "bubbles",
+  "applicationId": "S1gKlxOFBN",
+  "applicationSecret": "fireman",
   "appProtocol": "http",
   "appPort": 8082,
   // "authServerURL": "http://localhost:4443",
