@@ -3,7 +3,7 @@ module.exports = {
     "client/**/*.{js,jsx}",
     "!client/**/*.test.{js,jsx}",
     "!client/*/RbGenerated*/*.{js,jsx}",
-    "!client/main.js",
+    "!client/src/main.js",
     "!client/global-styles.js",
     "!client/*/*/Loadable.{js,jsx}",
   ],
