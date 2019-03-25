@@ -1,7 +1,5 @@
 /*
  * This is the app entry-point for databot deployment.
- * n.b. Make sure you **don't** have @nqminds/nqm-api-tdx as a dependency in the databot package package.json. At the
- * moment this causes a conflict which prevents TDX Api initialisation.
  */
 module.exports = (function() {
   "use strict";

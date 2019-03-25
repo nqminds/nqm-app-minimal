@@ -2,12 +2,11 @@ module.exports = {
   // So parent files don't get applied
   root: true,
   env: {
-    jest: true,
+    es6: true,
     browser: true,
     node: true,
-    es6: true,
   },
-  extends: ['plugin:jest/recommended', 'eslint:recommended'],
+  extends: 'eslint:recommended',
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 7,
@@ -17,7 +16,10 @@ module.exports = {
       experimentalObjectRestSpread: true,
     }
   },
-  plugins: ['redux-saga', 'react', 'babel', 'react-hooks'],
+  plugins: [
+    'babel',
+    'react'
+  ],
   rules: {
     'array-bracket-spacing': ['error', 'never'],
     'arrow-spacing': 'error',
@@ -82,8 +84,7 @@ module.exports = {
     'babel/func-params-comma-dangle': 'error',
     'babel/flow-object-type': 'error',
     'react/display-name': 'error',
-    'react-hooks/rules-of-hooks': 'error',
-    'react/jsx-boolean-value': ['error', 'never'],
+    'react/jsx-boolean-value': ['error', 'always'],
     'react/jsx-closing-bracket-location': 'error',
     'react/jsx-curly-spacing': 'error',
     'react/jsx-equals-spacing': 'error',
@@ -134,12 +135,5 @@ module.exports = {
     'react/require-optimization': 'off',
     'babel/object-shorthand': 'off',
     'babel/new-cap': 'off',
-  },
-  settings: {
-    'import/resolver': {
-      webpack: {
-        config: './internals/webpack/webpack.prod.babel.js',
-      },
-    },
   },
 };

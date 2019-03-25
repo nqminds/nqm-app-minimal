@@ -4,6 +4,7 @@ build
 node_modules
 dist
 stats.json
+databot.zip
 
 # Cruft
 .DS_Store
