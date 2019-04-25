@@ -8,9 +8,6 @@ import {
   CORE_AUTH_ERROR,
   CORE_AUTH_SIGN_OUT,
   CORE_APP_TOGGLE_THEME,
-  CORE_SERVER_PENDING,
-  CORE_SERVER_ERROR,
-  CORE_SERVER_IDLE,
 } from "../actions/action-types";
 
 export const defaultCoreState = {
@@ -22,8 +19,6 @@ export const defaultCoreState = {
   accessToken: "",
   darkTheme: false,
   profile: {},
-  serverPending: "",
-  serverError: null,
   userDataFolderId: "",
 };
 
@@ -47,18 +42,6 @@ export function core(state = defaultCoreState, action) {
       return {...state, authenticating: false, accessToken: "", authenticationError: action.error};
     case CORE_AUTH_SIGN_OUT:
       return {...state, authenticating: false, accessToken: "", authenticationError: null};
-    case CORE_SERVER_PENDING:
-      return {...state, serverPending: action.description};
-    case CORE_SERVER_ERROR:
-      return {
-        ...state,
-        serverError: {
-          ...action.error,
-          failure: JSON.parse(action.error.failure),
-        },
-      };
-    case CORE_SERVER_IDLE:
-      return {...state, serverPending: "", serverError: null};
     default:
       return state;
   }

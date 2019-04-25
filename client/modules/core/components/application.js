@@ -14,7 +14,6 @@ import AuthenticatedRoute from "../containers/authenticated-route";
 import Home from "./home";
 import User from "./user";
 import Data from "../containers/data";
-import ServerPendingModal from "../containers/server-pending-modal";
 
 // material-ui
 import {withStyles} from "@material-ui/core/styles";
@@ -100,7 +99,6 @@ class ApplicationRoot extends React.Component {
           {content}
           <ContentSpacer />
         </ContentPage>
-        <ServerPendingModal />
       </div>
     );
   }

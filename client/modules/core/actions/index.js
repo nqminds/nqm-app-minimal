@@ -1,26 +1,5 @@
 import * as reduxActions from "./redux-actions";
 
-const makeAPICall = function({tdxConnections, store}, method, ...args) { // eslint-disable-line no-unused-vars
-  const connectionManager = tdxConnections.defaultTDX;
-  const promise = connectionManager.tdxApi[method](...args)
-    .then((result) => {
-      store.dispatch(reduxActions.serverIdle({...args}, result));
-      return result;
-    })
-    .catch((err) => {
-      if (err.name === "TDXApiError") {
-        store.dispatch(reduxActions.serverError(JSON.parse(err.message)));
-      } else {
-        store.dispatch(reduxActions.serverError({code: err.code || "exception", message: err.message}));
-      }
-      return Promise.reject(err);
-    });
-
-  store.dispatch(reduxActions.serverPending(`calling '${method}'`));
-
-  return promise;
-};
-
 export default {
   core: {
     dashboard({tdxConnections}) {
@@ -47,9 +26,6 @@ export default {
         .catch((err) => {
           store.dispatch(reduxActions.authenticationError(err));
         });
-    },
-    serverIdle({store}) {
-      store.dispatch(reduxActions.serverIdle());
     },
     signOut({tdxConnections, store}) {
       tdxConnections.logout();

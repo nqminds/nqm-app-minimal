@@ -44,19 +44,3 @@ export const toggleTheme = function() {
   return {type: actionTypes.CORE_APP_TOGGLE_THEME};
 };
 
-/*
- * TDX
- *
- */
-export const serverPending = function(description) {
-  return {type: actionTypes.CORE_SERVER_PENDING, description};
-};
-
-export const serverError = function(error) {
-  return {type: actionTypes.CORE_SERVER_ERROR, error};
-};
-
-export const serverIdle = function() {
-  return {type: actionTypes.CORE_SERVER_IDLE};
-};
-
