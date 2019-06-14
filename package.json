@@ -71,8 +71,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.0",
-    "@material-ui/core": "^3.9.2",
-    "@material-ui/icons": "^3.0.2",
+    "@material-ui/core": "^4.0.0",
+    "@material-ui/icons": "^4.0.0",
     "@nqminds/nqm-api-tdx": "^0.5.12",
     "@nqminds/nqm-core-utils": "^0.4.88",
     "@nqminds/nqm-databot-utils": "^0.2.18",

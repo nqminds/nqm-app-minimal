@@ -28,9 +28,6 @@ export const themeMapper = ({darkTheme}, onData) => {
   };
 
   const overrides = {
-    typography: {
-      useNextVariants: true,
-    },
   };
 
   const theme = createMuiTheme({...overrides, palette});
