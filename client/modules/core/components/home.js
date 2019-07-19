@@ -22,6 +22,7 @@ const Home = ({classes}) => {
     <ContentMain className={classes.content}>
       <PageHeading>welcome - fast reloads!!</PageHeading>
       <p>hot potato</p>
+      <p>I was deployed with one command! Try npm run deploy from the terminal</p>
     </ContentMain>
   );
 };
