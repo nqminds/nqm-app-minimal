@@ -50,12 +50,25 @@ Libraries:
 - [history](https://github.com/ReactTraining/history) - library for managing session history
 - [Connected-react-router](https://github.com/supasate/connected-react-router) - Redux binding for React Router v4 
 - [material-ui](https://material-ui.com/) - UI components library. It can be customised by changing `app/themes/index.js` file
-## production
+
+## building
 
 Once your app is ready for production, you can bundle the client-side packages into a single, minified file, and then package it as a databot. This will output to a file databot.zip.
 
-When creating the databot definition you should copy the contents of /server/settings.js to the packageParams of your databot as the settings field. Additionally uncomment the line named production
+When creating the databot definition you should copy the contents of /server/settings.js to the packageParams or input of your databot as the settings field. Additionally uncomment the line named production
 
 ```
 npm run databotify
 ```
+
+## deploying
+
+In order to simplify deployment of your application you can use the command
+
+```
+npm run deploy
+```
+
+This will create a databot inside the application's server folder, build your code, upload that code to the databot file and then start the databot. If you have run this command before it will handle that too. 
+
+You *must* ensure that you have shared the created databot definition and zip resource with a host for this to work. The script will warn you if it thinks you haven't.
