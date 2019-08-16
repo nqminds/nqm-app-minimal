@@ -60,7 +60,7 @@ module.exports = (function() {
     }, true);
     await api.updateResource(getDatabotDefId(), {
       meta: {
-        chunks: 1, definitionVersion: 1, packageType: "zip", package: getDatabotFileId(),
+        chunks: 1, definitionVersion: 1, packageType: "zip", package: getDatabotFileId(), packageParams: {},
       },
     });
   }
@@ -74,7 +74,7 @@ module.exports = (function() {
       options.url = `${api.config.commandServer}/commandSync/resource/${getDatabotFileId()}/upload`;
       options.headers = {"Authorization": `Bearer ${api.accessToken}`};
       const baseName = "databot.zip";
-      options.headers["Content-Disposition"] = `attachment; filename=\"${baseName}\"`;
+      options.headers["Content-Disposition"] = `attachment; filename="${baseName}"`;
       options.headers["Content-Length"] = databotUtils.file.fileSize(databotZipFilePath);
 
       const req = request.post(options);
