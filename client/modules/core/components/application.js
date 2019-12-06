@@ -12,8 +12,6 @@ import {ContentPage, ContentSpacer} from "./page-components";
 import AppTitle from "../containers/app-title";
 import AuthenticatedRoute from "../containers/authenticated-route";
 import Home from "./home";
-import User from "./user";
-import Data from "../containers/data";
 
 // material-ui
 import {withStyles} from "@material-ui/core/styles";
@@ -82,11 +80,6 @@ class ApplicationRoot extends React.Component {
       content = (
         <Switch>
           <Route exact path="/" component={Home} />
-          <AuthenticatedRoute
-            path="/user"
-            render={(route) => (<User {...route} settings={this.props.settings} />)}
-          />
-          <AuthenticatedRoute path="/data" component={Data} />
         </Switch>
       );
     }
