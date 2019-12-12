@@ -1,6 +1,6 @@
 import {compose, merge, reduxFactory, useDeps} from "@nqminds/nqm-tdx-client";
 import {withRouter} from "react-router-dom";
-import ApplicationRoot from "../components/application";
+import ApplicationRoot from "./application-component";
 
 export const authMapper = ({
   accessToken,

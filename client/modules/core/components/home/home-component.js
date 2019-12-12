@@ -5,7 +5,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // internal
-import {ContentMain, PageHeading} from "./page-components";
+import {ContentMain, PageHeading} from "../page-components";
 
 import {withStyles} from "@material-ui/core/styles";
 const styleSheet = () => {

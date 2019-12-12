@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 // internal
 import AppMenu from "./app-menu";
-import {ContentMain, ContentPage, ContentSpacer} from "../../core/components/page-components";
+import {ContentMain, ContentPage, ContentSpacer} from "../page-components";
 
 // material-ui
 import {withStyles} from "@material-ui/core/styles";

@@ -9,7 +9,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // internal
-import Application from "../containers/application";
+import Application from "../application";
 
 // material-ui
 import {MuiThemeProvider} from "@material-ui/core/styles";

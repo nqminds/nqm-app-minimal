@@ -8,10 +8,10 @@ import PropTypes from "prop-types";
 import {Route, Switch} from "react-router-dom";
 
 // internal
-import {ContentPage, ContentSpacer} from "./page-components";
-import AppTitle from "../containers/app-title";
-import AuthenticatedRoute from "../containers/authenticated-route";
-import Home from "./home";
+import {ContentPage, ContentSpacer} from "../page-components";
+import AppTitle from "../app-title";
+import Home from "../home";
+import SystemNotification from "../system-notification";
 
 // material-ui
 import {withStyles} from "@material-ui/core/styles";
@@ -92,6 +92,7 @@ class ApplicationRoot extends React.Component {
           {content}
           <ContentSpacer />
         </ContentPage>
+        <SystemNotification />
       </div>
     );
   }

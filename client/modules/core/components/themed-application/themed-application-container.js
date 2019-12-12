@@ -6,7 +6,7 @@ import grey from "@material-ui/core/colors/grey";
 
 import {emphasize} from "@material-ui/core/styles/colorManipulator";
 import {withRouter} from "react-router-dom";
-import ThemedApplication from "../components/themed-application";
+import ThemedApplication from "./themed-application-component";
 
 export const themeMapper = ({darkTheme}, onData) => {
   const colours = { // Extra theme colours may be added here

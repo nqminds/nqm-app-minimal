@@ -34,5 +34,11 @@ export default {
     toggleTheme({store}) {
       store.dispatch(reduxActions.toggleTheme());
     },
+    setFeedback({store}, feedback) {
+      store.dispatch(reduxActions.setFeedback(feedback));
+    },
+    hideFeedback({store}) {
+      store.dispatch(reduxActions.hideFeedback());
+    },
   },
 };

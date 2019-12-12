@@ -111,6 +111,10 @@ module.exports = (function(options) {
       modules: ["node_modules", "client"],
       extensions: [".js", ".jsx", ".react.js"],
       mainFields: ["browser", "jsnext:main", "main"],
+      alias: {
+        Modules: path.resolve(process.cwd(), "client/modules"),
+        Configs: path.resolve(process.cwd(), "client/configs"),
+      },
     },
     devtool: options.devtool,
     target: "web", // Make web variables accessible to webpack, e.g. window

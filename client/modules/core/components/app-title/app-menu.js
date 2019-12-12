@@ -122,17 +122,6 @@ class AppMenu extends React.Component {
         </a>
       );
     } else {
-      // We have a valid user - add the profile link.
-      userLinks.push(
-        <NavLink
-          activeClassName={classes.menuActive}
-          className={classes.menu}
-          key="your profile"
-          to="/user/profile"
-        >
-          <div className={classes.menuText}>profile</div>
-        </NavLink>
-      );
       // Add a sign-out link for all logged in users.
       userLinks.push(
         <a

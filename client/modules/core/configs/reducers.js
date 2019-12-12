@@ -8,6 +8,8 @@ import {
   CORE_AUTH_ERROR,
   CORE_AUTH_SIGN_OUT,
   CORE_APP_TOGGLE_THEME,
+  CORE_APP_HIDE_FEEDBACK,
+  CORE_APP_SET_FEEDBACK,
 } from "../actions/action-types";
 
 export const defaultCoreState = {
@@ -18,8 +20,9 @@ export const defaultCoreState = {
   authenticating: false,
   accessToken: "",
   darkTheme: false,
-  profile: {},
   userDataFolderId: "",
+  feedback: {},
+  isFeedbackOpen: false,
 };
 
 export function core(state = defaultCoreState, action) {
@@ -42,6 +45,10 @@ export function core(state = defaultCoreState, action) {
       return {...state, authenticating: false, accessToken: "", authenticationError: action.error};
     case CORE_AUTH_SIGN_OUT:
       return {...state, authenticating: false, accessToken: "", authenticationError: null};
+    case CORE_APP_SET_FEEDBACK:
+      return {...state, feedback: action.feedback, isFeedbackOpen: true};
+    case CORE_APP_HIDE_FEEDBACK:
+      return {...state, isFeedbackOpen: false};
     default:
       return state;
   }
