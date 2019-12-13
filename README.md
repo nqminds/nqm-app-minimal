@@ -46,12 +46,11 @@ To pass data to the client from the server on boot see the /nqm-setup-data route
 Client files are included in `app` directory. The application is built with [React](https://reactjs.org/) and bundled with [Webpack](https://webpack.js.org/). It is already configured
 in `internals/webpack` - there are two separate configurations - for development and production.
 
-Libraries:
-- [Redux](https://redux.js.org/) - store configuration is defined in `app/redux/configureStore.js`
-- [React-router](https://github.com/ReactTraining/react-router) - library for handling routing, main routes are defined in `app/containers/App/index.js`
-- [history](https://github.com/ReactTraining/history) - library for managing session history
-- [Connected-react-router](https://github.com/supasate/connected-react-router) - Redux binding for React Router v4 
-- [material-ui](https://material-ui.com/) - UI components library. It can be customised by changing `app/themes/index.js` file
+Key Libraries:
+- [React](https://reactjs.org)
+- [Redux](https://redux.js.org/)
+- [React-router](https://github.com/ReactTraining/react-router)
+- [material-ui](https://material-ui.com/)
 
 ### module structure
 
@@ -61,14 +60,11 @@ If a module will require its own state and actions it should include the actions
 
 ### client side routes
 
-To add a route to the application see the application-component.js file in the core module, the authenticated route component available in the core module will enforce user login for a route.
+To add a route to the application see the app-routes.js file in the aplication component folder of thecore module, the authenticated route component available in the core module will enforce user login for a route.
 
 ### containers
 
-A container connects a component to the context and state of the application, additionally it is generally good practice to load data in containers.
-
-
-
+A container connects a component to the context and state of the application, additionally it is generally good practice to load data in containers. Examples are available in the state-demo and data-demo component folders in the core module.
 
 ## building
 
