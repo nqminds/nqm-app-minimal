@@ -84,7 +84,7 @@ module.exports = {
     'babel/func-params-comma-dangle': 'error',
     'babel/flow-object-type': 'error',
     'react/display-name': 'error',
-    'react/jsx-boolean-value': ['error', 'always'],
+    'react/jsx-boolean-value': ['error', 'never'],
     'react/jsx-closing-bracket-location': 'error',
     'react/jsx-curly-spacing': 'error',
     'react/jsx-equals-spacing': 'error',

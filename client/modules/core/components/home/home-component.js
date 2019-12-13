@@ -2,33 +2,30 @@
  * An example landing page
  */
 import React from "react";
-import PropTypes from "prop-types";
 
-// internal
-import {ContentMain, PageHeading} from "../page-components";
-
-import {withStyles} from "@material-ui/core/styles";
-const styleSheet = () => {
+import {makeStyles} from "@material-ui/core/styles";
+const useStyles = makeStyles(({spacing}) => {
   return {
     content: {
-      textAlign: "justify",
+      margin: spacing(2),
+      padding: spacing(2),
     },
   };
-};
+});
+import {Paper, Typography} from "@material-ui/core";
 
-const Home = ({classes}) => {
-  // Placeholder text for now.
+function Home() {
+  const classes = useStyles();
   return (
-    <ContentMain className={classes.content}>
-      <PageHeading>welcome - fast reloads!!</PageHeading>
-      <p>hot potato</p>
-      <p>I was deployed with one command! Try npm run deploy from the terminal</p>
-    </ContentMain>
+
+    <Paper className={classes.content}>
+      <Typography variant="h6">Welcome to <strong>nquiring</strong>minds' minimal react app</Typography>
+      <Typography component="p">
+        This app uses react, webpack, and express. Routing is provided by react-router and state by redux.
+      </Typography>
+      <Typography component="p">You can deploy this app straight to a TDX using the npm "deploy" script.</Typography>
+    </Paper>
   );
-};
+}
 
-Home.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styleSheet, {name: "nqm-home"})(Home);
+export default Home;

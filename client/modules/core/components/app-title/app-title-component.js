@@ -1,93 +1,49 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
-
-// internal
-import AppMenu from "./app-menu";
-import {ContentMain, ContentPage, ContentSpacer} from "../page-components";
 
 // material-ui
-import {withStyles} from "@material-ui/core/styles";
-const styleSheet = ({palette}) => {
-  return {
-    content: {
-      padding: "0 !important",
-    },
-    root: {
-      backgroundColor: palette.background.appBar,
-      color: palette.getContrastText(palette.background.appBar),
-      flex: "0 0 auto",
-    },
-    subTitle: {
-      fontSize: "calc(12px + (20 - 12) * (100vw - 320px) / (960 - 320))",
-      padding: "0px 5px 0px 0px",
-      textAlign: "right",
-    },
-    title: {
-      fontSize: "calc(18px + (30 - 18) * (100vw - 320px) / (960 - 320))",
-      fontWeight: "bold",
-      padding: "5px 5px 0px 5px",
-      textAlign: "right",
-    },
-  };
-};
+import ThemeIcon from "@material-ui/icons/Palette";
+import AppsIcon from "@material-ui/icons/Dashboard";
+import SignOutIcon from "@material-ui/icons/ExitToApp";
+import SignInIcon from "@material-ui/icons/AccountCircle";
+import {IconButton, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+const useStyles = makeStyles(({palette, spacing}) => ({
+  appTitle: {
+    alignItems: "center",
+    background: palette.background.appBar,
+    display: "flex",
+    justifyContent: "space-between",
+    height: 50,
+    padding: spacing(1),
+    width: "100%",
+  },
+  titleText: {
+    marginLeft: spacing(1),
+  },
+}));
 
-class AppTitle extends React.Component {
-  static propTypes = {
-    classes: PropTypes.object.isRequired,
-    darkTheme: PropTypes.bool,
-    dashboard: PropTypes.func.isRequired,
-    settings: PropTypes.object.isRequired,
-    signIn: PropTypes.func.isRequired,
-    signUp: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-    toggleTheme: PropTypes.func.isRequired,
-    user: PropTypes.object,
-    userInitialised: PropTypes.bool.isRequired,
-  };
-
-  render() {
-    const {
-      classes,
-      darkTheme,
-      dashboard,
-      settings,
-      signIn,
-      signUp,
-      title,
-      toggleTheme,
-      userInitialised,
-    } = this.props;
-
-
-    const subTitle = "public";
-
-    return (
+function AppTitle({appTitle, goToDashboard, signIn, signOut, toggleTheme, user}) {
+  const classes = useStyles();
+  return (
+    <div className={classes.appTitle}>
+      <Typography className={classes.titleText} variant="h6" component="h1">{appTitle}</Typography>
       <div>
-        <ContentPage className={classes.root}>
-          <ContentSpacer />
-          <ContentMain className={classes.content}>
-            <div className={classes.title}>
-              <Link to="/">{title}</Link>
-            </div>
-            <div className={classes.subTitle}>
-              {subTitle}
-            </div>
-            <AppMenu
-              dashboard={dashboard}
-              darkTheme={darkTheme}
-              settings={settings}
-              signIn={signIn}
-              signUp={signUp}
-              toggleTheme={toggleTheme}
-              userInitialised={userInitialised}
-            />
-          </ContentMain>
-          <ContentSpacer />
-        </ContentPage>
+        <IconButton onClick={toggleTheme}><ThemeIcon /></IconButton>
+        <IconButton onClick={goToDashboard}><AppsIcon /></IconButton>
+        <IconButton onClick={user ? signOut : signIn}>{user ? <SignOutIcon /> : <SignInIcon />}</IconButton>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default withStyles(styleSheet, {name: "nqm-app-title"})(AppTitle);
+AppTitle.propTypes = {
+  appTitle: PropTypes.string.isRequired,
+  goToDashboard: PropTypes.func.isRequired,
+  signIn: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired,
+  toggleTheme: PropTypes.func.isRequired,
+  user: PropTypes.object,
+};
+
+export default AppTitle;

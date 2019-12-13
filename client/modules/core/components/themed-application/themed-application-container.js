@@ -1,19 +1,32 @@
 import {compose, merge, reduxFactory, useDeps} from "@nqminds/nqm-tdx-client";
 import {createMuiTheme} from "@material-ui/core/styles";
 
+import deepPurple from "@material-ui/core/colors/deepPurple";
 import blueGrey from "@material-ui/core/colors/blueGrey";
-import grey from "@material-ui/core/colors/grey";
+import lightBlue from "@material-ui/core/colors/lightBlue";
 
 import {emphasize} from "@material-ui/core/styles/colorManipulator";
 import {withRouter} from "react-router-dom";
 import ThemedApplication from "./themed-application-component";
 
+export const depsMapper = ({store}) => {
+  return {
+    store,
+  };
+};
+
+export const reduxMapper = (state) => {
+  return {
+    darkTheme: state.core.darkTheme,
+  };
+};
+
 export const themeMapper = ({darkTheme}, onData) => {
   const colours = { // Extra theme colours may be added here
     public: {
-      primary: blueGrey,
+      primary: deepPurple,
       secondary: blueGrey,
-      text: grey,
+      text: lightBlue,
     },
   };
 
@@ -41,18 +54,6 @@ export const themeMapper = ({darkTheme}, onData) => {
   themedPalette.text.secondary = darkTheme ? colour.text[300] : colour.text[300];
 
   onData(null, {theme});
-};
-
-export const reduxMapper = (state) => {
-  return {
-    darkTheme: state.core.darkTheme,
-  };
-};
-
-export const depsMapper = ({store}) => {
-  return {
-    store,
-  };
 };
 
 const Container = merge(

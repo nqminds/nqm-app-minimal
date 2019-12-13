@@ -19,7 +19,7 @@ export const defaultCoreState = {
   authenticated: false,
   authenticating: false,
   accessToken: "",
-  darkTheme: false,
+  darkTheme: true,
   userDataFolderId: "",
   feedback: {},
   isFeedbackOpen: false,

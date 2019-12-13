@@ -5,6 +5,21 @@
 import {compose, merge, reduxFactory, useDeps} from "@nqminds/nqm-tdx-client";
 import AuthenticatedRoute from "./authenticated-route-component";
 
+export const depsMapper = ({store, tdxConnections, utils}, actions) => {
+  return {
+    signIn: actions.core.signIn,
+    store,
+    user: tdxConnections.defaultTDX.user,
+    utils,
+  };
+};
+
+export const reduxMapper = (state) => {
+  return {
+    userInitialised: state.core.userInitialised,
+  };
+};
+
 export const authMapper = ({userInitialised, user, utils}, onData) => {
   // Must have a valid **user** for components that require authentication. Check that there
   // is an initialised user, and verify that it is a user account, (i.e. not an application account).
@@ -15,21 +30,6 @@ export const authMapper = ({userInitialised, user, utils}, onData) => {
     // We have a valid user account.
     onData(null, {authenticated: true});
   }
-};
-
-export const reduxMapper = (state) => {
-  return {
-    userInitialised: state.core.userInitialised,
-  };
-};
-
-export const depsMapper = ({store, tdxConnections, utils}, actions) => {
-  return {
-    signIn: actions.core.signIn,
-    store,
-    user: tdxConnections.defaultTDX.user,
-    utils,
-  };
 };
 
 export default merge(
