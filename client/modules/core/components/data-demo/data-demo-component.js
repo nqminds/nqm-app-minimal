@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 
-import {Button, List, ListItem, ListItemText, ListSubheader, Paper, TextField, Typography} from "@material-ui/core";
+import {
+  Button, List, ListItem, ListItemText, ListSubheader, Paper, Slide, TextField, Typography,
+} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles(({spacing}) => {
   return {
@@ -14,6 +16,9 @@ const useStyles = makeStyles(({spacing}) => {
       flexDirection: "column",
       margin: spacing(2),
       padding: spacing(2),
+    },
+    messagePaper: {
+      margin: spacing(2),
     },
   };
 });
@@ -30,22 +35,24 @@ function DataDemo({api, data, exampleDatasetId, percentage, setFeedback}) {
     }
   }
   return (
-    <div className={classes.content}>
-      <Paper className={classes.paper}>
-        <Typography variant="p">This page demonstrates subscriptions and using the TDX Api</Typography>
-        <TextField label="Your message" onChange={(evt) => setMessage(evt.target.value)} value={message} />
-        <Button disabled={!message} onClick={addMessage}>Add message</Button>
-      </Paper>
-      <Paper className={classes.paper}>
-        <List subheader={<ListSubheader>Showing {percentage}% of messages</ListSubheader>}>
-          {data.map(({message, timestamp}) => (
-            <ListItem key={`${message}-${timestamp}`}>
-              <ListItemText primary={message} secondary={new Date(timestamp).toDateString()} />
-            </ListItem>
+    <Slide in timeout={300}>
+      <div className={classes.content}>
+        <Paper className={classes.paper}>
+          <Typography variant="p">This page demonstrates subscriptions and using the TDX Api</Typography>
+          <TextField label="Your message" onChange={(evt) => setMessage(evt.target.value)} value={message} />
+          <Button disabled={!message} onClick={addMessage}>Add message</Button>
+        </Paper>
+        <Paper className={classes.messagePaper}>
+          <List subheader={<ListSubheader>Showing {percentage}% of messages</ListSubheader>}>
+            {data.map(({message, timestamp}) => (
+              <ListItem key={`${message}-${timestamp}`}>
+                <ListItemText primary={message} secondary={new Date(timestamp).toDateString()} />
+              </ListItem>
       ))}
-        </List>
-      </Paper>
-    </div>
+          </List>
+        </Paper>
+      </div>
+    </Slide>
   );
 }
 

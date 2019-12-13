@@ -12,19 +12,20 @@ const useStyles = makeStyles(({spacing}) => {
     },
   };
 });
-import {Paper, Typography} from "@material-ui/core";
+import {Paper, Slide, Typography} from "@material-ui/core";
 
 function Home() {
   const classes = useStyles();
   return (
-
-    <Paper className={classes.content}>
-      <Typography variant="h6">Welcome to <strong>nquiring</strong>minds' minimal react app</Typography>
-      <Typography component="p">
+    <Slide in timeout={300}>
+      <Paper className={classes.content}>
+        <Typography variant="h6">Welcome to <strong>nquiring</strong>minds' minimal react app</Typography>
+        <Typography component="p">
         This app uses react, webpack, and express. Routing is provided by react-router and state by redux.
       </Typography>
-      <Typography component="p">You can deploy this app straight to a TDX using the npm "deploy" script.</Typography>
-    </Paper>
+        <Typography component="p">You can deploy this app straight to a TDX using the npm "deploy" script.</Typography>
+      </Paper>
+    </Slide>
   );
 }
 

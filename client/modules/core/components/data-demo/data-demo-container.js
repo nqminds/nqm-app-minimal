@@ -17,7 +17,7 @@ export const depsMapper = (context, actions) => { // The depsMapper is passed th
 
 // Subscribing to a dataset provides a reactive data source
 export const settingsMapper = ({connectionManager}, onData) => {
-  if (connectionManager.subscribe("datasetData", [exampleDatasetId]).ready()) {
+  if (connectionManager.subscribe("datasetData", [exampleDatasetId, null, {limit: 10}]).ready()) {
     const data = connectionManager.cache.data.find({
       _d: exampleDatasetId,
     }).fetch();
