@@ -1,7 +1,7 @@
 {
   "name": "nqm-app-minimal",
   "private": true,
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "Minimal application for use with the updated application account system.",
   "main": "databot.js",
   "scripts": {
@@ -19,12 +19,12 @@
     "url": "git+https://github.com/nqminds/nqm-app-minimal.git"
   },
   "keywords": [],
-  "license": "ISC",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/nqminds/nqm-app-minimal/issues"
   },
   "homepage": "https://github.com/nqminds/nqm-app-minimal#readme",
-  "author": "toby.ealden@gmail.com",
+  "author": "nqminds",
   "contributors": [
     {
       "name": "Toby Ealden",
@@ -40,6 +40,11 @@
     }
   ],
   "devDependencies": {
+    "babel-eslint": "^7.2.1",
+    "eslint": "^3.19.0",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-mocha": "^4.9.0",
+    "eslint-plugin-react": "^6.10.3",
     "@babel/core": "^7.6.3",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.6.3",

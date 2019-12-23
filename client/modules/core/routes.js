@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 
-import ThemedApplication from "./containers/themed-application";
+import ThemedApplication from "./components/themed-application";
 
 export default function(injectDeps, context, actions) { // eslint-disable-line no-unused-vars
   const Routes = () => (
@@ -24,7 +24,7 @@ export default function(injectDeps, context, actions) { // eslint-disable-line n
     // Hot reloadable React components and translation json files
     // modules.hot.accept does not accept dynamic dependencies,
     // have to be constants at compile-time
-    module.hot.accept(["modules/core/containers/themed-application"], () => {
+    module.hot.accept(["modules/core/components/themed-application"], () => {
       ReactDOM.unmountComponentAtNode(MOUNT_NODE);
       render();
     });

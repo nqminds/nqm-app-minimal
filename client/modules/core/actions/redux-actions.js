@@ -44,3 +44,10 @@ export const toggleTheme = function() {
   return {type: actionTypes.CORE_APP_TOGGLE_THEME};
 };
 
+export const setFeedback = function(feedback) {
+  return {type: actionTypes.CORE_APP_SET_FEEDBACK, feedback};
+};
+
+export const hideFeedback = function() {
+  return {type: actionTypes.CORE_APP_HIDE_FEEDBACK};
+};

@@ -1,6 +1,25 @@
 import {compose, merge, reduxFactory, useDeps} from "@nqminds/nqm-tdx-client";
 import {withRouter} from "react-router-dom";
-import ApplicationRoot from "../components/application";
+import ApplicationRoot from "./application-component";
+
+export const depsMapper = ({settings, store}, actions) => {
+  return {
+    store,
+    setAuthToken: actions.core.setAuthToken,
+  };
+};
+
+export const reduxMapper = (state) => {
+  return {
+    accessToken: state.core.accessToken,
+    appInitialised: state.core.appInitialised,
+    appInitialiseProgress: state.core.appInitialiseProgress,
+    authenticated: state.core.authenticated,
+    authenticating: state.core.authenticating,
+    authenticationError: state.core.authenticationError,
+    userInitialised: state.core.userInitialised,
+  };
+};
 
 export const authMapper = ({
   accessToken,
@@ -20,26 +39,6 @@ export const authMapper = ({
     // of initialising with it.
     onData(null, {});
   }
-};
-
-export const reduxMapper = (state) => {
-  return {
-    accessToken: state.core.accessToken,
-    appInitialised: state.core.appInitialised,
-    appInitialiseProgress: state.core.appInitialiseProgress,
-    authenticated: state.core.authenticated,
-    authenticating: state.core.authenticating,
-    authenticationError: state.core.authenticationError,
-    userInitialised: state.core.userInitialised,
-  };
-};
-
-export const depsMapper = ({settings, store}, actions) => {
-  return {
-    store,
-    setAuthToken: actions.core.setAuthToken,
-    settings,
-  };
 };
 
 const Container = merge(
