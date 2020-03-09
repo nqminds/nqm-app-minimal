@@ -1,9 +1,9 @@
 import {compose, merge, reduxFactory, useDeps} from "@nqminds/nqm-tdx-client";
 import {createMuiTheme} from "@material-ui/core/styles";
 
-import deepPurple from "@material-ui/core/colors/deepPurple";
 import blueGrey from "@material-ui/core/colors/blueGrey";
 import lightBlue from "@material-ui/core/colors/lightBlue";
+import blue from "@material-ui/core/colors/blue";
 
 import {emphasize} from "@material-ui/core/styles/colorManipulator";
 import {withRouter} from "react-router-dom";
@@ -24,9 +24,9 @@ export const reduxMapper = (state) => {
 export const themeMapper = ({darkTheme}, onData) => {
   const colours = { // Extra theme colours may be added here
     public: {
-      primary: deepPurple,
+      primary: lightBlue,
       secondary: blueGrey,
-      text: lightBlue,
+      text: blue,
     },
   };
 
