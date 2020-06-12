@@ -48,7 +48,7 @@ function DataDemo({api, data, exampleDatasetId, percentage, setFeedback}) {
               <ListItem key={`${message}-${timestamp}`}>
                 <ListItemText primary={message} secondary={new Date(timestamp).toDateString()} />
               </ListItem>
-      ))}
+            ))}
           </List>
         </Paper>
       </div>
