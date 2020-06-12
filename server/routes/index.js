@@ -103,6 +103,7 @@ module.exports = (function(appConfig) {
       nqmApplicationState: {
         core: {
           accessToken: token,
+          serverDataFolderId: appConfig.getServerDataFolderId(),
           userDataFolderId,
         },
       },
