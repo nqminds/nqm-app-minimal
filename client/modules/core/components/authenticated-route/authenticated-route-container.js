@@ -23,7 +23,7 @@ export const reduxMapper = (state) => {
 export const authMapper = ({userInitialised, user, utils}, onData) => {
   // Must have a valid **user** for components that require authentication. Check that there
   // is an initialised user, and verify that it is a user account, (i.e. not an application account).
-  if (!userInitialised || user.accountType !== utils.constants.userAccountType) {
+  if (!userInitialised || !user || user.accountType !== utils.constants.userAccountType) {
     // Not a valid user account.
     onData(null, {authenticated: false});
   } else {
