@@ -1,7 +1,9 @@
 module.exports = (function() {
   "use strict";
   const Promise = require("bluebird");
-  const config = require("./server/settings");
+  const minimist = require("minimist");
+  const argv = minimist(process.argv.slice(2));
+  const config = require("./server/settings")(argv.config);
   const TDXApi = require("@nqminds/nqm-api-tdx");
   const nqmUtils = require("@nqminds/nqm-core-utils");
   const constants = nqmUtils.constants;
