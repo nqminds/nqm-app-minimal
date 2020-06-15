@@ -6,7 +6,8 @@ module.exports = (function(appConfig) {
   const session = require("express-session");
   const bodyParser = require("body-parser");
 
-  const routes = require("./routes/index")(appConfig);
+  const appRoutes = require("./routes/index")(appConfig);
+  const apiRoutes = require("./routes/api")(appConfig);
 
   const app = express();
 
@@ -16,9 +17,11 @@ module.exports = (function(appConfig) {
   //
   // n.b. - make sure you set a unique name for the session to avoid confusion esp. when debugging on localhost.
   //
-  app.use(session({resave: false, secret: "boogaloo", name: "nqm-app-minimal", saveUninitialized: false}));
-
-  app.use("/", routes);
+  app.use(session({
+    resave: false, secret: "boogaloo", name: appConfig.public.applicationTitle, saveUninitialized: false,
+  }));
+  app.use("/api", apiRoutes);
+  app.use("/", appRoutes);
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {

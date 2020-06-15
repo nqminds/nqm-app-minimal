@@ -121,7 +121,7 @@ module.exports = (function() {
       {
         inputs: {settings: config},
         id: getDatabotInstanceId(),
-        name: config.public.applicationTitle,
+        name: config.databotName || config.public.applicationTitle,
         overwriteExisting: getDatabotInstanceId(),
         schedule: {always: true},
         shareKeyId: config.applicationId,
