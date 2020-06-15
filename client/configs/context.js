@@ -12,6 +12,7 @@ export default function({initialState, reducers, settings}) {
 
   const context = {
     constants,
+    getDatasetId: (dataset) => `${initialState.core.serverDataFolderId}-${dataset}`,
     history,
     settings,
     store: createStore(

@@ -35,12 +35,10 @@ module.exports = (function(appConfig) {
     req.session.destroy(() => {
       // Encode the client return url.
       const rurlClient = encodeURIComponent(req.query.rurl || "/");
-
       // Encode the auth callback return url (which also includes the client return url!).
       const rurlAuth = encodeURIComponent(
         `${appConfig.appProtocol || "https"}://${req.get("host")}/auth/callback?rurl=${rurlClient}`
       );
-
       // Redirect to auth server, sending the application token.
       res.redirect(
         `${appConfig.public.tdxConfig.tdxServer}/auth?rurl=${rurlAuth}&a=${appConfig.getToken()}`
@@ -72,9 +70,7 @@ module.exports = (function(appConfig) {
       // The user application data folder is a combination of the application id and the user TDX id.
       userDataFolderId = nqmUtils.shortHash(`${appConfig.applicationId}-${req.session.authData.sub}`);
     }
-
     let token;
-
     if ((!req.session || !req.session.token) && appConfig.publicShareKeyId && appConfig.publicShareKeySecret) {
       //
       // There is no session, which implies a user has not logged in yet. If your app supports a 'public' mode,
@@ -103,6 +99,7 @@ module.exports = (function(appConfig) {
       nqmApplicationState: {
         core: {
           accessToken: token,
+          serverDataFolderId: appConfig.getServerDataFolderId(),
           userDataFolderId,
         },
       },

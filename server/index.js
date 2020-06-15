@@ -9,14 +9,7 @@ module.exports = (function() {
   const minimist = require("minimist");
   const main = require("./main");
   const argv = minimist(process.argv.slice(2));
-
-  let settings;
-  try {
-    settings = require(argv.config);
-  } catch (err) {
-    log("failed to load settings file '%s'", argv.config);
-    process.exit(1);
-  }
+  const settings = require("./settings")(argv.config);
 
   main(settings)
     .then(() => {
