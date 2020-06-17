@@ -5,7 +5,7 @@
   "description": "Minimal application for use with the updated application account system.",
   "main": "databot.js",
   "scripts": {
-    "deploy": "npm run databotify && DEBUG=nqm:deploy node ./deploy-application.js",
+    "deploy": "npm run databotify && NODE_ENV=production DEBUG=nqm:deploy node ./deploy-application.js",
     "databotify": "npm run build && zip -r databot.zip databot.js server dist package.json",
     "prebuild": "npm run build:clean",
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
