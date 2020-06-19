@@ -29,6 +29,8 @@ module.exports = (function(config) {
       "appPort": 8082,
       "authServerURL": "https://tdx.nqminds.com",
       "databotName": "minimal",
+      "failOffline": true,
+      "notifyList": ["ivan@nquiringminds.com"],
       "public": {
         "applicationTitle": "app minimal",
         "dateFormat": "HH:mm DD/MM/YYYY",
@@ -40,7 +42,11 @@ module.exports = (function(config) {
           "accessTokenTTL": 31622400,
         },
       },
-      production: true,
+      "production": true,
+      "schedule": {
+        always: true,
+        cron: "",
+      },
     },
   };
 
