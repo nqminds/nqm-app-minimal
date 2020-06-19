@@ -123,9 +123,11 @@ module.exports = (function() {
         id: getDatabotInstanceId(),
         name: config.databotName || config.public.applicationTitle,
         overwriteExisting: getDatabotInstanceId(),
-        schedule: {always: true},
+        schedule: config.schedule,
         shareKeyId: config.applicationId,
         shareKeySecret: config.applicationSecret,
+        notifyList: config.notifyList,
+        failOffline: config.failOffline,
       }
     );
   }
@@ -155,6 +157,15 @@ module.exports = (function() {
   async function deployApplication() {
     try {
       config.production = true;
+      if (!config.schedule || !config.schedule.always) {
+        log("WARN: Databot not configured for always running!");
+      }
+      if (!config.failOffline) {
+        log("WARN: Databot not configured to fail if host offline!");
+      }
+      if (!config.notifyList || !config.notifyList.length) {
+        log("WARN: No databot status notification emails configured!");
+      }
       const api = new TDXApi({tdxServer: config.authServerURL});
       await api.authenticate(config.applicationId, config.applicationSecret);
       const databotFileExists = await checkResourceExists(api, getDatabotFileId());
