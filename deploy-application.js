@@ -123,9 +123,11 @@ module.exports = (function() {
         id: getDatabotInstanceId(),
         name: config.databotName || config.public.applicationTitle,
         overwriteExisting: getDatabotInstanceId(),
-        schedule: {always: true},
+        schedule: config.schedule,
         shareKeyId: config.applicationId,
         shareKeySecret: config.applicationSecret,
+        notifyList: config.notifyList,
+        failOffline: config.failOffline,
       }
     );
   }
