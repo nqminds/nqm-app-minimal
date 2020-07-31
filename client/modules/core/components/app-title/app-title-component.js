@@ -28,7 +28,7 @@ const useStyles = makeStyles(({palette, spacing}) => ({
 function AppTitle({appTitle, goToDashboard, signIn, signOut, toggleTheme, user, history}) {
   const classes = useStyles();
 
-  function signUserOut() {
+  function handleSignOut() {
     history.push("/");
     signOut();
   }
@@ -39,7 +39,7 @@ function AppTitle({appTitle, goToDashboard, signIn, signOut, toggleTheme, user, 
       <div>
         <IconButton onClick={toggleTheme}><ThemeIcon /></IconButton>
         <IconButton onClick={goToDashboard}><AppsIcon /></IconButton>
-        <IconButton onClick={user ? signUserOut : signIn}>{user ? <SignOutIcon /> : <SignInIcon />}</IconButton>
+        <IconButton onClick={user ? handleSignOut : signIn}>{user ? <SignOutIcon /> : <SignInIcon />}</IconButton>
       </div>
     </div>
   );
