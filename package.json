@@ -1,18 +1,18 @@
 {
   "name": "nqm-app-minimal",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minimal application for use with the updated application account system.",
   "main": "databot.js",
   "scripts": {
-    "deploy": "npm run databotify && DEBUG=nqm:deploy node ./deploy-application.js",
+    "deploy": "npm run databotify && NODE_ENV=production DEBUG=nqm:deploy node ./deploy-application.js",
     "databotify": "npm run build && zip -r databot.zip databot.js server dist package.json",
     "prebuild": "npm run build:clean",
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
     "build:clean": "rimraf ./dist",
-    "start": "cross-env NODE_ENV=development DEBUG=nqm-app:* node ./server/index.js --config ./settings.js",
+    "start": "cross-env NODE_ENV=development DEBUG=nqm-app:* node ./server/index.js",
     "start:production": "npm run build && npm run start:prod",
-    "start:prod": "cross-env NODE_ENV=production DEBUG=nqm-app:* node ./server/index.js --config ./settings.js"
+    "start:prod": "cross-env NODE_ENV=production DEBUG=nqm-app:* node ./server/index.js"
   },
   "repository": {
     "type": "git",

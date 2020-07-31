@@ -3,7 +3,9 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 
 // material-ui
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles, Typography} from "@material-ui/core";
+import {Code, Cloud, Home} from "@material-ui/icons";
+
 const useStyles = makeStyles(({breakpoints, palette, spacing}) => ({
   appMenu: {
     background: palette.background.paper,
@@ -39,15 +41,11 @@ const useStyles = makeStyles(({breakpoints, palette, spacing}) => ({
     },
   },
 }));
-import HomeIcon from "@material-ui/icons/Home";
-import StateIcon from "@material-ui/icons/Code";
-import CloudIcon from "@material-ui/icons/Cloud";
-import {Typography} from "@material-ui/core";
 
 const routes = [
-  {url: "", name: "Home", Icon: HomeIcon, associatedUrls: [""]},
-  {url: "state-demo", name: "State Demo", Icon: StateIcon, associatedUrls: ["state-demo"]},
-  {url: "data-demo", name: "Data Demo", Icon: CloudIcon, associatedUrls: ["data-demo"]},
+  {url: "", name: "Home", Icon: Home, associatedUrls: [""]},
+  {url: "state-demo", name: "State Demo", Icon: Code, associatedUrls: ["state-demo"]},
+  {url: "data-demo", name: "Data Demo", Icon: Cloud, associatedUrls: ["data-demo"]},
 ];
 
 function AppMenu() {

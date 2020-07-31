@@ -5,7 +5,7 @@ module.exports = (function(appConfig) {
   const TDXApi = require("@nqminds/nqm-api-tdx");
   const nqmUtils = require("@nqminds/nqm-core-utils");
   const constants = nqmUtils.constants;
-  const {bootServerResource, checkServerResourceExists} = require("./boot-utils")(appConfig);
+  const {checkServerResourceExists} = require("./boot-utils")(appConfig);
 
   const bootstrap = async function() {
     // Configure TDX comms.

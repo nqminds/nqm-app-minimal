@@ -1,7 +1,9 @@
 module.exports = (function() {
   "use strict";
   const Promise = require("bluebird");
-  const config = require("./server/settings");
+  const minimist = require("minimist");
+  const argv = minimist(process.argv.slice(2));
+  const config = require("./server/settings")(argv.config);
   const TDXApi = require("@nqminds/nqm-api-tdx");
   const nqmUtils = require("@nqminds/nqm-core-utils");
   const constants = nqmUtils.constants;
@@ -119,11 +121,13 @@ module.exports = (function() {
       {
         inputs: {settings: config},
         id: getDatabotInstanceId(),
-        name: config.public.applicationTitle,
+        name: config.databotName || config.public.applicationTitle,
         overwriteExisting: getDatabotInstanceId(),
-        schedule: {always: true},
+        schedule: config.schedule,
         shareKeyId: config.applicationId,
         shareKeySecret: config.applicationSecret,
+        notifyList: config.notifyList,
+        failOffline: config.failOffline,
       }
     );
   }
@@ -153,6 +157,15 @@ module.exports = (function() {
   async function deployApplication() {
     try {
       config.production = true;
+      if (!config.schedule || !config.schedule.always) {
+        log("WARN: Databot not configured for always running!");
+      }
+      if (!config.failOffline) {
+        log("WARN: Databot not configured to fail if host offline!");
+      }
+      if (!config.notifyList || !config.notifyList.length) {
+        log("WARN: No databot status notification emails configured!");
+      }
       const api = new TDXApi({tdxServer: config.authServerURL});
       await api.authenticate(config.applicationId, config.applicationSecret);
       const databotFileExists = await checkResourceExists(api, getDatabotFileId());
