@@ -20,8 +20,7 @@ module.exports = (function(appConfig) {
       const resource = await checkServerResourceExists(api, dataFolderId);
 
       if (!resource) {
-        // TODO - review - Should be created by account-saga, but could attempt to re-create it here?
-        throw new Error("server data folder not found");
+        throw new Error("server data folder not found"); // Should be created by account-saga
       }
 
       log("got server data folder [%s]", resource.id);
