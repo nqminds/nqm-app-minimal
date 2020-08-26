@@ -44,7 +44,7 @@ export function core(state = defaultCoreState, action) {
     case CORE_AUTH_ERROR:
       return {...state, authenticating: false, accessToken: "", authenticationError: action.error};
     case CORE_AUTH_SIGN_OUT:
-      return {...state, authenticating: false, accessToken: "", authenticationError: null};
+      return {...state, authenticating: false, accessToken: "", authenticationError: null, userInitialised: false};
     case CORE_APP_SET_FEEDBACK:
       return {...state, feedback: action.feedback, isFeedbackOpen: true};
     case CORE_APP_HIDE_FEEDBACK:

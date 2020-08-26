@@ -7,6 +7,7 @@ import {
 } from "@material-ui/icons";
 import {IconButton, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import {withRouter} from "react-router-dom";
 
 const useStyles = makeStyles(({palette, spacing}) => ({
   appTitle: {
@@ -23,15 +24,21 @@ const useStyles = makeStyles(({palette, spacing}) => ({
   },
 }));
 
-function AppTitle({appTitle, goToDashboard, signIn, signOut, toggleTheme, user}) {
+function AppTitle({appTitle, goToDashboard, signIn, signOut, toggleTheme, user, history}) {
   const classes = useStyles();
+
+  function handleSignOut() {
+    history.push("/");
+    signOut();
+  }
+
   return (
     <div className={classes.appTitle}>
       <Typography className={classes.titleText} variant="h6" component="h1">{appTitle}</Typography>
       <div>
         <IconButton onClick={toggleTheme}><ThemeIcon /></IconButton>
         <IconButton onClick={goToDashboard}><AppsIcon /></IconButton>
-        <IconButton onClick={user ? signOut : signIn}>{user ? <SignOutIcon /> : <SignInIcon />}</IconButton>
+        <IconButton onClick={user ? handleSignOut : signIn}>{user ? <SignOutIcon /> : <SignInIcon />}</IconButton>
       </div>
     </div>
   );
@@ -40,10 +47,11 @@ function AppTitle({appTitle, goToDashboard, signIn, signOut, toggleTheme, user})
 AppTitle.propTypes = {
   appTitle: PropTypes.string.isRequired,
   goToDashboard: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
   signIn: PropTypes.func.isRequired,
   signOut: PropTypes.func.isRequired,
   toggleTheme: PropTypes.func.isRequired,
   user: PropTypes.object,
 };
 
-export default AppTitle;
+export default withRouter(AppTitle);
