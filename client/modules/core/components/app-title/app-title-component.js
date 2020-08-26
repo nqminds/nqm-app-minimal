@@ -2,10 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // material-ui
-import ThemeIcon from "@material-ui/icons/Palette";
-import AppsIcon from "@material-ui/icons/Dashboard";
-import SignOutIcon from "@material-ui/icons/ExitToApp";
-import SignInIcon from "@material-ui/icons/AccountCircle";
+import {
+  Palette as ThemeIcon, Dashboard as AppsIcon, ExitToApp as SignOutIcon, AccountCircle as SignInIcon,
+} from "@material-ui/icons";
 import {IconButton, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {withRouter} from "react-router-dom";
