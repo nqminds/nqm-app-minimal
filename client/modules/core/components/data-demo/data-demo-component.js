@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 
 import {
-  Button, List, ListItem, ListItemText, ListSubheader, makeStyles, TextField, Typography,
+  Button, List, ListItem, ListItemText, ListSubheader, TextField, Typography,
 } from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
 import {Paper} from "@nqminds/ui-components";
 

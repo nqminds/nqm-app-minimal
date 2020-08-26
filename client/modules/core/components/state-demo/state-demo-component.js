@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 
-import {Button, FormControlLabel, FormGroup, makeStyles, Switch, TextField, Typography} from "@material-ui/core";
+import {Button, FormControlLabel, FormGroup, Switch, TextField, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
 import {Paper} from "@nqminds/ui-components";
 

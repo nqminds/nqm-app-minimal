@@ -48,16 +48,22 @@ module.exports = (function() {
       concatenateModules: true,
       splitChunks: {
         chunks: "all",
-        minSize: 30000,
+        minSize: 0,
         minChunks: 1,
         maxAsyncRequests: 5,
-        maxInitialRequests: 3,
+        maxInitialRequests: Infinity,
         name: true,
         cacheGroups: {
-          commons: {
+          vendor: {
             test: /[\\/]node_modules[\\/]/,
-            name: "vendor",
-            chunks: "all",
+            name(module) {
+              // get the name. E.g. node_modules/packageName/not/this/part.js
+              // or node_modules/packageName
+              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+              // npm package names are URL-safe, but some servers don't like @ symbols
+              return `npm.${packageName.replace("@", "")}`;
+            },
           },
           main: {
             chunks: "all",

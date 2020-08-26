@@ -4,15 +4,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Snackbar from "@material-ui/core/Snackbar";
-import SnackbarContent from "@material-ui/core/SnackbarContent";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import ErrorIcon from "@material-ui/icons/Error";
-import green from "@material-ui/core/colors/green";
-import CloseIcon from "@material-ui/icons/Close";
-import IconButton from "@material-ui/core/IconButton";
-
+import {IconButton, Snackbar, SnackbarContent} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import {green} from "@material-ui/core/colors";
+import {Close as CloseIcon, Error as ErrorIcon, CheckCircle as CheckCircleIcon} from "@material-ui/icons";
 
 const useStyles = makeStyles(({palette, spacing}) => ({
   failure: {
