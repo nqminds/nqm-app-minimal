@@ -6,6 +6,7 @@ module.exports = (function() {
   const webpack = require("webpack");
   const HtmlWebpackPlugin = require("html-webpack-plugin");
   const CircularDependencyPlugin = require("circular-dependency-plugin");
+  const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
   return require("./webpack.base.babel")({
     mode: "development",
@@ -26,6 +27,30 @@ module.exports = (function() {
     optimization: {
       splitChunks: {
         chunks: "all",
+        minSize: 0,
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: Infinity,
+        name: true,
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name(module) {
+              // get the name. E.g. node_modules/packageName/not/this/part.js
+              // or node_modules/packageName
+              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+              // npm package names are URL-safe, but some servers don't like @ symbols
+              return `npm.${packageName.replace("@", "")}`;
+            },
+          },
+          main: {
+            chunks: "all",
+            minChunks: 2,
+            reuseExistingChunk: true,
+            enforce: true,
+          },
+        },
       },
     },
 
@@ -40,6 +65,7 @@ module.exports = (function() {
         exclude: /a\.js|node_modules/, // exclude node_modules
         failOnError: false, // show a warning when there is a circular dependency
       }),
+      new BundleAnalyzerPlugin(),
     ],
 
     // Emit a source map for easier debugging
