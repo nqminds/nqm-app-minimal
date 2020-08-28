@@ -6,6 +6,7 @@ module.exports = (function() {
   const webpack = require("webpack");
   const HtmlWebpackPlugin = require("html-webpack-plugin");
   const CircularDependencyPlugin = require("circular-dependency-plugin");
+  const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
   return require("./webpack.base.babel")({
     mode: "development",
@@ -23,11 +24,7 @@ module.exports = (function() {
       chunkFilename: "[name].chunk.js",
     },
 
-    optimization: {
-      splitChunks: {
-        chunks: "all",
-      },
-    },
+    optimization: {},
 
     // Add development plugins
     plugins: [
@@ -40,6 +37,7 @@ module.exports = (function() {
         exclude: /a\.js|node_modules/, // exclude node_modules
         failOnError: false, // show a warning when there is a circular dependency
       }),
+      new BundleAnalyzerPlugin(),
     ],
 
     // Emit a source map for easier debugging
