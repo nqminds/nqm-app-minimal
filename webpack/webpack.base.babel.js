@@ -18,10 +18,8 @@ module.exports = (function(options) {
     optimization: {
       splitChunks: {
         chunks: "all",
-        minSize: 20000,
-        minChunks: 1,
+        minChunks: 2,
         maxAsyncRequests: 5,
-        maxInitialRequests: 30,
         name: true,
         cacheGroups: {
           vendor: {
