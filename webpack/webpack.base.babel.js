@@ -15,7 +15,36 @@ module.exports = (function(options) {
       },
       options.output,
     ),
-    optimization: options.optimization,
+    optimization: {
+      splitChunks: {
+        chunks: "all",
+        minSize: 20000,
+        minChunks: 1,
+        maxAsyncRequests: 5,
+        maxInitialRequests: 30,
+        name: true,
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name(module) {
+              // get the name. E.g. node_modules/packageName/not/this/part.js
+              // or node_modules/packageName
+              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+              // npm package names are URL-safe, but some servers don't like @ symbols
+              return `npm.${packageName.replace("@", "")}`;
+            },
+          },
+          main: {
+            chunks: "all",
+            minChunks: 2,
+            reuseExistingChunk: true,
+            enforce: true,
+          },
+        },
+      },
+      ...options.optimization,
+    },
     module: {
       rules: [
         {
