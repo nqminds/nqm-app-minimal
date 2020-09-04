@@ -10,16 +10,20 @@ const log = debug("nqm-app:context");
 export default function({initialState, reducers, settings}) {
   const tdxConnections = new TDXConnections(settings.public.tdxConfig);
 
+  const store = createStore(
+    reducers,
+    initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  );
+
+  const getDatasetId = buildDatasetMapper(store);
+
   const context = {
     constants,
-    getDatasetId: (dataset) => `${initialState.core.serverDataFolderId}-${dataset}`,
+    getDatasetId,
     history,
     settings,
-    store: createStore(
-      reducers,
-      initialState,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    ),
+    store,
     tdxConnections,
     utils: utils,
     user: () => tdxConnections.defaultTDX.user,
@@ -31,4 +35,20 @@ export default function({initialState, reducers, settings}) {
   });
 
   return context;
+}
+
+function buildDatasetMapper(store) {
+  return (dataset) => {
+    const state = store.getState();
+    switch (dataset) {
+      case "example-dataset":
+        if (state.core.permissions.includes("admin")) {
+          return `${state.core.serverDataFolderId}-${dataset}AdminView`;
+        } else {
+          return `${state.core.serverDataFolderId}-${dataset}`;
+        }
+      default:
+        return `${state.core.serverDataFolderId}-${dataset}`;
+    }
+  };
 }
