@@ -37,17 +37,20 @@ export default function({initialState, reducers, settings}) {
   return context;
 }
 
+/**
+ * This function allows getting a dataset inside the app's server data folder
+ * or optionally overriding the dataset that is returned based on permission
+ * levels of users
+ */
 function buildDatasetMapper(store) {
   return (dataset) => {
     const state = store.getState();
     switch (dataset) {
-      case "example-dataset":
+      case "example-dataset": // Include a case statement if a different id should be returned based on permission
         if (state.core.permissions.includes("admin")) {
           return `${state.core.serverDataFolderId}-${dataset}AdminView`;
-        } else {
-          return `${state.core.serverDataFolderId}-${dataset}`;
         }
-      default:
+      default: // eslint-disable-line no-fallthrough
         return `${state.core.serverDataFolderId}-${dataset}`;
     }
   };
