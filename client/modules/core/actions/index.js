@@ -6,15 +6,8 @@ export default {
       tdxConnections.logout();
       window.location = "/dashboard";
     },
-    signIn() {
-      // Redirect to server route to begin authentication process.
-      const callback = window.location.href;
-      window.location = `/auth/?rurl=${callback}`;
-    },
-    signUp() {
-      // Redirect to server route to begin authentication process, and redirect to the register page.
-      const callback = "/profile";
-      window.location = `/auth/?rurl=${callback}`;
+    hideFeedback({store}) {
+      store.dispatch(reduxActions.hideFeedback());
     },
     setAuthToken({tdxConnections, store}, token) {
       // The below line causes issues with react/redux update leading to a warning
@@ -27,18 +20,28 @@ export default {
           store.dispatch(reduxActions.authenticationError(err));
         });
     },
+    setFeedback({store}, feedback) {
+      store.dispatch(reduxActions.setFeedback(feedback));
+    },
+    setPermissions({store}, permissions) {
+      store.dispatch(reduxActions.setPermissions(permissions));
+    },
+    signIn() {
+      // Redirect to server route to begin authentication process.
+      const callback = window.location.href;
+      window.location = `/auth/?rurl=${callback}`;
+    },
     signOut({tdxConnections, store}) {
       tdxConnections.logout();
       store.dispatch(reduxActions.signOut());
     },
+    signUp() {
+      // Redirect to server route to begin authentication process, and redirect to the register page.
+      const callback = "/profile";
+      window.location = `/auth/?rurl=${callback}`;
+    },
     toggleTheme({store}) {
       store.dispatch(reduxActions.toggleTheme());
-    },
-    setFeedback({store}, feedback) {
-      store.dispatch(reduxActions.setFeedback(feedback));
-    },
-    hideFeedback({store}) {
-      store.dispatch(reduxActions.hideFeedback());
     },
   },
 };

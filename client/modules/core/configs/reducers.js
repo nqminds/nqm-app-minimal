@@ -10,6 +10,7 @@ import {
   CORE_APP_TOGGLE_THEME,
   CORE_APP_HIDE_FEEDBACK,
   CORE_APP_SET_FEEDBACK,
+  CORE_APP_SET_PERMISSIONS,
 } from "../actions/action-types";
 
 export const defaultCoreState = {
@@ -23,6 +24,7 @@ export const defaultCoreState = {
   userDataFolderId: "",
   feedback: {},
   isFeedbackOpen: false,
+  permissions: [],
 };
 
 export function core(state = defaultCoreState, action) {
@@ -49,6 +51,8 @@ export function core(state = defaultCoreState, action) {
       return {...state, feedback: action.feedback, isFeedbackOpen: true};
     case CORE_APP_HIDE_FEEDBACK:
       return {...state, isFeedbackOpen: false};
+    case CORE_APP_SET_PERMISSIONS:
+      return {...state, permissions: action.permissions};
     default:
       return state;
   }
