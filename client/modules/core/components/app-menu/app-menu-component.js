@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import {NavLink} from "react-router-dom";
 
@@ -43,17 +44,29 @@ const useStyles = makeStyles(({breakpoints, palette, spacing}) => ({
   },
 }));
 
+// To add a route with permission requirements add the property permReq as
+// an array to a route. Then put the schema name of the account set or sets
+// as strings into that array. E.g.
+// {url: "", name: "Developers Only", Icon: HomeIcon, associatedUrls: [""], permReq: ["developers"]},
+// Likewise a route can be excluded from showing for users with certain pemrissions using the permExc
+// property, also passed as an array
 const routes = [
   {url: "", name: "Home", Icon: Home, associatedUrls: [""]},
   {url: "state-demo", name: "State Demo", Icon: Code, associatedUrls: ["state-demo"]},
   {url: "data-demo", name: "Data Demo", Icon: Cloud, associatedUrls: ["data-demo"]},
 ];
 
-function AppMenu() {
+function AppMenu({isPermitted}) {
   const classes = useStyles();
+
+  const userRoutes = routes.filter(({permExc = [], permReq = []}) => {
+    const hasRequired = isPermitted(permReq, false); // Include or exclude if any permissions match
+    const excluded = isPermitted(permExc, false);
+    return hasRequired && !excluded;
+  });
   return (
     <div className={classes.appMenu}>
-      {routes.map(({associatedUrls, Icon, name, url}) => (
+      {userRoutes.map(({associatedUrls, Icon, name, url}) => (
         <NavLink
           key={url}
           activeClassName={classes.menuActive}
@@ -69,5 +82,9 @@ function AppMenu() {
     </div>
   );
 }
+
+AppMenu.propTypes = {
+  isPermitted: PropTypes.func.isRequired,
+};
 
 export default AppMenu;

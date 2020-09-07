@@ -7,7 +7,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import AppTitle from "../app-title";
-import AppMenu from "./app-menu";
+import AppMenu from "../app-menu";
 import AppRoutes from "./app-routes";
 import Initialisation from "./initialisation";
 
