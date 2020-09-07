@@ -60,6 +60,9 @@ function AppMenu({isPermitted}) {
   const classes = useStyles();
 
   const userRoutes = routes.filter(({permExc = [], permReq = []}) => {
+    if (!permExc.length && !permReq.length) {
+      return true;
+    }
     const hasRequired = isPermitted(permReq, false); // Include or exclude if any permissions match
     const excluded = isPermitted(permExc, false);
     return hasRequired && !excluded;
