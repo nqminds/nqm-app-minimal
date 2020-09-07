@@ -17,11 +17,13 @@ export default function({initialState, reducers, settings}) {
   );
 
   const getDatasetId = buildDatasetMapper(store);
+  const isPermitted = buildPermissionChecker(store);
 
   const context = {
     constants,
     getDatasetId,
     history,
+    isPermitted,
     settings,
     store,
     tdxConnections,
@@ -52,6 +54,19 @@ function buildDatasetMapper(store) {
         }
       default: // eslint-disable-line no-fallthrough
         return `${state.core.serverDataFolderId}-${dataset}`;
+    }
+  };
+}
+
+/** Returns a function that can be used to verify if a user has a set of permissions
+ */
+function buildPermissionChecker(store) {
+  return (requiredPermissions, validateAll = true) => {
+    const state = store.getState();
+    if (validateAll) {
+      return requiredPermissions.every((permission) => state.core.permissions.includes(permission));
+    } else {
+      return requiredPermissions.some((permission) => state.core.permissions.includes(permission));
     }
   };
 }
