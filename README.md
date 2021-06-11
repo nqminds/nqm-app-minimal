@@ -1,4 +1,9 @@
-# nqm-app-minimal (webpack version)
+# [DEPRECATED] nqm-app-minimal (webpack version)
+
+**DEPRECATED: replaced by nqm-app-minimal in nqminds/mono-repo-template mono-repo**
+
+New GitHub Code link:
+[nqm-app-minimal](https://github.com/nqminds/mono-repo-template/tree/master/packages/app)
 
 Minimal application for use with the application account system.
 
